@@ -1,16 +1,44 @@
 import fetch
 import annotate
+import random
+import pandas as pd
 
-prjid = 'PRJNA643248'
-meta = fetch.fetch(prjid)
+#prjid = 'PRJNA643248'
+#meta = fetch.fetch(prjid)
 
-print(meta)
+#model = 'gpt-4-0125-preview'
+model = 'gpt-3.5-turbo-0125'
 
-experiment_metadata = meta[['project_id','experiment_id', 'title', 'attributes']]
-project_metadata = meta[['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+#projects = pd.read_csv('scratch/projects-ALLHistone.csv')
+#prjids = projects['project_id'].tolist()
 
-annotation = annotate.main(model = 'gpt-3.5-turbo-0125',
-                               prjMeta = project_metadata,
-                               expMeta = experiment_metadata)
+#print(prjids)
 
-print(annotation)
+#all_meta = pd.concat([fetch.fetch(prj) for prj in prjids]).drop_duplicates(subset='experiment_id', keep = 'first')
+
+#experiment_metadata = all_meta[['project_id','experiment_id', 'title', 'attributes']]
+#project_metadata = all_meta[['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+
+#experiment_metadata.to_csv('scratch/experiment_metaData-AllHistone.tsv', index = False, sep = '\t')
+#project_metadata.to_csv('scratch/project_metaData-AllHistone.tsv', index = False, sep = '\t')
+#all_meta.to_csv('scratch/all_metaData-AllHistone.tsv', index = False, sep = '\t')
+
+projectdf = pd.read_csv('scratch/project_metaData-AllHistone.tsv', sep = '\t')
+experimentdf = pd.read_csv('scratch/experiment_metaData-AllHistone.tsv', sep = '\t')
+print(projectdf)
+for n in range(1):
+    
+#    project_id = random.choice(projectdf['project_id'])
+    project_id = 'PRJNA643248'
+    print(project_id)
+    prjMeta = projectdf[projectdf['project_id'] == project_id]
+    expMeta = experimentdf[experimentdf['project_id'] == project_id]
+
+    annotation = annotate.main(model = model,
+                               prjMeta = prjMeta,
+                               expMeta = expMeta,
+                               sample=15)
+
+
+    annotation.to_csv(f'scratch/240506_{model}_{n+1}_prjna643248.csv', index = False)
+    print(annotation)

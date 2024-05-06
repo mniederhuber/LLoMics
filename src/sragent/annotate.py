@@ -152,7 +152,7 @@ def sampleExps(model,
     # get all of the unique experiments in the project
 
     project_summary = '\n'.join(project_summary)
-
+    print(project_summary)
     expMeta_list = []
     for exp in exp_list:
         # get the experiment metadata from the full dataframe of experiments 
