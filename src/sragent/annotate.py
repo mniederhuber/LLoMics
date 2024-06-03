@@ -13,7 +13,8 @@ system_prompt = "You are an assistant with domain expertise in yeast genetics an
 prompts = {'summary':"""Analyze the metadata for this ChIP-seq project and the experiments in the project.
 Briefly summarize the main goal of the project. What is the project testing? What are the different experimental conditions?
 Using the project **abstract**, project **protocol**, and the experiment **titles** and **attributes** answer the following questions. Let's think these through step by step.
-- What key words indicate if an experiment is a 'Perturbed' condition in this project? 'Perturbed' should exclusively indicate experiments that test the effect of a gene mutation, gene deletion, protein depletion, or stress conditions. Careful, some projects may not have any perturbed conditions, and many cell lines and strains have baseline mutations that should not be considered 'Perturbed'.
+- What key words indicate if there are experiments with gene mutations, gene deletions, or protein depletions in the project? Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate different chemical treatments or stress conditions in the project and what do they signify?
 - What key words indicate if the project involves experiments separated over time or from specific stages of development/growth? Experimental replicates are not the same as time points.
 - What key words indicate if an experiment a ChIP Input control? 
 - What key words indicate if an experiment a non-specific antibody control? 
@@ -31,13 +32,20 @@ Your responses should be designed to be used by an LLM assistant tasked with cla
 class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
     experiment_id: str = Field(description = "The experiment ID")
-    expTitle: str = Field(description = "The experiment title") 
-    perturbed: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this exerpiment 'Perturbed' (i.e. it tests the effect of a gene mutation, deletion, depletion, or stress condition)? If 'WT' is in the experiment title the experiment must not be 'Perturbed'. Let's think this through step by step.")
+    exp_title: str = Field(description = "The experiment title") 
+    gene_mutation: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene mutation? Let's think this through step by step.")
+    gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene deletion? Let's think this through step by step.")
+#    protein_depletion: bool = Field(description = "Based on experiment **title** and the **look up table** does this experiment use a protein depletion system? Let's think this through step by step.")
+    protein_depletion: bool = Field(description = "If this experiment uses a protein depletion system, is depletion being induced or is this a control treatment? Let's think this through step by step.")
+    stress_condition: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a stress condition? Let's think this through step by step.")
+#    perturbed: bool = Field(description = "If ANY of the following are TRUE: **gene_mutation**, **gene_deletion**, **protein_depletion**, or **stress_condition** then this should be TRUE. Let's think this through step by step.")
+#    wild_type: bool = Field(description = "If ALL of the following are FALSE: **gene_mutation**, **gene_deletion**, **protein_depletion**, **stress_condition**, OR if 'WT' is in the experiment title then this should be TRUE. Let's think this through step by step.")
     time_series: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this experiment part of a time series or from a specific growth phase? Let's think this through step by step.")
     chip_input: bool = Field(description = "Is this experiment an input control? Let's think this through step by step.")
     antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody)")
     chip_target: Optional[str] = Field(None,description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") # method_A
     perturbation_type: Literal["gene_mutation", "gene_deletion", "protein_depletion", "stress_condition",None]
+    perturbation: Optional[str] = Field(None,description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
     replicate: Optional[int] = Field(None,description = "If the experiment is a replicate of another experiment, provide the replicate number.")
     sample_name: str = Field(description = "Short name that uniquely identifies the experiment. Let's think this through step by step")
 #    time_point: Optional[str] = Field(None,description = "The most likely time point of an experiment in a time series. e.g. '30m' or 'G1' phase") 

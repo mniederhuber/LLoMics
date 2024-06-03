@@ -7,7 +7,8 @@ import pandas as pd
 #meta = fetch.fetch(prjid)
 
 #model = 'gpt-4-0125-preview'
-model = 'gpt-3.5-turbo-0125'
+model = 'gpt-4o'
+#model = 'gpt-3.5-turbo-0125'
 
 #projects = pd.read_csv('scratch/projects-ALLHistone.csv')
 #prjids = projects['project_id'].tolist()
@@ -26,10 +27,10 @@ model = 'gpt-3.5-turbo-0125'
 projectdf = pd.read_csv('scratch/project_metaData-AllHistone.tsv', sep = '\t')
 experimentdf = pd.read_csv('scratch/experiment_metaData-AllHistone.tsv', sep = '\t')
 print(projectdf)
-for n in range(1):
+for n in range(3):
     
-#    project_id = random.choice(projectdf['project_id'])
-    project_id = 'PRJNA643248'
+    project_id = random.choice(projectdf['project_id'])
+#    project_id = 'PRJNA643248'
     print(project_id)
     prjMeta = projectdf[projectdf['project_id'] == project_id]
     expMeta = experimentdf[experimentdf['project_id'] == project_id]
@@ -40,5 +41,5 @@ for n in range(1):
                                sample=15)
 
 
-    annotation.to_csv(f'scratch/240506_{model}_{n+1}_prjna643248.csv', index = False)
+    annotation.to_csv(f'scratch/240602_{model}_{n+1}.csv', index = False)
     print(annotation)
