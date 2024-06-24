@@ -33,22 +33,24 @@ class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
     experiment_id: str = Field(description = "The experiment ID")
     exp_title: str = Field(description = "The experiment title") 
-    gene_mutation: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene mutation? Let's think this through step by step.")
+    gene_mutation: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene mutation? Epitope tags should not be considered mutations. Let's think this through step by step.")
     gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene deletion? Let's think this through step by step.")
-#    protein_depletion: bool = Field(description = "Based on experiment **title** and the **look up table** does this experiment use a protein depletion system? Let's think this through step by step.")
     protein_depletion: bool = Field(description = "If this experiment uses a protein depletion system, is depletion being induced or is this a control treatment? Let's think this through step by step.")
     stress_condition: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a stress condition? Let's think this through step by step.")
-#    perturbed: bool = Field(description = "If ANY of the following are TRUE: **gene_mutation**, **gene_deletion**, **protein_depletion**, or **stress_condition** then this should be TRUE. Let's think this through step by step.")
-#    wild_type: bool = Field(description = "If ALL of the following are FALSE: **gene_mutation**, **gene_deletion**, **protein_depletion**, **stress_condition**, OR if 'WT' is in the experiment title then this should be TRUE. Let's think this through step by step.")
+    perturbed: bool = Field(description = "Is the experiment a perturbed condition? Let's think this through step by step.")
+    wild_type: bool = Field(description = "Is the experiment a wild-type non-perturbed condition? Let's think this through step by step.")
     time_series: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this experiment part of a time series or from a specific growth phase? Let's think this through step by step.")
     chip_input: bool = Field(description = "Is this experiment an input control? Let's think this through step by step.")
     antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody)")
     chip_target: Optional[str] = Field(None,description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") # method_A
     perturbation_type: Literal["gene_mutation", "gene_deletion", "protein_depletion", "stress_condition",None]
     perturbation: Optional[str] = Field(None,description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
-    replicate: Optional[int] = Field(None,description = "If the experiment is a replicate of another experiment, provide the replicate number.")
+    mutation: Optional[str] = Field(None,description = "If the experiment is testing a gene mutation what is the mutation?")
+    deletion: Optional[int] = Field(None,description = "If the experiment is testing a gene deletion what is the deletion?")
+    depletion: Optional[int] = Field(None,description = "If the experiment is testing a protein depletion what is the protein being depleted?")
+    stress: Optional[int] = Field(None,description = "If the experiment is testing a chemical or environmental stress what is the stress?")
+    time_point: Optional[str] = Field(None,description = "If the experiment is part of a time series what is the time point or growth phase?") 
     sample_name: str = Field(description = "Short name that uniquely identifies the experiment. Let's think this through step by step")
-#    time_point: Optional[str] = Field(None,description = "The most likely time point of an experiment in a time series. e.g. '30m' or 'G1' phase") 
 
 
 class project_model(BaseModel):
@@ -256,6 +258,6 @@ if __name__ == "__main__":
                    expMeta,
                    sample = 10, 
                    summary_reps=1,
-                   outFile = f'data/240502_{model}_{n+1}.csv')
+                   outFile = f'data/240610_{model}_{n+1}.csv')
 
         print(out)

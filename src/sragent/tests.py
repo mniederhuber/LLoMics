@@ -41,5 +41,5 @@ for n in range(3):
                                sample=15)
 
 
-    annotation.to_csv(f'scratch/240602_{model}_{n+1}.csv', index = False)
+    annotation.to_csv(f'scratch/240624_{model}_{n+1}.csv', index = False)
     print(annotation)
