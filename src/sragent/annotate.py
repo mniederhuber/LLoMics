@@ -37,19 +37,19 @@ class experiment_model(BaseModel):
     gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene deletion? Let's think this through step by step.")
     protein_depletion: bool = Field(description = "If this experiment uses a protein depletion system, is depletion being induced or is this a control treatment? Let's think this through step by step.")
     stress_condition: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a stress condition? Let's think this through step by step.")
-    perturbed: bool = Field(description = "Is the experiment a perturbed condition? Let's think this through step by step.")
-    wild_type: bool = Field(description = "Is the experiment a wild-type non-perturbed condition? Let's think this through step by step.")
+    #perturbed: bool = Field(description = "Is the experiment a perturbed condition? Let's think this through step by step.")
+    #wild_type: bool = Field(description = "Is the experiment a wild-type non-perturbed condition? Let's think this through step by step.")
     time_series: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this experiment part of a time series or from a specific growth phase? Let's think this through step by step.")
     chip_input: bool = Field(description = "Is this experiment an input control? Let's think this through step by step.")
     antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody)")
-    chip_target: Optional[str] = Field(None,description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") # method_A
+    chip_target: str = Field('',description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") # method_A
     perturbation_type: Literal["gene_mutation", "gene_deletion", "protein_depletion", "stress_condition",None]
-    perturbation: Optional[str] = Field(None,description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
-    mutation: Optional[str] = Field(None,description = "If the experiment is testing a gene mutation what is the mutation?")
-    deletion: Optional[int] = Field(None,description = "If the experiment is testing a gene deletion what is the deletion?")
-    depletion: Optional[int] = Field(None,description = "If the experiment is testing a protein depletion what is the protein being depleted?")
-    stress: Optional[int] = Field(None,description = "If the experiment is testing a chemical or environmental stress what is the stress?")
-    time_point: Optional[str] = Field(None,description = "If the experiment is part of a time series what is the time point or growth phase?") 
+    perturbation: str = Field('',description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
+    mutation: str = Field('',description = "If the experiment is testing a gene mutation what is the name of the gene and mutation?")
+    deletion: str = Field('',description = "If the experiment is testing a gene deletion what is the name of the gene being deleted?")
+    depletion: str = Field('',description = "If this experiment uses a protein depletion system, and depletion being induced in this experiment, what is the name of the protein being depleted?")
+    stress: str = Field('',description = "If the experiment is testing a chemical or environmental stress what is the stress?")
+    time_point: str = Field('',description = "Based on experiment **title**, **attributes**, and the **look up table** if this experiment is part of a time series or from a specific growth phase, what is the name of that time point? Let's think this through step by step.") 
     sample_name: str = Field(description = "Short name that uniquely identifies the experiment. Let's think this through step by step")
 
 
@@ -108,19 +108,6 @@ def summarize(model,
         temperature=0.1)
 
     return response
-
-def validator(response):
-    json_response = json.loads(response)
-    validated = True
-    if not json_response['perturbed']:
-        if json_response['perturbation'] is not None or json_response['perturbation_type'] is not None:
-            validated = False
-    if not json_response['time_series'] and json_response['time_point'] is not None:
-        validated = False
-    if json_response['chip_input'] and json_response['chip_target'] is not None:
-        validated = False
-
-    return validated
 
 def jsonOut(model,
             responses_text, 
