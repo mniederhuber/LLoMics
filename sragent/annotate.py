@@ -148,7 +148,7 @@ def sampleExps(model,
         exp_list = random.sample(exp_list, sample)
     # get all of the unique experiments in the project
 
-    project_summary = '\n'.join(project_summary)
+    #project_summary = '\n'.join(project_summary)
     print(project_summary)
     expMeta_list = []
     for exp in exp_list:
@@ -168,62 +168,57 @@ def sampleExps(model,
 
 
 # default settings to 1 rep 1 sample for testing
-def main(model,
-         prjMeta,
-         expMeta,
+def main(meta,
+         model,
          sample = None,
          summary_reps = 1,
          outFile = None):
 
-    project_title = prjMeta['project_title'].iloc[0]
-    project_id = prjMeta['project_id'].iloc[0]
-    
+    # parse meta table, isolate individual projects and their experiments
+    unique_projects = meta['project_id'].unique() 
+
     expdf_list = []
-    summaries = []
-    if summary_reps == 1:
+    for project_id in unique_projects:
+        prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+        expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
+
+        project_title = prjMeta['project_title'].iloc[0]
+        #project_id = prjMeta['project_id'].iloc[0]
+    
+
         summary = summarize(model,
                             prjMeta,
                             expMeta)
         project_summary = summary.choices[0].message.content
-        summaries.append(project_summary)
-        
-    else:
-        for n in range(summary_reps):
-            summary = summarize(model,
-                                prjMeta,
-                                expMeta)
+  #      summaries.append(project_summary)
 
-            project_summary = summary.choices[0].message.content
-            summaries.append(f"Summary {n}:\n{project_summary}\n\n")
-
-    expMeta_list = sampleExps(model,
-                              expMeta,
-                              summaries,
-                              summary_reps,
-                              sample)
-
+        expMeta_list = sampleExps(model,
+                                  expMeta,
+                                  project_summary,
+                                  summary_reps,
+                                  sample)
 
  ### handling response output ### 
  # use the project_model class to format the experiment jsons under the parent project
-    output = project_model(project_id = project_id, 
-                           project_title = project_title, 
-                           experimentMeta = expMeta_list)        
-
-    # validate and store the json output 
-    json_args = json.loads(output.model_dump_json())
-
-    # convert json output to dataframe
-    expdf = pd.json_normalize(json_args['experimentMeta'])
-    expdf['project_id'] = project_id
-    expdf['model'] = model
-    #expdf['summary'] = '\n'.join(summaries)
-    expdf_list.append(expdf)
-
+        output = project_model(project_id = project_id, 
+                               project_title = project_title, 
+                               experimentMeta = expMeta_list)        
+    
+        # validate and store the json output 
+        json_args = json.loads(output.model_dump_json())
+    
+        # convert json output to dataframe
+        expdf = pd.json_normalize(json_args['experimentMeta'])
+        expdf['project_id'] = project_id
+        expdf['model'] = model
+        #expdf['summary'] = '\n'.join(summaries)
+        expdf_list.append(expdf)
+    
     outdf = pd.concat(expdf_list)
-
+    
     if outFile is not None:
         outdf.to_csv(outFile, index = False, sep = '\t')
-
+    
     return outdf
 
 

@@ -23,9 +23,10 @@ def bool_check(df):
     for i in range(len(df)):
         mismatch = False 
         for var in var_dict:
-            if df.loc[i, var_dict[var]] == False and df.loc[i, var] != '':
+
+            if df.loc[i, var_dict[var]] == False and pd.isnull(df.loc[i, var]) == False:
                 mismatch = True 
-            elif df.loc[i, var_dict[var]] == True and df.loc[i, var] == '':
+            elif df.loc[i, var_dict[var]] == True and pd.isnull(df.loc[i, var]) == True:
                 mismatch = True
 
         if mismatch:
