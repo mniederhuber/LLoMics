@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: sragent
+Version: 0.1.0
+Summary: place holder
+Home-page: https://github.com/yourusername/sragent
+Author: m
+Author-email: your.email@example.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+UNKNOWN
+

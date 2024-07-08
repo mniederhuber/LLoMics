@@ -1,0 +1,7 @@
+README.md
+setup.py
+sragent.egg-info/PKG-INFO
+sragent.egg-info/SOURCES.txt
+sragent.egg-info/dependency_links.txt
+sragent.egg-info/requires.txt
+sragent.egg-info/top_level.txt
