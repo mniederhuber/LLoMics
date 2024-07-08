@@ -5,6 +5,7 @@ import pandas as pd
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
+import sragent.fetch as fetch
 
 client = OpenAI(api_key = os.environ.get('OPENAI_API_KEY'))
 
@@ -166,13 +167,93 @@ def sampleExps(model,
 
     return expMeta_list 
 
+def tagExps(annotated_exps):
+    
+    for row in range(len(annotated_exps)):
+        pertype = annotated_exps.loc[row,'perturbation_type']
+        per = annotated_exps.loc[row,'perturbation']
+        timepoint = str(annotated_exps.loc[row,'time_point']).replace(' ','_')
+
+        if annotated_exps.loc[row,'chip_input'] == True:
+            target = 'Input'
+        else:
+            target = annotated_exps.loc[row,'chip_target']
+        
+        if any(annotated_exps.loc[row,'gene_mutation':'stress_condition']):
+            if annotated_exps.loc[row,'time_series']:
+                annotated_exps.loc[row,'sample'] = f'{target}-{per}-{pertype}-{timepoint}'
+            else:
+                annotated_exps.loc[row,'sample'] = f'{target}-{per}-{pertype}'
+        else:
+            if annotated_exps.loc[row,'time_series']:
+                annotated_exps.loc[row,'sample'] = f'{target}-WT-{timepoint}'
+            else:
+                annotated_exps.loc[row,'sample'] = f'{target}-WT'
+
+    return annotated_exps
+
+def setControl(annotated_proj):
+    # designed for grouped apply to projects within annotated table
+    # first find out what the controls are in the project if any
+    # then iterate the rows and match control to experiment
+    controls = pd.DataFrame()
+    exps = pd.DataFrame()
+    if not any(annotated_proj['chip_input']): # if there are no samples labelled as inputs
+        if any(annotated_proj['antibody_control']): # check if any are labelled as antibody controls
+            controls = annotated_proj[annotated_proj['antibody_control'] == True] # and if so then make a list of controls
+            exps = annotated_proj[annotated_proj['antibody_control'] == False] # and a list of experiments
+    else:
+        controls = annotated_proj[annotated_proj['chip_input'] == True]
+        exps = annotated_proj[annotated_proj['chip_input'] == False] # and a list of experiments
+
+
+    # now we need to match experiments to controls
+   # for row in range(len(exps)):
+   #     if 'WT' in exps.loc[row, 'sample']:
+   #         if exps.loc[row, 'time_series']:
+   #             ctrl = controls.loc[controls['time_point'] == exps.loc[row, 'time_point']]['sample']
+   #         else:
+   #             ctrl = controls['sample']
+   #     else:
+   #         if exps.loc[row, 'time_series']:
+   #             ctrl = controls.loc[controls['perturbation'] == exps.loc[row, 'perturbation'] and controls['perturbation_type'] == exps.loc[row, 'perturbation_type'] and controls['time_point'] == exps.loc[row, 'time_point']]['sample']
+   #         else:
+   #             ctrl = controls.loc[controls['perturbation'] == exps.loc[row, 'perturbation'] and controls['perturbation_type'] == exps.loc[row, 'perturbation_type']]['sample']
+   #     print(ctrl)
+    for index, row in exps.iterrows():
+        if 'WT' in row['sample']:
+            if row['time_series']:
+                ctrl = controls.loc[(controls['gene_mutation'] == False) & (controls['gene_deletion'] == False) & (controls['protein_depletion'] == False) & (controls['stress_condition'] == False) & (controls['time_point'] == row['time_point']), 'sample']
+            else:
+                ctrl = controls.loc[(controls['gene_mutation'] == False) & (controls['gene_deletion'] == False) & (controls['protein_depletion'] == False) & (controls['stress_condition'] == False), 'sample']
+        else:
+            if row['time_series']:
+                ctrl = controls[(controls['perturbation'] == row['perturbation']) & (controls['perturbation_type'] == row['perturbation_type']) & (controls['time_point'] == row['time_point'])]['sample']
+            else:
+                ctrl = controls[(controls['perturbation'] == row['perturbation']) & (controls['perturbation_type'] == row['perturbation_type'])]['sample']
+        
+        if not ctrl.empty:
+            exps.loc[index, 'control'] = ctrl.iloc[0]
+        else:
+            exps.loc[index, 'control'] = 'None'
+
+    annotated_proj = pd.concat([exps, controls])
+    return annotated_proj
 
 # default settings to 1 rep 1 sample for testing
-def main(meta,
+def main(project_ids,
          model,
+         tag = True,
          sample = None,
          summary_reps = 1,
          outFile = None):
+
+    if type(project_ids) == list:
+        meta = pd.concat([fetch.fetch(prj) for prj in project_ids]).drop_duplicates(subset='experiment_id', keep = 'first')    
+    elif type(project_ids) == str:
+        meta = pd.DataFrame(fetch.fetch(project_ids).drop_duplicates(subset='experiment_id', keep = 'first'))
+    else:
+        raise TypeError('project_ids must be a list of project ids or a single project id')
 
     # parse meta table, isolate individual projects and their experiments
     unique_projects = meta['project_id'].unique() 
@@ -215,7 +296,11 @@ def main(meta,
         expdf_list.append(expdf)
     
     outdf = pd.concat(expdf_list)
-    
+
+    if tag:
+       outdf = tagExps(outdf) 
+       outdf = outdf.groupby('project_id').apply(setControl)
+
     if outFile is not None:
         outdf.to_csv(outFile, index = False, sep = '\t')
     
