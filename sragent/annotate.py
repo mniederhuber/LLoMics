@@ -38,8 +38,6 @@ class experiment_model(BaseModel):
     gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene deletion? Let's think this through step by step.")
     protein_depletion: bool = Field(description = "If this experiment uses a protein depletion system, is depletion being induced or is this a control treatment? Let's think this through step by step.")
     stress_condition: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a stress condition? Let's think this through step by step.")
-    #perturbed: bool = Field(description = "Is the experiment a perturbed condition? Let's think this through step by step.")
-    #wild_type: bool = Field(description = "Is the experiment a wild-type non-perturbed condition? Let's think this through step by step.")
     time_series: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this experiment part of a time series or from a specific growth phase? Let's think this through step by step.")
     chip_input: bool = Field(description = "Is this experiment an input control? Let's think this through step by step.")
     antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody)")
@@ -51,7 +49,6 @@ class experiment_model(BaseModel):
     depletion: str = Field('',description = "If this experiment uses a protein depletion system, and depletion being induced in this experiment, what is the name of the protein being depleted?")
     stress: str = Field('',description = "If the experiment is testing a chemical or environmental stress what is the stress?")
     time_point: str = Field('',description = "Based on experiment **title**, **attributes**, and the **look up table** if this experiment is part of a time series or from a specific growth phase, what is the name of that time point? Let's think this through step by step.") 
-    sample_name: str = Field(description = "Short name that uniquely identifies the experiment. Let's think this through step by step")
 
 
 class project_model(BaseModel):
@@ -167,6 +164,36 @@ def sampleExps(model,
 
     return expMeta_list 
 
+def bool_check(df):
+    """
+    Check for inconsistencies between boolean and character variables
+    """
+    var_dict = {'mutation':'gene_mutation',
+                'deletion':'gene_deletion',
+                'depletion':'protein_depletion',
+                'stress':'stress_condition',
+                'time_point':'time_series'}
+
+    # loop through the rows and check for inconsistencies
+    check = []
+    # for each row in the df, check if any of the bool and char variables disagree
+    for i in range(len(df)):
+        mismatch = False 
+        for var in var_dict:
+
+            if df.loc[i, var_dict[var]] == False and pd.isnull(df.loc[i, var]) == False:
+                mismatch = True 
+            elif df.loc[i, var_dict[var]] == True and pd.isnull(df.loc[i, var]) == True:
+                mismatch = True
+
+        if mismatch:
+            check.append(True)
+        else:
+            check.append(False)
+    df['warning'] = check
+
+    return df
+
 def tagExps(annotated_exps):
     
     for row in range(len(annotated_exps)):
@@ -180,6 +207,19 @@ def tagExps(annotated_exps):
             target = annotated_exps.loc[row,'chip_target']
         
         if any(annotated_exps.loc[row,'gene_mutation':'stress_condition']):
+            if annotated_exps.loc[row,'gene_mutation']:
+                pertype = 'gene_mutation'
+                per = annotated_exps.loc[row,'mutation']
+            elif annotated_exps.loc[row,'gene_deletion']:
+                pertype = 'gene_deletion'
+                per = annotated_exps.loc[row,'deletion']
+            elif annotated_exps.loc[row,'protein_depletion']:
+                pertype = 'protein_depletion'
+                per = annotated_exps.loc[row,'depletion']
+            elif annotated_exps.loc[row,'stress_condition']:
+                pertype = 'stress_condition'
+                per = annotated_exps.loc[row,'stress'] 
+
             if annotated_exps.loc[row,'time_series']:
                 annotated_exps.loc[row,'sample'] = f'{target}-{per}-{pertype}-{timepoint}'
             else:
@@ -206,20 +246,6 @@ def setControl(annotated_proj):
         controls = annotated_proj[annotated_proj['chip_input'] == True]
         exps = annotated_proj[annotated_proj['chip_input'] == False] # and a list of experiments
 
-
-    # now we need to match experiments to controls
-   # for row in range(len(exps)):
-   #     if 'WT' in exps.loc[row, 'sample']:
-   #         if exps.loc[row, 'time_series']:
-   #             ctrl = controls.loc[controls['time_point'] == exps.loc[row, 'time_point']]['sample']
-   #         else:
-   #             ctrl = controls['sample']
-   #     else:
-   #         if exps.loc[row, 'time_series']:
-   #             ctrl = controls.loc[controls['perturbation'] == exps.loc[row, 'perturbation'] and controls['perturbation_type'] == exps.loc[row, 'perturbation_type'] and controls['time_point'] == exps.loc[row, 'time_point']]['sample']
-   #         else:
-   #             ctrl = controls.loc[controls['perturbation'] == exps.loc[row, 'perturbation'] and controls['perturbation_type'] == exps.loc[row, 'perturbation_type']]['sample']
-   #     print(ctrl)
     for index, row in exps.iterrows():
         if 'WT' in row['sample']:
             if row['time_series']:
@@ -227,10 +253,19 @@ def setControl(annotated_proj):
             else:
                 ctrl = controls.loc[(controls['gene_mutation'] == False) & (controls['gene_deletion'] == False) & (controls['protein_depletion'] == False) & (controls['stress_condition'] == False), 'sample']
         else:
+            if row['gene_mutation']:
+                pertype = 'mutation'
+            elif row['gene_deletion']:
+                pertype = 'deletion'
+            elif row['protein_depletion']:
+                pertype = 'depletion'
+            elif row['stress_condition']:
+                pertype = 'stress'
+
             if row['time_series']:
-                ctrl = controls[(controls['perturbation'] == row['perturbation']) & (controls['perturbation_type'] == row['perturbation_type']) & (controls['time_point'] == row['time_point'])]['sample']
+                ctrl = controls[(controls[pertype].str.lower() == row[pertype].lower()) & (controls['time_point'] == row['time_point'])]['sample']
             else:
-                ctrl = controls[(controls['perturbation'] == row['perturbation']) & (controls['perturbation_type'] == row['perturbation_type'])]['sample']
+                ctrl = controls[(controls[pertype].str.lower() == row[pertype].lower())]['sample']
         
         if not ctrl.empty:
             exps.loc[index, 'control'] = ctrl.iloc[0]
@@ -241,90 +276,102 @@ def setControl(annotated_proj):
     return annotated_proj
 
 # default settings to 1 rep 1 sample for testing
-def main(project_ids,
+def main(input,
          model,
+         validate = True, 
          tag = True,
          sample = None,
          summary_reps = 1,
          outFile = None):
 
-    if type(project_ids) == list:
-        meta = pd.concat([fetch.fetch(prj) for prj in project_ids]).drop_duplicates(subset='experiment_id', keep = 'first')    
-    elif type(project_ids) == str:
-        meta = pd.DataFrame(fetch.fetch(project_ids).drop_duplicates(subset='experiment_id', keep = 'first'))
+    if type(input) == list:
+        meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
+    elif type(input) == str:
+        meta = pd.DataFrame(fetch.fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
+    elif type(input) not in ['str','list','pd.DataFrame']:
+        raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
+
+    if type(input) == pd.DataFrame:
+        outdf = input
     else:
-        raise TypeError('project_ids must be a list of project ids or a single project id')
-
     # parse meta table, isolate individual projects and their experiments
-    unique_projects = meta['project_id'].unique() 
+        unique_projects = meta['project_id'].unique() 
 
-    expdf_list = []
-    for project_id in unique_projects:
-        prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
-        expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
+        expdf_list = []
+        for project_id in unique_projects:
+            prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+            expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
 
-        project_title = prjMeta['project_title'].iloc[0]
-        #project_id = prjMeta['project_id'].iloc[0]
-    
+            project_title = prjMeta['project_title'].iloc[0]
+            #project_id = prjMeta['project_id'].iloc[0]
 
-        summary = summarize(model,
-                            prjMeta,
-                            expMeta)
-        project_summary = summary.choices[0].message.content
-  #      summaries.append(project_summary)
 
-        expMeta_list = sampleExps(model,
-                                  expMeta,
-                                  project_summary,
-                                  summary_reps,
-                                  sample)
+            summary = summarize(model,
+                                prjMeta,
+                                expMeta)
+            project_summary = summary.choices[0].message.content
+      #      summaries.append(project_summary)
 
- ### handling response output ### 
- # use the project_model class to format the experiment jsons under the parent project
-        output = project_model(project_id = project_id, 
-                               project_title = project_title, 
-                               experimentMeta = expMeta_list)        
-    
-        # validate and store the json output 
-        json_args = json.loads(output.model_dump_json())
-    
-        # convert json output to dataframe
-        expdf = pd.json_normalize(json_args['experimentMeta'])
-        expdf['project_id'] = project_id
-        expdf['model'] = model
-        #expdf['summary'] = '\n'.join(summaries)
-        expdf_list.append(expdf)
-    
-    outdf = pd.concat(expdf_list)
+            expMeta_list = sampleExps(model,
+                                      expMeta,
+                                      project_summary,
+                                      summary_reps,
+                                      sample)
+
+     ### handling response output ### 
+     # use the project_model class to format the experiment jsons under the parent project
+            output = project_model(project_id = project_id, 
+                                   project_title = project_title, 
+                                   experimentMeta = expMeta_list)        
+
+            # validate and store the json output 
+            json_args = json.loads(output.model_dump_json())
+
+            # convert json output to dataframe
+            expdf = pd.json_normalize(json_args['experimentMeta'])
+            expdf['project_id'] = project_id
+            expdf['model'] = model
+            #expdf['summary'] = '\n'.join(summaries)
+            expdf_list.append(expdf)
+
+        outdf = pd.concat(expdf_list, ignore_index=True)
+
+    print(outdf)
+    if validate:
+        outdf = bool_check(outdf)
 
     if tag:
        outdf = tagExps(outdf) 
        outdf = outdf.groupby('project_id').apply(setControl)
 
     if outFile is not None:
-        outdf.to_csv(outFile, index = False, sep = '\t')
-    
+        basename = outFile.split('.')[0]
+        outdf.to_csv(f'{basename}_FULL.csv', index = False, sep = ',')
+        if tag:
+            outdf[['project_id','experiment_id','exp_title','sample','control','warning']].to_csv(outFile, index = False, sep = ',')
+        else:
+            outdf[['project_id','experiment_id','exp_title','sample']].to_csv(outFile, index = False, sep = ',')
     return outdf
 
 
-if __name__ == "__main__":
-    # test the functions
-    #model = "gpt-3.5-turbo-0125"
-    model = "gpt-4-0125-preview"
-    projectdf = pd.read_csv('db_sheets/project_metaData-AllHistone.tsv', sep = '\t')
-    experimentdf = pd.read_csv('db_sheets/experiment_metaData-AllHistone.tsv', sep = '\t')
-
-    for n in range(3):
-
-        project_id = random.choice(projectdf['project_id'])
-        prjMeta = projectdf[projectdf['project_id'] == project_id]
-        expMeta = experimentdf[experimentdf['project_id'] == project_id]
-
-        out = main(model, 
-                   prjMeta, 
-                   expMeta,
-                   sample = 10, 
-                   summary_reps=1,
-                   outFile = f'data/240610_{model}_{n+1}.csv')
-
-        print(out)
+#if __name__ == "__main__":
+#    # test the functions
+#    #model = "gpt-3.5-turbo-0125"
+#    model = "gpt-4-0125-preview"
+#    projectdf = pd.read_csv('db_sheets/project_metaData-AllHistone.tsv', sep = '\t')
+#    experimentdf = pd.read_csv('db_sheets/experiment_metaData-AllHistone.tsv', sep = '\t')
+#
+#    for n in range(3):
+#
+#        project_id = random.choice(projectdf['project_id'])
+#        prjMeta = projectdf[projectdf['project_id'] == project_id]
+#        expMeta = experimentdf[experimentdf['project_id'] == project_id]
+#
+#        out = main(model, 
+#                   prjMeta, 
+#                   expMeta,
+#                   sample = 10, 
+#                   summary_reps=1,
+#                   outFile = f'data/240610_{model}_{n+1}.csv')
+#
+#        print(out)
