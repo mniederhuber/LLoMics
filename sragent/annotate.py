@@ -14,7 +14,9 @@ system_prompt = "You are an assistant with domain expertise in yeast genetics an
 prompts = {'summary':"""Analyze the metadata for this ChIP-seq project and the experiments in the project.
 Briefly summarize the main goal of the project. What is the project testing? What are the different experimental conditions?
 Using the project **abstract**, project **protocol**, and the experiment **titles** and **attributes** answer the following questions. Let's think these through step by step.
-- What key words indicate if there are experiments with gene mutations, gene deletions, or protein depletions in the project? Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate if there are experiments with gene mutations in the project? Epitope tags should not be considered mutations. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate if there are experiments with gene deletions in the project? A gene deletion must involve the complete removal of the gene. Ignore cases where only specific regions or domains are deleted. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate if there are experiments with protein depletions in the project? How is the depletion controlled or induced?
 - What key words indicate different chemical treatments or stress conditions in the project and what do they signify?
 - What key words indicate if the project involves experiments separated over time or from specific stages of development/growth? Experimental replicates are not the same as time points.
 - What key words indicate if an experiment a ChIP Input control? 
@@ -25,7 +27,6 @@ Using the project **abstract**, project **protocol**, and the experiment **title
     If an experiment is identified as 'Input' **protein target must be 'None'**.
 - What key words indicate experimental replicates if there are any?
 - What key words indicate any small molecules being used in the project to induce stress or protein depletion in specific experiments?
-- What is a simple naming pattern that could be used to name the experiments in this project? Names should be short (<10 characters), uniquely identify conditions, and follow the structure [chip_target]_[genotype] with no spaces. For example: 'H3K27ac_WT', 'PolII_Swi6del', 'H3K4me3_30m', 'Input_Spt6mut'.
 Your responses should be designed to be used by an LLM assistant tasked with classifying and generated structured metadata for each experiment in the project.
 """
 }
@@ -34,20 +35,20 @@ class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
     experiment_id: str = Field(description = "The experiment ID")
     exp_title: str = Field(description = "The experiment title") 
-    gene_mutation: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene mutation? Epitope tags should not be considered mutations. Let's think this through step by step.")
-    gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene deletion? Let's think this through step by step.")
+    gene_mutation: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a gene mutation? Let's think this through step by step.")
+    gene_deletion: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of the complete removal/deletion of a gene? Let's think this through step by step.")
     protein_depletion: bool = Field(description = "If this experiment uses a protein depletion system, is depletion being induced or is this a control treatment? Let's think this through step by step.")
     stress_condition: bool = Field(description = "Based on experiment **title** and the **look up table** is this experiment testing the effect of a stress condition? Let's think this through step by step.")
     time_series: bool = Field(description = "Based on experiment **title**, **attributes**, and the **look up table** is this experiment part of a time series or from a specific growth phase? Let's think this through step by step.")
-    chip_input: bool = Field(description = "Is this experiment an input control? Let's think this through step by step.")
-    antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody)")
-    chip_target: str = Field('',description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") # method_A
-    perturbation_type: Literal["gene_mutation", "gene_deletion", "protein_depletion", "stress_condition",None]
-    perturbation: str = Field('',description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
-    mutation: str = Field('',description = "If the experiment is testing a gene mutation what is the name of the gene and mutation?")
-    deletion: str = Field('',description = "If the experiment is testing a gene deletion what is the name of the gene being deleted?")
-    depletion: str = Field('',description = "If this experiment uses a protein depletion system, and depletion being induced in this experiment, what is the name of the protein being depleted?")
-    stress: str = Field('',description = "If the experiment is testing a chemical or environmental stress what is the stress?")
+    chip_input: bool = Field(description = "Is this experiment an input control? This is normally indicated by 'input' or similar in **title**. Let's think this through step by step.")
+    antibody_control: bool = Field(description = "Is this experiment an antibody control? (e.g. IgG control or another non-specific antibody) Let's think this through step by step.")
+    chip_target: str = Field('',description = "What protein is being profiled by ChIP-seq in this experiment? Be careful, in some cases the actual target protein might be profiled indirectly via a synthetic peptide tag fusion, in those cases report the protein target and not the peptide tag. Use Brno notation for histone modifications and UCSC Gene Symbols for non-histone targets. Answer should be a single word, e.g. 'H3K27ac' or 'H3K4me3' or 'Set1'. Let's think this through step by step.") 
+    #perturbation_type: Literal["gene_mutation", "gene_deletion", "protein_depletion", "stress_condition","None]
+    #perturbation: str = Field('',description = "If the experiment is a perturbation condition, what is the perturbation? Use only 1-2 words in snake case.")
+    mutation: str = Field('',description = "If the experiment is testing a gene mutation what is the name of the gene and mutation? Field should be a single token without spaces and follow standard format of: 'GeneName-Mutation' (e.g. PolII-A54R, H3-K4R, Set2-Δ2-30). Let's think this through step by step.")
+    deletion: str = Field('',description = "If the experiment is testing a gene deletion what is the name of the gene being deleted? Field should follow standard format of: 'ΔGeneName'. Let's think this through step by step.")
+    depletion: str = Field('',description = "If this experiment uses a protein depletion system, and depletion being induced in this experiment, what is the name of the depleted protein? Let's think this through step by step.")
+    stress: str = Field('',description = "If the experiment is testing a chemical or environmental stress what is the stress? Let's think this through step by step.")
     time_point: str = Field('',description = "Based on experiment **title**, **attributes**, and the **look up table** if this experiment is part of a time series or from a specific growth phase, what is the name of that time point? Let's think this through step by step.") 
 
 
@@ -197,8 +198,6 @@ def bool_check(df):
 def tagExps(annotated_exps):
     
     for row in range(len(annotated_exps)):
-        pertype = annotated_exps.loc[row,'perturbation_type']
-        per = annotated_exps.loc[row,'perturbation']
         timepoint = str(annotated_exps.loc[row,'time_point']).replace(' ','_')
 
         if annotated_exps.loc[row,'chip_input'] == True:
@@ -224,11 +223,16 @@ def tagExps(annotated_exps):
                 annotated_exps.loc[row,'sample'] = f'{target}-{per}-{pertype}-{timepoint}'
             else:
                 annotated_exps.loc[row,'sample'] = f'{target}-{per}-{pertype}'
+
+            annotated_exps.loc[row,'perturbation'] = f'{pertype}'
+
         else:
             if annotated_exps.loc[row,'time_series']:
                 annotated_exps.loc[row,'sample'] = f'{target}-WT-{timepoint}'
             else:
                 annotated_exps.loc[row,'sample'] = f'{target}-WT'
+
+            annotated_exps.loc[row,'perturbation'] = 'none'
 
     return annotated_exps
 
@@ -348,9 +352,9 @@ def main(input,
         basename = outFile.split('.')[0]
         outdf.to_csv(f'{basename}_FULL.csv', index = False, sep = ',')
         if tag:
-            outdf[['project_id','experiment_id','exp_title','sample','control','warning']].to_csv(outFile, index = False, sep = ',')
+            outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv(outFile, index = False, sep = ',')
         else:
-            outdf[['project_id','experiment_id','exp_title','sample']].to_csv(outFile, index = False, sep = ',')
+            outdf[['project_id','experiment_id','exp_title','perturbation','sample']].to_csv(outFile, index = False, sep = ',')
     return outdf
 
 
