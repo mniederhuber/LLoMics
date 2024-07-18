@@ -284,7 +284,7 @@ def setControl(annotated_proj):
     return annotated_proj
 
 # default settings to 1 rep 1 sample for testing
-def main(input,
+def annotate(input,
          model,
          validate = True, 
          tag = True,
