@@ -1,4 +1,0 @@
-pandas
-openai
-biopython
-pydantic
