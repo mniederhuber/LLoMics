@@ -5,12 +5,18 @@ import os
 import xml.etree.ElementTree as ET
 ########
 
-Entrez.email = os.environ.get('ENTREZ_EMAIL')
-api = os.environ.get('ENTREZ_API_KEY')
-
 ########
-
+    
 def fetch(prjid):
+
+    if os.environ.get('ENTREZ_EMAIL') is None:
+        raise ValueError('Please set the environment variable ENTREZ_EMAIL to your email address.')
+    elif os.environ.get('ENTREZ_API_KEY') is None:
+        raise ValueError('Please set the environment variable ENTREZ_API_KEY to your NCBI API key.')
+    else:
+        Entrez.email = os.environ.get('ENTREZ_EMAIL')
+        api = os.environ.get('ENTREZ_API_KEY')
+
     print(f'Fetching {prjid}...')
     # search by bioproject id and gather sra IDs
     search = Entrez.read(Entrez.esearch(db = 'sra', term = prjid, retmax = 5000, api_key = api))

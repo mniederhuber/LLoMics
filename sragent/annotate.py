@@ -7,30 +7,6 @@ from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
 import sragent.fetch as fetch
 
-client = OpenAI(api_key = os.environ.get('OPENAI_API_KEY'))
-
-system_prompt = "You are an assistant with domain expertise in yeast genetics and molecular biology, you are skilled in analyzing and summarizing metadata from high-throughput sequencing experiments."
-
-prompts = {'summary':"""Analyze the metadata for this ChIP-seq project and the experiments in the project.
-Briefly summarize the main goal of the project. What is the project testing? What are the different experimental conditions?
-Using the project **abstract**, project **protocol**, and the experiment **titles** and **attributes** answer the following questions. Let's think these through step by step.
-- What key words indicate if there are experiments with gene mutations in the project? Epitope tags should not be considered mutations. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
-- What key words indicate if there are experiments with gene deletions in the project? A gene deletion must involve the complete removal of the gene. Ignore cases where only specific regions or domains are deleted. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
-- What key words indicate if there are experiments with protein depletions in the project? How is the depletion controlled or induced?
-- What key words indicate different chemical treatments or stress conditions in the project and what do they signify?
-- What key words indicate if the project involves experiments separated over time or from specific stages of development/growth? Experimental replicates are not the same as time points.
-- What key words indicate if an experiment a ChIP Input control? 
-- What key words indicate if an experiment a non-specific antibody control? 
-- What key words indicate the ChIP-seq protein targets in the project? 
-    In some experiments the protein target be tagged with a synthetic peptide (FLAG, HA, V5, etc.). 
-    It is important that we can correctly identify the protein target of experimental interest and not just the tag. Use Brno notation for histone modifications and UCSC Gene Symbols for non-histone targets.
-    If an experiment is identified as 'Input' **protein target must be 'None'**.
-- What key words indicate experimental replicates if there are any?
-- What key words indicate any small molecules being used in the project to induce stress or protein depletion in specific experiments?
-Your responses should be designed to be used by an LLM assistant tasked with classifying and generated structured metadata for each experiment in the project.
-"""
-}
-
 class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
     experiment_id: str = Field(description = "The experiment ID")
@@ -66,6 +42,14 @@ tools = [
     }
 ]
 
+# function to check for necessary environment variables
+def check_env():
+
+    if os.environ.get('OPENAI_API_KEY') is None:
+        raise ValueError("OPENAI_API_KEY environment variable must be set")
+    else:
+        global client
+        client = OpenAI(api_key = os.environ.get('OPENAI_API_KEY')) 
 
 # utility functions to convert project and experiment metadat to a string object for prompting
 def project_text(prjMeta):
@@ -92,7 +76,26 @@ def exp_text(expMeta):
 def summarize(model, 
               prjMeta, 
               expMeta):
-    summary_prompt = prompts['summary'] 
+
+    system_prompt = "You are an assistant with domain expertise in yeast genetics and molecular biology, you are skilled in analyzing and summarizing metadata from high-throughput sequencing experiments."
+    summary_prompt = """Analyze the metadata for this ChIP-seq project and the experiments in the project.
+Briefly summarize the main goal of the project. What is the project testing? What are the different experimental conditions?
+Using the project **abstract**, project **protocol**, and the experiment **titles** and **attributes** answer the following questions. Let's think these through step by step.
+- What key words indicate if there are experiments with gene mutations in the project? Epitope tags should not be considered mutations. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate if there are experiments with gene deletions in the project? A gene deletion must involve the complete removal of the gene. Ignore cases where only specific regions or domains are deleted. Some projects use cell lines or strains with common baseline genetic mutations or deletions that should be ignored, only mutations or deletions that are relevant to the project goal should be listed. 
+- What key words indicate if there are experiments with protein depletions in the project? How is the depletion controlled or induced?
+- What key words indicate different chemical treatments or stress conditions in the project and what do they signify?
+- What key words indicate if the project involves experiments separated over time or from specific stages of development/growth? Experimental replicates are not the same as time points.
+- What key words indicate if an experiment a ChIP Input control? 
+- What key words indicate if an experiment a non-specific antibody control? 
+- What key words indicate the ChIP-seq protein targets in the project? 
+    In some experiments the protein target be tagged with a synthetic peptide (FLAG, HA, V5, etc.). 
+    It is important that we can correctly identify the protein target of experimental interest and not just the tag. Use Brno notation for histone modifications and UCSC Gene Symbols for non-histone targets.
+    If an experiment is identified as 'Input' **protein target must be 'None'**.
+- What key words indicate experimental replicates if there are any?
+- What key words indicate any small molecules being used in the project to induce stress or protein depletion in specific experiments?
+Your responses should be designed to be used by an LLM assistant tasked with classifying and generated structured metadata for each experiment in the project.
+"""
     project = project_text(prjMeta)
     experiment = exp_text(expMeta)
 
@@ -113,6 +116,7 @@ def jsonOut(model,
             expMeta,
             summary_reps):
 
+    system_prompt = "You are an assistant with domain expertise in yeast genetics and molecular biology, you are skilled in analyzing and summarizing metadata from high-throughput sequencing experiments."
     exptext = exp_text(expMeta)
     if summary_reps == 1:
         prompt = f"Here is a summary of a ChIP-seq project that was made using the whole project metadata:\n\n{responses_text}\n\nExtract details about the following experiment and use the **json_output** function to generate a structured output. Let's think this through step by step:\n\n{exptext}\n\n " # 24.03.31 changed method A3
@@ -287,6 +291,8 @@ def main(input,
          sample = None,
          summary_reps = 1,
          outFile = None):
+
+    check_env()
 
     if type(input) == list:
         meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
