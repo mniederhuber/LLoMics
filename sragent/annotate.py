@@ -364,24 +364,3 @@ def annotate(input,
     return outdf
 
 
-#if __name__ == "__main__":
-#    # test the functions
-#    #model = "gpt-3.5-turbo-0125"
-#    model = "gpt-4-0125-preview"
-#    projectdf = pd.read_csv('db_sheets/project_metaData-AllHistone.tsv', sep = '\t')
-#    experimentdf = pd.read_csv('db_sheets/experiment_metaData-AllHistone.tsv', sep = '\t')
-#
-#    for n in range(3):
-#
-#        project_id = random.choice(projectdf['project_id'])
-#        prjMeta = projectdf[projectdf['project_id'] == project_id]
-#        expMeta = experimentdf[experimentdf['project_id'] == project_id]
-#
-#        out = main(model, 
-#                   prjMeta, 
-#                   expMeta,
-#                   sample = 10, 
-#                   summary_reps=1,
-#                   outFile = f'data/240610_{model}_{n+1}.csv')
-#
-#        print(out)
