@@ -110,6 +110,6 @@ def fetch(prjid):
         outRows.append(row)
                  
     outDF = pd.DataFrame(outRows, columns = header)
-
+    
     print(f'{prjid} fetch complete...')
     return(outDF)

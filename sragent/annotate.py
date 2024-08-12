@@ -286,11 +286,12 @@ def setControl(annotated_proj):
 # default settings to 1 rep 1 sample for testing
 def annotate(input,
          model,
+         annotate = True,
          validate = True, 
          tag = True,
          sample = None,
          summary_reps = 1,
-         outFile = None):
+         save_output = True):
 
     check_env()
 
@@ -298,12 +299,15 @@ def annotate(input,
         meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
     elif type(input) == str:
         meta = pd.DataFrame(fetch.fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
+    elif type(input) == pd.DataFrame:
+        meta = input
     elif type(input) not in ['str','list','pd.DataFrame']:
         raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
 
-    if type(input) == pd.DataFrame:
-        outdf = input
-    else:
+
+#    if type(input) == pd.DataFrame:
+#        outdf = input
+    if annotate:
     # parse meta table, isolate individual projects and their experiments
         unique_projects = meta['project_id'].unique() 
 
@@ -346,21 +350,33 @@ def annotate(input,
 
         outdf = pd.concat(expdf_list, ignore_index=True)
 
-    print(outdf)
-    if validate:
-        outdf = bool_check(outdf)
+        if validate:
+            outdf = bool_check(outdf)
 
-    if tag:
-       outdf = tagExps(outdf) 
-       outdf = outdf.groupby('project_id').apply(setControl)
-
-    if outFile is not None:
-        basename = outFile.split('.')[0]
-        outdf.to_csv(f'{basename}_FULL.csv', index = False, sep = ',')
         if tag:
-            outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv(outFile, index = False, sep = ',')
-        else:
-            outdf[['project_id','experiment_id','exp_title','perturbation','sample']].to_csv(outFile, index = False, sep = ',')
+           outdf = tagExps(outdf) 
+           outdf = outdf.groupby('project_id').apply(setControl)
+
+    elif not annotate:
+        outdf = meta
+    else:
+        raise ValueError("Annotate must be set to True or False")
+
+    ### outputs
+    if save_output:
+        if not os.path.exists('sragent_output'):
+            os.mkdir('sragent_output')
+        meta.to_csv(f'sragent_output/metadata.csv', index = False, sep = ',') 
+        if annotate:    
+            outdf.to_csv(f'sragent_output/annotation_FULL.csv', index = False, sep = ',')
+            if tag:
+                outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
+            else:
+                outdf[['project_id','experiment_id','exp_title','perturbation','sample']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
+        
+        
+
+
     return outdf
 
 
