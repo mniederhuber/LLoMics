@@ -2,6 +2,7 @@ import os
 import json
 import random
 import pandas as pd
+import tiktoken
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
@@ -50,6 +51,18 @@ def check_env():
     else:
         global client
         client = OpenAI(api_key = os.environ.get('OPENAI_API_KEY')) 
+
+def check_tokens(prompt, model):
+    tokenizer = tiktoken.encoding_for_model(model)
+    tokens = len(tokenizer.encode(prompt))
+    if model == 'gpt-4o':
+        cost = (tokens/1000000)*5
+    elif model == 'gpt-4o-mini':
+        cost = (tokens/1000000)*0.15 
+    else:
+        cost = 'unable to calculate cost'
+    
+    return cost
 
 # utility functions to convert project and experiment metadat to a string object for prompting
 def project_text(prjMeta):
@@ -100,6 +113,10 @@ Your responses should be designed to be used by an LLM assistant tasked with cla
     experiment = exp_text(expMeta)
 
     prompt = f"Here is study-level metadata for a series of ChIP-seq experiments in yeast:\n{project}\nHere is the NCBI metadata for all of the experiments included in this project:\n{experiment}\n{summary_prompt}"
+
+    # check the token count
+#    cost = check_tokens(prompt, model)
+#    print(f'Summarization will cost ~${cost}')
 
     response = client.chat.completions.create(
         model = model,

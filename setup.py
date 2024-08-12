@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'pandas',  
         'openai',
+        'tiktoken',
         'biopython',
         'pydantic'
         ],
