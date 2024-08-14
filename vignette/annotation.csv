@@ -1,0 +1,649 @@
+project_id,experiment_id,exp_title,perturbation,sample,control,warning
+PRJNA140547,SRX058452,H3_RC_ChIP-seq,none,H3-WT-RC_phase,Input-WT-RC_phase,False
+PRJNA140547,SRX058451,H3_OX_ChIP-seq,none,H3-WT-OX,None,False
+PRJNA140547,SRX058450,H3K9ac_RC_ChIP-seq,none,H3K9ac-WT-RC_phase,Input-WT-RC_phase,False
+PRJNA140547,SRX058449,H3K9ac_OX_ChIP-seq,none,H3K9ac-WT-OX_phase,Input-WT-OX_phase,False
+PRJNA140547,SRX058456,Input_RC_ChIP-seq,none,Input-WT-RC_phase,,False
+PRJNA140547,SRX058455,Input_OX_ChIP-seq,none,Input-WT-OX_phase,,False
+PRJNA231240,SRX390624,H3K4ME3_WT_FM392_Rep_2,none,H3K4me3-WT,Input-WT,False
+PRJNA231240,SRX390623,H3K4ME3_WT_FM392_Rep_1,none,H3K4me3-WT,Input-WT,False
+PRJNA231240,SRX390622,H3K4ME3_leo1_delta_FM392_Rep_2,gene_deletion,H3K4me3-ΔLeo1-gene_deletion,None,False
+PRJNA231240,SRX390621,H3K4ME3_leo1_delta_FM392_Rep_1,gene_deletion,H3K4me3-ΔLeo1-gene_deletion,None,False
+PRJNA231240,SRX390620,H3K4ME3_Full_length_Set1_Rep_2,none,H3K4me3-WT,Input-WT,False
+PRJNA231240,SRX390618,H3K4ME3_Full_length_Set1_Rep_1,none,H3K4me3-WT,Input-WT,False
+PRJNA231240,SRX390616,H3K4ME3_aa762-1080_Set1_Rep_1,gene_mutation,H3K4me3-Set1-aa762-1080-gene_mutation,Input-Set1-aa762-1080-gene_mutation,False
+PRJNA231240,SRX390615,H3K4ME3_chd1_delta_FM392_Rep_2,gene_deletion,H3K4me3-ΔChd1-gene_deletion,None,False
+PRJNA231240,SRX390614,H3K4ME3_chd1_delta_FM392_Rep_1,gene_deletion,H3K4me3-ΔChd1-gene_deletion,None,False
+PRJNA231240,SRX390613,H3K4ME3_aa762-1080_Set1_Rep_2,gene_mutation,H3K4me3-Set1-aa762-1080-gene_mutation,Input-Set1-aa762-1080-gene_mutation,False
+PRJNA231240,SRX390619,Input_for_Full_length_Set1_Rep1,none,Input-WT,,False
+PRJNA231240,SRX390617,Input_Set1_aa762-1080_Rep_1,gene_mutation,Input-Set1-aa762-1080-gene_mutation,,False
+PRJNA254082,SRX1143282,"Rad51 chIP-seq in H4K44->R mutant yeast, rep #2",gene_mutation,Rad51-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143281,"Rad51 chIP-seq in H4K44->R mutant yeast, rep #1",gene_mutation,Rad51-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143278,"H3 chIP-seq in H4K44->R mutant yeast, rep #2",gene_mutation,H3-H4-K44R-gene_mutation,None,False
+PRJNA254082,SRX1143277,"H3 chIP-seq in H4K44->R mutant yeast, rep #1",gene_mutation,H3-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143276,"H3 chIP-seq in WT yeast, rep #2",none,H3-WT,Input-WT,False
+PRJNA254082,SRX1143275,"H3 chIP-seq in WT yeast, rep #1",none,H3-WT,Input-WT,False
+PRJNA254082,SRX1143274,"H3K56ac chIP-seq in H4K44->R mutant yeast, rep #2",gene_mutation,H3K56ac-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143273,"H3K56ac chIP-seq in H4K44->R mutant yeast, rep #1",gene_mutation,H3K56ac-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143272,"H3K56ac chIP-seq in WT yeast, rep #2",none,H3K56ac-WT,Input-WT,False
+PRJNA254082,SRX1143271,"H3K56ac chIP-seq in WT yeast, rep #1",none,H3K56ac-WT,Input-WT,False
+PRJNA254082,SRX1143270,"H3K4me3 chIP-seq in H4K44->R mutant yeast, rep #2",gene_mutation,H3K4me3-H4K44-R-gene_mutation,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143269,"H3K4me3 chIP-seq in H4K44->R mutant yeast, rep #1",gene_mutation,H3K4me3-H4K44-R-gene_mutation-4hrs,Input-H4K44-R-gene_mutation-4hrs,False
+PRJNA254082,SRX1143268,"H3K4me3 chIP-seq in WT yeast, rep #2",none,H3K4me3-WT,Input-WT,False
+PRJNA254082,SRX1143267,"H3K4me3 chIP-seq in WT yeast, rep #1",none,H3K4me3-WT,Input-WT,False
+PRJNA254082,SRX643290,"H4 chIP-seq from WT yeast, replicate 2",stress_condition,H4-sporulation-stress_condition-4hrs,None,False
+PRJNA254082,SRX643289,"H4 chIP-seq from WT yeast, replicate 1",stress_condition,H4-sporulation-stress_condition-4hrs,None,False
+PRJNA254082,SRX643288,"H4K44ac chIP-seq from WT yeast, replicate 2",stress_condition,H4K44ac-sporulation-stress_condition-4hrs,None,False
+PRJNA254082,SRX643287,"H4K44ac chIP-seq from WT yeast, replicate 1",stress_condition,H4K44ac-sporulation-stress_condition-4hrs,None,False
+PRJNA254082,SRX1143284,"Input in H4K44->R mutant yeast, rep #1",gene_mutation,Input-H4K44-R-gene_mutation-4hrs,,False
+PRJNA254082,SRX1143283,"Input in WT yeast, rep #1",none,Input-WT,,False
+PRJNA262623,SRX717511,h4r3me2s_0,none,H4R3me2s-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717510,h4r3me2s_4,stress_condition,H4R3me2s-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717509,h4r3me2s_8,stress_condition,H4R3me2s-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717508,h4r3me2s_15,stress_condition,H4R3me2s-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717507,h4r3me2s_30,stress_condition,H4R3me2s-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717506,h4r3me2s_60,stress_condition,H4R3me2s-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717505,h4r3me_0,none,H4R3me-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717504,h4r3me_4,stress_condition,H4R3me-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717503,h4r3me_8,stress_condition,H4R3me-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717502,h4r3me_15,stress_condition,H4R3me-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717501,h4r3me_30,stress_condition,H4R3me-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717500,h4r3me_60,stress_condition,H4R3me-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717499,h4k8ac_0,none,H4K8ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717498,h4k8ac_4,stress_condition,H4K8ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717497,h4k8ac_8,stress_condition,H4K8ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717496,h4k8ac_15,stress_condition,H4K8ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717495,h4k8ac_30,stress_condition,H4K8ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717494,h4k8ac_60,stress_condition,H4K8ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717493,h4k5ac_0,none,H4K5ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717492,h4k5ac_4,stress_condition,H4K5ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717491,h4k5ac_8,stress_condition,H4K5ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717490,h4k5ac_15,stress_condition,H4K5ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717489,h4k5ac_30,stress_condition,H4K5ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717488,h4k5ac_60,stress_condition,H4K5ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717487,h4k20me_0,none,H4K20me-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717486,h4k20me_4,stress_condition,H4K20me-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717485,h4k20me_8,stress_condition,H4K20me-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717484,h4k20me_15,stress_condition,H4K20me-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717483,h4k20me_30,stress_condition,H4K20me-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717482,h4k20me_60,stress_condition,H4K20me-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717481,h4k16ac_0,none,H4K16ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717480,h4k16ac_4,stress_condition,H4K16ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717479,h4k16ac_8,stress_condition,H4K16ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717478,h4k16ac_15,stress_condition,H4K16ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717477,h4k16ac_30,stress_condition,H4K16ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717476,h4k16ac_60,stress_condition,H4K16ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717475,h4k12ac_0,none,H4K12ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717474,h4k12ac_4,stress_condition,H4K12ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717473,h4k12ac_8,stress_condition,H4K12ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717472,h4k12ac_15,stress_condition,H4K12ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717471,h4k12ac_30,stress_condition,H4K12ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717470,h4k12ac_60,stress_condition,H4K12ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717469,h3s10ph_0,none,H3S10ph-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717468,h3s10ph_4,stress_condition,H3S10ph-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717467,h3s10ph_8,stress_condition,H3S10ph-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717466,h3s10ph_15,stress_condition,H3S10ph-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717465,h3s10ph_30,stress_condition,H3S10ph-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717464,h3s10ph_60,stress_condition,H3S10ph-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717463,h3k9ac_0,none,H3K9ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717462,h3k9ac_4,stress_condition,H3K9ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717461,h3k9ac_8,stress_condition,H3K9ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717460,h3k9ac_15,stress_condition,H3K9ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717459,h3k9ac_30,stress_condition,H3K9ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717458,h3k9ac_60,stress_condition,H3K9ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717457,h3k79me3_0,none,H3K79me3-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717456,h3k79me3_4,stress_condition,H3K79me3-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717455,h3k79me3_8,stress_condition,H3K79me3-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717454,h3k79me3_15,stress_condition,H3K79me3-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717453,h3k79me3_30,stress_condition,H3K79me3-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717452,h3k79me3_60,stress_condition,H3K79me3-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717451,h3k79me_0,none,H3K79me-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717450,h3k79me_4,stress_condition,H3K79me-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717449,h3k79me_8,stress_condition,H3K79me-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717448,h3k79me_15,stress_condition,H3K79me-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717447,h3k79me_30,stress_condition,H3K79me-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717446,h3k79me_60,stress_condition,H3K79me-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717445,h3k56ac_0,none,H3K56ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717444,h3k56ac_4,stress_condition,H3K56ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717443,h3k56ac_8,stress_condition,H3K56ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717442,h3k56ac_15,stress_condition,H3K56ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717441,h3k56ac_30,stress_condition,H3K56ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717440,h3k56ac_60,stress_condition,H3K56ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717439,h3k4me3_0,none,H3K4me3-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717438,h3k4me3_4,stress_condition,H3K4me3-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717437,h3k4me3_8,stress_condition,H3K4me3-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717436,h3k4me3_15,stress_condition,H3K4me3-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717435,h3k4me3_30,stress_condition,H3K4me3-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717434,h3k4me3_60,stress_condition,H3K4me3-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717433,h3k4me2_0,none,H3K4me2-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717432,h3k4me2_4,stress_condition,H3K4me2-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717431,h3k4me2_8,stress_condition,H3K4me2-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717430,h3k4me2_15,stress_condition,H3K4me2-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717429,h3k4me2_30,stress_condition,H3K4me2-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717428,h3k4me2_60,stress_condition,H3K4me2-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717427,h3k4me_0,none,H3K4me-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717426,h3k4me_4,stress_condition,H3K4me-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717425,h3k4me_8,stress_condition,H3K4me-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717424,h3k4me_15,stress_condition,H3K4me-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717423,h3k4me_30,stress_condition,H3K4me-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717422,h3k4me_60,stress_condition,H3K4me-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717421,h3k4ac_0,none,H3K4ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717420,h3k4ac_4,stress_condition,H3K4ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717419,h3k4ac_8,stress_condition,H3K4ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717418,h3k4ac_15,stress_condition,H3K4ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717417,h3k4ac_30,stress_condition,H3K4ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717416,h3k4ac_60,stress_condition,H3K4ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717415,h3k36me3_0,none,H3K36me3-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717414,h3k36me3_4,stress_condition,H3K36me3-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717413,h3k36me3_8,stress_condition,H3K36me3-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717412,h3k36me3_15,stress_condition,H3K36me3-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717411,h3k36me3_30,stress_condition,H3K36me3-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717410,h3k36me3_60,stress_condition,H3K36me3-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717409,h3k36me2_0,none,H3K36me2-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717408,h3k36me2_4,stress_condition,H3K36me2-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717407,h3k36me2_8,stress_condition,H3K36me2-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717406,h3k36me2_15,stress_condition,H3K36me2-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717405,h3k36me2_30,stress_condition,H3K36me2-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717404,h3k36me2_60,stress_condition,H3K36me2-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717403,h3k36me_0,none,H3K36me-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717402,h3k36me_4,stress_condition,H3K36me-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717401,h3k36me_8,stress_condition,H3K36me-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717400,h3k36me_15,stress_condition,H3K36me-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717399,h3k36me_30,stress_condition,H3K36me-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717398,h3k36me_60,stress_condition,H3K36me-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717397,h3k27ac_0,none,H3K27ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717396,h3k27ac_4,stress_condition,H3K27ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717395,h3k27ac_8,stress_condition,H3K27ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717394,h3k27ac_15,stress_condition,H3K27ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717393,h3k27ac_30,stress_condition,H3K27ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717392,h3k27ac_60,stress_condition,H3K27ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717391,h3k23ac_0,none,H3K23ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717390,h3k23ac_4,stress_condition,H3K23ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717389,h3k23ac_8,stress_condition,H3K23ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717388,h3k23ac_15,stress_condition,H3K23ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717387,h3k23ac_30,stress_condition,H3K23ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717386,h3k23ac_60,stress_condition,H3K23ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717385,h3k18ac_0,none,H3K18ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717384,h3k18ac_4,stress_condition,H3K18ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717383,h3k18ac_8,stress_condition,H3K18ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717382,h3k18ac_15,stress_condition,H3K18ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717381,h3k18ac_30,stress_condition,H3K18ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717380,h3k18ac_60,stress_condition,H3K18ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717379,h3k14ac_0,none,H3K14ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717378,h3k14ac_4,stress_condition,H3K14ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717377,h3k14ac_8,stress_condition,H3K14ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717376,h3k14ac_15,stress_condition,H3K14ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717375,h3k14ac_30,stress_condition,H3K14ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717374,h3k14ac_60,stress_condition,H3K14ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717373,h2as129ph_0,none,H2AS129ph-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717372,h2as129ph_4,stress_condition,H2AS129ph-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717371,h2as129ph_8,stress_condition,H2AS129ph-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717370,h2as129ph_15,stress_condition,H2AS129ph-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717369,h2as129ph_30,stress_condition,H2AS129ph-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717368,h2as129ph_60,stress_condition,H2AS129ph-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717367,h2ak5ac_0,none,H2AK5ac-WT-0_min,Input-WT-0_min,False
+PRJNA262623,SRX717366,h2ak5ac_4,stress_condition,H2AK5ac-diamide-stress_condition-4_min,Input-diamide-stress_condition-4_min,False
+PRJNA262623,SRX717365,h2ak5ac_8,stress_condition,H2AK5ac-diamide-stress_condition-8_min,Input-diamide-stress_condition-8_min,False
+PRJNA262623,SRX717364,h2ak5ac_15,stress_condition,H2AK5ac-diamide-stress_condition-15_min,Input-diamide-stress_condition-15_min,False
+PRJNA262623,SRX717363,h2ak5ac_30,stress_condition,H2AK5ac-diamide-stress_condition-30_min,Input-diamide-stress_condition-30_min,False
+PRJNA262623,SRX717362,h2ak5ac_60,stress_condition,H2AK5ac-diamide-stress_condition-60_min,Input-diamide-stress_condition-60_min,False
+PRJNA262623,SRX717562,input2.2_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717561,input1.2_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717560,input2.2_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717559,input3.1_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717558,input1.3_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717557,input1.1_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717556,input1.3_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717555,input1.3_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA262623,SRX717554,input2.3_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717553,input1.3_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717552,input3.2_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717551,input1.1_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717550,input2.3_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717549,input1.1_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA262623,SRX717548,input3.2_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717547,input1.2_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA262623,SRX717546,input2.2_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717545,input3.1_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717544,input1.1_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717543,input2.1_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA262623,SRX717542,input2.1_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717541,input3.2_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717540,input3.2_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717539,input1.3_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717538,input1.3_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717537,input1.2_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717536,input2.1_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717535,input1.1_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717534,input3.1_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717533,input2.2_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717532,input2.1_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717531,input2.3_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717530,input2.3_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717529,input3.1_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717528,input2.1_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717527,input2.1_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717526,input2.2_60,stress_condition,Input-diamide-stress_condition-60_min,,False
+PRJNA262623,SRX717525,input1.2_8,stress_condition,Input-diamide-stress_condition-8_min,,False
+PRJNA262623,SRX717524,input1.2_4,stress_condition,Input-diamide-stress_condition-4_min,,False
+PRJNA262623,SRX717523,input2.2_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA262623,SRX717522,input3.1_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717521,input3.2_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717520,input1.1_15,stress_condition,Input-diamide-stress_condition-15_min,,False
+PRJNA262623,SRX717519,input1.2_0,none,Input-WT-0_min,,False
+PRJNA262623,SRX717518,input2.3_30,stress_condition,Input-diamide-stress_condition-30_min,,False
+PRJNA274975,SRX869427,"Rph1- Old (S3O, Exp 2) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869426,"Rph1- Old (S2O, Exp 2) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869425,"Rph1- Young (S2Y, Exp 2) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869424,"Rph1- Old (S3O, Exp 2) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation-Old_S3O_Exp2,None,True
+PRJNA274975,SRX869423,"Rph1- Old (S2O, Exp 2) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869422,"Rph1- Young (S2Y, Exp 2) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869418,"WT Old (S3O, Exp 2) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869417,"WT Old (S2O, Exp 2) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869416,"WT Young (S2Y, Exp 2) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869415,"WT Old (S3O, Exp 2) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869414,"WT Old (S2O, Exp 2) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869413,"WT Young (S2Y, Exp 2) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869409,"Rph1- Old (S3O, Exp 1) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869408,"Rph1- Old (S2O, Exp 1) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869407,"Rph1- Young (S2Y, Exp 1) H3",gene_mutation,H3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869406,"Rph1- Old (S3O, Exp 1) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869405,"Rph1- Old (S2O, Exp 1) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869404,"Rph1- Young (S2Y, Exp 1) H3K36me3",gene_mutation,H3K36me3-Rph1--gene_mutation,Input-Rph1--gene_mutation,True
+PRJNA274975,SRX869400,"WT Old (S3O, Exp 1) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869399,"WT Old (S2O, Exp 1) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869398,"WT Young (S2Y, Exp 1) H3",none,H3-WT,Input-WT,False
+PRJNA274975,SRX869397,"WT Old (S3O, Exp 1) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869396,"WT Old (S2O, Exp 1) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869395,"WT Young (S2Y, Exp 1) H3K36me3",none,H3K36me3-WT,Input-WT,False
+PRJNA274975,SRX869430,"Rph1- Old (S3O, Exp 2) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869429,"Rph1- Old (S2O, Exp 2) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869428,"Rph1- Young (S2Y, Exp 2) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869421,"WT Old (S3O, Exp 2) Input",none,Input-WT,,False
+PRJNA274975,SRX869420,"WT Old (S2O, Exp 2) Input",none,Input-WT,,False
+PRJNA274975,SRX869419,"WT Young (S2Y, Exp 2) Input",none,Input-WT,,False
+PRJNA274975,SRX869412,"Rph1- Old (S3O, Exp 1) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869411,"Rph1- Old (S2O, Exp 1) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869410,"Rph1- Young (S2Y, Exp 1) Input",gene_mutation,Input-Rph1--gene_mutation,,True
+PRJNA274975,SRX869403,"WT Old (S3O, Exp 1) Input",none,Input-WT,,False
+PRJNA274975,SRX869402,"WT Old (S2O, Exp 1) Input",none,Input-WT,,False
+PRJNA274975,SRX869401,"WT Young (S2Y, Exp 1) Input",none,Input-WT,,False
+PRJNA278334,SRX957133,H3K36me3,none,H3K36me3-WT,Input-WT,False
+PRJNA278334,SRX957132,H3K4me3,none,H3K4me3-WT,Input-WT,True
+PRJNA278334,SRX957131,H3K4me1,none,H3K4me1-WT,Input-WT,False
+PRJNA278334,SRX957135,INPUT_2,none,Input-WT,,False
+PRJNA278334,SRX957134,INPUT_1,none,Input-WT,,False
+PRJNA320298,SRX1738634,Set1G990E H3K4me3 repeat2,gene_mutation,H3K4me3-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738633,jhd2Δ H3K4me3 repeat2,gene_deletion,H3K4me3-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738632,wild type H3K4me3 repeat2,none,H3K4me3-WT,Input-WT,False
+PRJNA320298,SRX1738631,Set1G990E H3K4me2 repeat2,gene_mutation,H3K4me2-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738630,jhd2Δ H3K4me2 repeat2,gene_deletion,H3K4me2-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738629,wild type H3K4me2 repeat2,none,H3K4me2-WT,Input-WT,False
+PRJNA320298,SRX1738628,Set1G990E H3K4me1 repeat2,gene_mutation,H3K4me1-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738627,jhd2Δ H3K4me1 repeat2,gene_deletion,H3K4me1-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738626,wild type H3K4me1 repeat2,none,H3K4me1-WT,Input-WT,False
+PRJNA320298,SRX1738622,Set1G990E H3K4me3 repeat1,gene_mutation,H3K4me3-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738621,jhd2Δ H3K4me3 repeat1,gene_deletion,H3K4me3-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738620,wild type H3K4me3 repeat1,none,H3K4me3-WT,Input-WT,False
+PRJNA320298,SRX1738619,Set1G990E H3K4me2 repeat1,gene_mutation,H3K4me2-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738618,jhd2Δ H3K4me2 repeat1,gene_deletion,H3K4me2-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738617,wild type H3K4me2 repeat1,none,H3K4me2-WT,Input-WT,False
+PRJNA320298,SRX1738616,Set1G990E H3K4me1 repeat1,gene_mutation,H3K4me1-Set1-G990E-gene_mutation,Input-Set1-G990E-gene_mutation,False
+PRJNA320298,SRX1738615,jhd2Δ H3K4me1 repeat1,gene_deletion,H3K4me1-Δjhd2-gene_deletion,Input-Δjhd2-gene_deletion,False
+PRJNA320298,SRX1738614,wild type H3K4me1 repeat1,none,H3K4me1-WT,Input-WT,False
+PRJNA320298,SRX1738637,Set1G990E input repeat2,gene_mutation,Input-Set1-G990E-gene_mutation,,False
+PRJNA320298,SRX1738636,jhd2Δ input repeat2,gene_deletion,Input-Δjhd2-gene_deletion,,False
+PRJNA320298,SRX1738635,wild type input repeat2,none,Input-WT,,False
+PRJNA320298,SRX1738625,Set1G990E input repeat1,gene_mutation,Input-Set1-G990E-gene_mutation,,False
+PRJNA320298,SRX1738624,jhd2Δ input repeat1,gene_deletion,Input-Δjhd2-gene_deletion,,False
+PRJNA320298,SRX1738623,wild type input repeat1,none,Input-WT,,False
+PRJNA450434,SRX3944369,H3K56ac_ChIP-seq_spt6-1004_rep2,gene_mutation,H3K56ac-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944368,H3K56ac_ChIP-seq_spt6-1004_rep1,gene_mutation,H3K56ac-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944367,H3K56ac_ChIP-seq_spt16-197_rep2,gene_mutation,H3K56ac-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944366,H3K56ac_ChIP-seq_spt16-197_rep1,gene_mutation,H3K56ac-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944365,H3K56ac_ChIP-seq_WT_rep2,gene_deletion,H3K56ac-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944364,H3K56ac_ChIP-seq_WT_rep1,gene_deletion,H3K56ac-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944363,H3_ChIP-seq_spt6-1004_rep2,gene_mutation,H3-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944362,H3_ChIP-seq_spt6-1004_rep1,gene_mutation,H3-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944361,H3_ChIP-seq_spt16-197_rep2,gene_mutation,H3-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944360,H3_ChIP-seq_spt16-197_rep1,gene_mutation,H3-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944359,H3_ChIP-seq_WT_rep2,gene_deletion,H3-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944358,H3_ChIP-seq_WT_rep1,gene_deletion,H3-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944357,H4_ChIP-seq_spt6-1004_rep2,gene_mutation,H4-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944356,H4_ChIP-seq_spt6-1004_rep1,gene_mutation,H4-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944355,H4_ChIP-seq_spt16-197_rep2,gene_mutation,H4-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944354,H4_ChIP-seq_spt16-197_rep1,gene_mutation,H4-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944353,H4_ChIP-seq_WT_rep2,gene_deletion,H4-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944352,H4_ChIP-seq_WT_rep1,gene_deletion,H4-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944351,H3K4me3_ChIP-seq_spt6-1004_rep2,gene_mutation,H3K4me3-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944350,H3K4me3_ChIP-seq_spt6-1004_rep1,gene_mutation,H3K4me3-spt6-1004-gene_mutation,Input-spt6-1004-gene_mutation,True
+PRJNA450434,SRX3944349,H3K4me3_ChIP-seq_spt16-197_rep2,gene_mutation,H3K4me3-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944348,H3K4me3_ChIP-seq_spt16-197_rep1,gene_mutation,H3K4me3-spt16-197-gene_mutation,Input-spt16-197-gene_mutation,True
+PRJNA450434,SRX3944347,H3K4me3_ChIP-seq_WT_rep2,gene_deletion,H3K4me3-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944346,H3K4me3_ChIP-seq_WT_rep1,gene_deletion,H3K4me3-Δleu2-gene_deletion,Input-spt16-197-gene_mutation,False
+PRJNA450434,SRX3944381,H3K56ac/H3_Input_spt6-1004_rep2,gene_mutation,Input-spt6-1004-gene_mutation,,True
+PRJNA450434,SRX3944380,H3K56ac/H3_Input_spt6-1004_rep1,gene_mutation,Input-spt6-1004-gene_mutation,,True
+PRJNA450434,SRX3944379,H3K56ac/H3_Input_spt16-197_rep2,gene_mutation,Input-spt16-197-gene_mutation,,True
+PRJNA450434,SRX3944378,H3K56ac/H3_Input_spt16-197_rep1,gene_mutation,Input-spt16-197-gene_mutation,,True
+PRJNA450434,SRX3944377,H3K56ac/H3_Input_WT_rep2,gene_deletion,Input-Δleu2-gene_deletion,,False
+PRJNA450434,SRX3944376,H3K56ac/H3_Input_WT_rep1,gene_deletion,Input-Δleu2-gene_deletion,,False
+PRJNA450434,SRX3944375,H3K4me3/H4_Input_spt6-1004_rep2,gene_mutation,Input-spt6-1004-gene_mutation,,True
+PRJNA450434,SRX3944374,H3K4me3/H4_Input_spt6-1004_rep1,gene_mutation,Input-spt6-1004-gene_mutation,,True
+PRJNA450434,SRX3944373,H3K4me3/H4_Input_spt16-197_rep2,gene_mutation,Input-spt16-197-gene_mutation,,True
+PRJNA450434,SRX3944372,H3K4me3/H4_Input_spt16-197_rep1,gene_mutation,Input-spt16-197-gene_mutation,,True
+PRJNA450434,SRX3944371,H3K4me3/H4_Input_WT_rep2,gene_deletion,Input-Δleu2-gene_deletion,,False
+PRJNA450434,SRX3944370,H3K4me3/H4_Input_WT_rep1,gene_deletion,Input--gene_deletion,,True
+PRJNA588479,SRX7119855,H3K4me2_4h_r3,stress_condition,H3K4me2-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119854,H3K4me2_2h_r3,stress_condition,H3K4me2-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119853,H3K36me3_4h_r3,stress_condition,H3K36me3-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119852,H3K36me3_2h_r3,stress_condition,H3K36me3-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119849,H3K4me2_4h_r2,stress_condition,H3K4me2-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119848,H3K4me2_2h_r2,stress_condition,H3K4me2-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119847,H3K36me3_4h_r2,stress_condition,H3K36me3-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119846,H3K36me3_2h_r2,stress_condition,H3K36me3-sporulation media-stress_condition-SPO_2h,None,False
+PRJNA588479,SRX7119845,H3K4me2_4h_in_r1,stress_condition,H3K4me2-sporulation media-stress_condition-4h,None,False
+PRJNA588479,SRX7119844,H3K4me2_4h_r1,stress_condition,H3K4me2-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119843,H3K4me2_2h_in_r1,stress_condition,H3K4me2-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119842,H3K4me2_2h_r1,stress_condition,H3K4me2-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119841,H3K36me3_4h_in_r1,stress_condition,H3K36me3-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119840,H3K36me3_4h_r1,stress_condition,H3K36me3-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),False
+PRJNA588479,SRX7119837,H3K36me3_2h_in_r1,stress_condition,H3K36me3-sporulation media-stress_condition-premeiotic_(2h_in_SPO),Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),False
+PRJNA588479,SRX7119836,H3K36me3_2h_r1,stress_condition,H3K36me3-sporulation media-stress_condition-SPO_2h,None,False
+PRJNA588479,SRX7119857,input_4h_r3,stress_condition,Input-sporulation media-stress_condition-meiotic_prophase_(4h_in_SPO),,False
+PRJNA588479,SRX7119856,input_2h_r3,stress_condition,Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),,False
+PRJNA588479,SRX7119851,input_4h_r2,stress_condition,Input-sporulation media-stress_condition-SPO_4h,,False
+PRJNA588479,SRX7119850,input_2h_r2,stress_condition,Input-sporulation media-stress_condition-premeiotic_(2h_in_SPO),,False
+PRJNA643248,SRX8641860,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 2",protein_depletion,H3K36me3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641859,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 1",protein_depletion,H3K36me3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641858,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",none,H3K36me3-WT,Input-WT,False
+PRJNA643248,SRX8641857,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",none,H3K36me3-WT,Input-WT,False
+PRJNA643248,SRX8641856,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + IAA 2",protein_depletion,H3K36me2-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641855,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + IAA 1",protein_depletion,H3K36me2-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641854,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",none,H3K36me2-WT,Input-WT,False
+PRJNA643248,SRX8641853,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",none,H3K36me2-WT,Input-WT,False
+PRJNA643248,SRX8641852,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 2",protein_depletion,H3K4me3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641851,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 1",protein_depletion,H3K4me3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641850,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",none,H3K4me3-WT,Input-WT,False
+PRJNA643248,SRX8641849,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",none,H3K4me3-WT,Input-WT,False
+PRJNA643248,SRX8641848,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 4",protein_depletion,H3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641847,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 3",protein_depletion,H3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641846,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 2",protein_depletion,H3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641845,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + IAA 1",protein_depletion,H3-Spn1-protein_depletion,Input-Spn1-protein_depletion,False
+PRJNA643248,SRX8641844,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 4",none,H3-WT,Input-WT,False
+PRJNA643248,SRX8641843,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 3",none,H3-WT,Input-WT,False
+PRJNA643248,SRX8641842,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",none,H3-WT,Input-WT,False
+PRJNA643248,SRX8641841,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",none,H3-WT,Input-WT,False
+PRJNA643248,SRX8641913,"Set2 ChIP-seq, input DNA: Spn1-AID + IAA 1",protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641911,"Set2 ChIP-seq, input DNA: Spn1-AID + DMSO 2",none,Input-WT,,False
+PRJNA643248,SRX8641909,"Set2 ChIP-seq, input DNA: Spn1-AID + DMSO 1",none,Input-WT,,False
+PRJNA643248,SRX8641907,"Spt6 ChIP-seq, input DNA: Spn1-AID + IAA 2",protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641905,"Spt6 ChIP-seq, input DNA: Spn1-AID + IAA 1",protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641903,"Spt6 ChIP-seq, input DNA: Spn1-AID + DMSO 2",none,Input-WT,,False
+PRJNA643248,SRX8641901,"Spt6 ChIP-seq, input DNA: Spn1-AID + DMSO 1",none,Input-WT,,False
+PRJNA643248,SRX8641891,ChIP-seq input DNA: Spn1-AID + IAA 4,protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641890,ChIP-seq input DNA: Spn1-AID + IAA 3,protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641889,ChIP-seq input DNA: Spn1-AID + IAA 2,protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641888,ChIP-seq input DNA: Spn1-AID + IAA 1,protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA643248,SRX8641887,ChIP-seq input DNA: Spn1-AID + DMSO 4,none,Input-WT,,False
+PRJNA643248,SRX8641886,ChIP-seq input DNA: Spn1-AID + DMSO 3,none,Input-WT,,False
+PRJNA643248,SRX8641885,ChIP-seq input DNA: Spn1-AID + DMSO 2,none,Input-WT,,False
+PRJNA643248,SRX8641884,ChIP-seq input DNA: Spn1-AID + DMSO 1,none,Input-WT,,False
+PRJNA643248,SRX8641840,"Set2 ChIP-seq, input DNA: Spn1-AID + IAA 2",protein_depletion,Input-Spn1-protein_depletion,,False
+PRJNA672715,SRX9381475,20min-H3K56ac-ChIP-WT-2readsFigS7GEO,none,H3K56ac-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381474,20min-H3K56Ac-ChIPNChAP-WT-2readsFigS7GEO,none,H3K56ac-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381473,20min-H3K4me3-ChIP-WT-2readsFigS7GEO,none,H3K4me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381472,20min-H3K4me3-ChIPNChAP-WT-2readsFigS7GEO,none,H3K4me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381471,20min-H3K36me3-ChIP-WT-2readsFigS7GEO,none,H3K36me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381470,20min-H3K36me3-ChIPNChAP-WT-2readsFigS7GEO,none,H3K36me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381469,20min-H3-ChIP-WT-2readsFigS7GEO,none,H3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381468,20min-H3-ChIPNChAP-WT-2readsFigS7GEO,none,H3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381455,H3K56acChIPNChAP_52percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381454,H3K56acChIPNChAP_45percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381453,H3K56acChIPNChAP_38percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381452,H3K56acChIP_52percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381451,H3K56acChIP_45percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381450,H3K56acChIP_38percentunreplicatedreadsFigS4GEO,none,H3K56ac-WT-early_S-phase,None,False
+PRJNA672715,SRX9381445,25min-H3K56Ac-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381444,25min-H3K56Ac-ChIP-MCM23A-1readsFig6GEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381443,25min-H3K4me3-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381442,25min-H3K4me3-ChIP-MCM23A-1readsFig6GEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381441,25min-H3K36me3-ChIPNChAP-McM23A-1readsFig6GEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381440,25min-H3K36me3-ChIP-MCM23A-1readsFig6GEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381439,25min-H3-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381438,25min-H3-ChIP-McM23A-1readsFig6GEO,gene_mutation,H3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381433,20min-H3K56Ac-ChIPNChAP-McM23A-1readsFig6GEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381432,20min-H3K56Ac-ChIP-McM23A-1readsFig6GEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381431,20min-H3K4me3-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381430,20min-H3K4me3-ChIP-MCM23A-1readsFig6GEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381429,20min-H3K36me3-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381428,20min-H3K36me3-ChIP-McM23A-1readsFig6GEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381427,20min-H3-ChIPNChAP-MCM23A-1readsFig6GEO,gene_mutation,H3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381426,20min-H3-ChIP-MCM23A-1readsFig6GEO,gene_mutation,H3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381421,25min-H3K56-ChIP-WT-1readsFig5GEO,none,H3K56ac-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381420,25min-H3K56ac-ChIPNChAP-WT-1readsFig5GEO,none,H3K56ac-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381419,25min-H3K4me3-ChIP-WT-1readsFig5GEO,none,H3K4me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381418,25min-H3K36me3-ChIP-WT-1readsFig5GEO,none,H3K36me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381417,25min-H3K36me3-ChIPNChAP-WT-1readsFig5GEO,none,H3K36me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381416,25min-H3-ChIP-WT-1readsFig5GEO,none,H3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381415,25min-H3-ChIPNChAP-WT-1readsFig5GEO,none,H3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381414,25min-H3K4me3-CHIP-NChAP-WT-1readsFig5GEO,none,H3K4me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381409,20min-H3K56ac-ChIP-WT-1readsFig5GEO,none,H3K56ac-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381408,20min-H3K56ac-CHIP-NChAP-WT-1readsFig5GEO,none,H3K56ac-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381407,20min-H3K4me3-ChIP-WT-1readsFig5GEO,none,H3K4me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381406,20min-H3K4me3-ChIPNChAP-WT-1readsFig5GEO,none,H3K4me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381405,20min-H3K36me3-ChIP-WT-1readsFig5GEO,none,H3K36me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381404,20min-H3K36me3-CHIP-NChAP-WT-1readsFig5GEO,none,H3K36me3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381403,20min-H3-ChIP-WT-1readsFig5GEO,none,H3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381402,20min-H3-CHIP-NChAP-WT-1readsFig5GEO,none,H3-WT-20min,Input-WT-20min,False
+PRJNA672715,SRX9381392,mid-Sphase_H3K56ac_ChIPreadsFig3GEO,none,H3K56ac-WT-mid_S-phase,Input-WT-mid_S-phase,False
+PRJNA672715,SRX9381391,mid-Sphase_H3K56ac_ChIPNChAPreadsFig3GEO,none,H3K56ac-WT-mid_S-phase,Input-WT-mid_S-phase,False
+PRJNA672715,SRX9381389,Midlog_H3K56ac_ChIPreadsFig3GEO,none,H3K56ac-WT-mid-log,Input-WT-mid-log,False
+PRJNA672715,SRX9381387,G1_H3K56ac_ChIPreadsFig3GEO,stress_condition,H3K56ac-G1 arrest-stress_condition-G1,Input-G1 arrest-stress_condition-G1,False
+PRJNA672715,SRX9381384,earlyS-phase-24min_H3K56ac_ChIPreadsFig3GEO,none,H3K56ac-WT-24min,Input-WT-24min,False
+PRJNA672715,SRX9381383,earlyS-phase-24min_H3K56ac_ChIPNChAPreadsFig3GEO,none,H3K56ac-WT-24min,Input-WT-24min,False
+PRJNA672715,SRX9381309,25min-H3K56Ac-ChIPNChAP-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381308,25min-H3K4me3-ChIPNChAP-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381307,25min-H3K36me3-ChIPNChAP-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381306,25min-H3ChIPNChAP-Mcm23A-2readsFigS7BGEO,gene_mutation,H3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381304,25min-ChIP-H3-Mcm23A-2readsFigS7BGEO,gene_mutation,H3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381303,25min-ChIP-H3K56Ac-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381302,25min-ChIP-H3K4me3-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381301,25min-ChIP-H3K36me3-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-25min,Input-Mcm2-3A-gene_mutation-25min,False
+PRJNA672715,SRX9381296,20min-H3K56Ac-ChIPNChAP-MCM23A-2readsFigS7BGEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381295,20min-H3K56Ac-ChIP-Mcm23A-2readsFigS7BGEO,gene_mutation,H3K56ac-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381294,20min-H3K4me3-McM23A-2readsFigS7BGEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381293,20min-H3K4me3-ChIPNChAP-McM23A-2readsFigS7BGEO,gene_mutation,H3K4me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381292,20min-H3K36me3-McM23A-2readsFigS7BGEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381291,20min-H3K36me3-ChIPNChAP-McM23A-2readsFigS7BGEO,gene_mutation,H3K36me3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381290,20min-H3-ChIPNChAP-McM23A-2readsFigS7BGEO,gene_mutation,H3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381289,20min-H3-ChIP-McM23A-2readsFigS7GEO,gene_mutation,H3-Mcm2-3A-gene_mutation-20min,Input-Mcm2-3A-gene_mutation-20min,False
+PRJNA672715,SRX9381283,25min-H3K56ac-ChIP-WT-2readsFigS7GEO,none,H3K56ac-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381282,25min-H3K56Ac-ChIPNChAP-WT-2techrepreadsFigS7GEO,none,H3K56ac-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381281,25min-H3K56Ac-ChIPNChAP-WT-2readsFigS7GEO,none,H3K56ac-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381280,25min-H3K4me3-ChIP-WT-2readsFigS7GEO,none,H3K4me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381279,25min-H3K4me3-ChIPNChAP-WT-2techrepreadsFigS7GEO,none,H3K4me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381278,25min-H3K4me3-ChIPNChAP-WT-2readsFigS7GEO,none,H3K4me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381277,25min-H3K36me3-ChIP-WT-2readsFigS7GEO,none,H3K36me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381276,25min-H3K36me3-ChIPNChAP-WT-2readsFigS7GEO,none,H3K36me3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381275,25min-H3-ChIP-WT-2readsFigS7GEO,none,H3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX9381274,25min-H3-ChIPNChAP-WT-2readsFigS7GEO,none,H3-WT-25min,Input-WT-25min,False
+PRJNA672715,SRX13341012,Input DNA from mid-log cultures 15min after the EdU pulse replicate 2,none,Input-WT-15min_after_the_EdU_pulse,,False
+PRJNA672715,SRX13341011,Input DNA from mid-log cultures 15min after the EdU pulse replicate 1,none,Input-WT-15min_after_the_EdU_pulse,,False
+PRJNA672715,SRX13341006,Input DNA from mid-log cultures 7min after the EdU pulse replicate 2,none,Input-WT-7min_after_the_EdU_pulse,,False
+PRJNA672715,SRX13341005,Input DNA from mid-log cultures 7min after the EdU pulse replicate 1,none,Input-WT-7min_after_EdU_pulse,,False
+PRJNA672715,SRX9381446,25min-Input-McM23A-1readsFig6GEO,gene_mutation,Input-Mcm2-3A-gene_mutation-25min,,False
+PRJNA672715,SRX9381434,20min-Input-MCM23A-1readsFig6GEO,gene_mutation,Input-Mcm2-3A-gene_mutation-20min,,False
+PRJNA672715,SRX9381410,20min-Input-WT-1readsFig5GEO,none,Input-WT-20min,,False
+PRJNA672715,SRX9381395,rtt109D_Input25min_Sphase_rep2readsFig4GEO,gene_mutation,Input-rtt109-KanMX6-gene_mutation-25min,,True
+PRJNA672715,SRX9381394,rtt109D_Input25min_Sphase_rep1readsFig4GEO,gene_mutation,Input-rtt109-KanMX6-gene_mutation-25min,,True
+PRJNA672715,SRX9381393,mid-Sphase_inputreadsFig3GEO,none,Input-WT-mid_S-phase,,False
+PRJNA672715,SRX9381390,Midlog_inputreadsFig3GEO,none,Input-WT-mid-log,,False
+PRJNA672715,SRX9381388,G1_inputreadsFig3GEO,stress_condition,Input-G1 arrest-stress_condition-G1,,False
+PRJNA672715,SRX9381385,earlyS-phase-24min_inputreadsFig3GEO,none,Input-WT-24min,,False
+PRJNA672715,SRX9381380,G1_input_rep2readsFig2GEO,stress_condition,Input-G1 arrest-stress_condition-G1,,False
+PRJNA672715,SRX9381379,G1_input_rep1readsFig2GEO,stress_condition,Input-G1 arrest-stress_condition-G1,,False
+PRJNA672715,SRX9381372,32min_10prcnt_unreplicated_Sphase_input_rep2readsFig2GEO,none,Input-WT-32min,,False
+PRJNA672715,SRX9381371,32min_10prcnt_unreplicated_Sphase_input_rep1readsFig2GEO,none,Input-WT-32min,,False
+PRJNA672715,SRX9381367,25min_21prcnt_unreplicated_Sphase_inputreadsFig2GEO,none,Input-WT-25min,,False
+PRJNA672715,SRX9381310,25min-Input-Mcm23A-2readsFigS7BGEO,gene_mutation,Input-Mcm2-3A-gene_mutation-25min,,False
+PRJNA672715,SRX9381297,20min-Input-Mcm23A-2readsFigS7BGEO,gene_mutation,Input-Mcm2-3A-gene_mutation-20min,,False
+PRJNA672715,SRX9381286,25minSphase_Input_readsFig1GEO,none,Input-WT-25min,,False
+PRJNA672715,SRX9381284,25min-Input-WT-2readsFigS7GEO,none,Input-WT-25min,,False
+PRJNA672715,SRX9381270,20min-Input-WT-2readsFigS7GEO,none,Input-WT-20min,,False
+PRJNA721183,SRX10574731,H2A.Z ChIP in Swc2-ΔZN yeast,gene_deletion,H2A.Z-ΔSwc2-gene_deletion,Input-ΔSwc2-gene_deletion,False
+PRJNA721183,SRX10574729,H2A.Z ChIP in Swc2-ΔZ yeast,gene_deletion,H2A.Z-ΔSwc2-gene_deletion,Input-ΔSwc2-gene_deletion,False
+PRJNA721183,SRX10574727,H2A.Z ChIP in WT-Swc2 yeast,none,H2A.Z-WT,Input-WT,False
+PRJNA721183,SRX10574732,input of Swc3-ΔZN yeast,gene_deletion,Input-ΔSwc2-gene_deletion,,False
+PRJNA721183,SRX10574730,input of Swc3-ΔZ yeast,gene_deletion,Input-ΔSwc2-gene_deletion,,False
+PRJNA721183,SRX10574728,input of WT-Swc2 yeast,none,Input-WT,,False
+PRJNA737490,SRX11141070,s10_H3K9_WT_30,stress_condition,H3K9-glucose starvation-stress_condition-30,Input-glucose starvation-stress_condition-30,False
+PRJNA737490,SRX11141069,s16_H3K9_WT_30,stress_condition,H3K9-glucose starvation-stress_condition-30,Input-glucose starvation-stress_condition-30,False
+PRJNA737490,SRX11141067,s13_H3K9_WT_0,none,H3K9-WT-0,Input-WT-0,False
+PRJNA737490,SRX11141066,s7_H3K9_WT_0,none,H3K9-WT-0,Input-WT-0,False
+PRJNA737490,SRX11141064,s11_H3K9_gcn5_30,gene_mutation,H3K9-gcn5-gene_mutation-30,Input-gcn5-gene_mutation-30,False
+PRJNA737490,SRX11141063,WT_0_H3K9_2,none,H3K9-WT-0,Input-WT-0,False
+PRJNA737490,SRX11141062,WT_0_H3K9_1,none,H3K9-WT-0,Input-WT-0,False
+PRJNA737490,SRX11141060,rpd3_30_H3K9_2,gene_mutation,H3K9-Rpd3-Mutation-gene_mutation-30,Input-RPD3-Mutation-gene_mutation-30,False
+PRJNA737490,SRX11141059,rpd3_30_H3K9_1,gene_mutation,H3K9-Rpd3-Mutation-gene_mutation-30,Input-RPD3-Mutation-gene_mutation-30,False
+PRJNA737490,SRX11141057,rpd3_0_H3K9_2,gene_mutation,H3K9-Rpd3-0-gene_mutation-0,Input-RPD3-0-gene_mutation-0,False
+PRJNA737490,SRX11141056,rpd3_0_H3K9_1,gene_mutation,H3K9-Rpd3-0-gene_mutation-0,Input-RPD3-0-gene_mutation-0,False
+PRJNA737490,SRX11141050,s17_H3K9_gcn5_30,gene_mutation,H3K9-gcn5-gene_mutation-30,Input-gcn5-gene_mutation-30,False
+PRJNA737490,SRX11141048,s14_H3K9_gcn5_0,gene_mutation,H3K9-gcn5-gene_mutation-0,Input-gcn5-gene_mutation-0,False
+PRJNA737490,SRX11141047,s8_H3K9_gcn5_0,gene_mutation,H3K9-gcn5-gene_mutation-0,Input-gcn5-gene_mutation-0,False
+PRJNA737490,SRX11141045,WT_30_H3K9_2,stress_condition,H3K9-glucose starvation-stress_condition-30,Input-glucose starvation-stress_condition-30,False
+PRJNA737490,SRX11141044,WT_30_H3K9_1,stress_condition,H3K9-glucose starvation-stress_condition-30,Input-glucose starvation-stress_condition-30,False
+PRJNA737490,SRX11141068,s4_H3_WT_30,stress_condition,Input-glucose starvation-stress_condition-30,,False
+PRJNA737490,SRX11141065,s1_H3_WT_0,none,Input-WT-0,,False
+PRJNA737490,SRX11141061,WT_0_H3,none,Input-WT-0,,False
+PRJNA737490,SRX11141058,rpd3_30_H3,gene_mutation,Input-RPD3-Mutation-gene_mutation-30,,False
+PRJNA737490,SRX11141049,s5_H3_gcn5_30,gene_mutation,Input-gcn5-gene_mutation-30,,False
+PRJNA737490,SRX11141046,s2_H3_gcn5_0,gene_mutation,Input-gcn5-gene_mutation-0,,False
+PRJNA737490,SRX11141043,WT_30_H3,stress_condition,Input-glucose starvation-stress_condition-30,,False
+PRJNA737490,SRX11141042,rpd3_0_H3,gene_mutation,Input-RPD3-0-gene_mutation-0,,False
+PRJNA753826,SRX11717442,YCE1141 H3K4me3 ChIP repeat 2,gene_mutation,H3K4me3-Spt5-3A-gene_mutation-G1,Input-Spt5-3A-gene_mutation,False
+PRJNA753826,SRX11717438,YCE1140 H3K4me3 ChIP repeat 2,stress_condition,H3K4me3-GAL+IAA-stress_condition,Input-Spt5-3A-gene_mutation,True
+PRJNA753826,SRX11717434,YCE281 H3K4me3 ChIP repeat 2,gene_deletion,H3K4me3-ΔSpt5-gene_deletion,Input-ΔSpt5-gene_deletion,True
+PRJNA753826,SRX11717430,YCE1141 H3K4me3 ChIP repeat 1,gene_mutation,H3K4me3-Spt5-3A-gene_mutation-G1,Input-Spt5-3A-gene_mutation,False
+PRJNA753826,SRX11717426,YCE1140 H3K4me3 ChIP repeat 1,stress_condition,H3K4me3-GAL+IAA-stress_condition-G1,Input-Spt5-3A-gene_mutation,False
+PRJNA753826,SRX11717422,YCE281 H3K4me3 ChIP repeat 1,gene_deletion,H3K4me3-ΔSpt5-gene_deletion,Input-ΔSpt5-gene_deletion,False
+PRJNA753826,SRX11717441,YCE1141 input MNase repeat 2,gene_mutation,Input-Spt5-3A-gene_mutation,,True
+PRJNA753826,SRX11717439,YCE1141 input sonication repeat 2,gene_mutation,Input-Spt5-3A-gene_mutation,,True
+PRJNA753826,SRX11717437,YCE1140 input MNase repeat 2,stress_condition,Input-GAL+IAA-stress_condition-G1,,False
+PRJNA753826,SRX11717435,YCE1140 input sonication repeat 2,stress_condition,Input-GAL+IAA-stress_condition,,False
+PRJNA753826,SRX11717433,YCE281 input MNase repeat 2,gene_deletion,Input-ΔSpt5-gene_deletion,,False
+PRJNA753826,SRX11717431,YCE281 input sonication repeat 2,gene_deletion,Input-ΔSpt5-gene_deletion,,False
+PRJNA753826,SRX11717429,YCE1141 input MNase repeat 1,gene_mutation,Input-Spt5-3A-gene_mutation-G1,,False
+PRJNA753826,SRX11717427,YCE1141 input sonication repeat 1,gene_mutation,Input-Spt5-3A-gene_mutation,,True
+PRJNA753826,SRX11717425,YCE1140 input MNase repeat 1,stress_condition,Input-GAL+IAA-stress_condition-G1,,False
+PRJNA753826,SRX11717423,YCE1140 input sonication repeat 1,stress_condition,Input-GAL+IAA-stress_condition,,False
+PRJNA753826,SRX11717421,YCE281 input MNase repeat 1,gene_deletion,Input-ΔSpt5-gene_deletion-G1,,False
+PRJNA753826,SRX11717419,YCE281 input sonication repeat 1,gene_deletion,Input-ΔSpt5-gene_deletion,,False
+PRJNA783027,SRX13211266,"H3K27ac, Log Growth Replicate 2",none,H3K27ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211265,"H3K27ac, Log Growth Replicate 1",none,H3K27ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211264,"H3K27ac, Exit 240 min Replicate 2",none,H3K27ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211263,"H3K27ac, Exit 240 min Replicate 1",none,H3K27ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211262,"H3K27ac, Exit 30 min Replicate 2",none,H3K27ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211261,"H3K27ac, Exit 30 min Replicate 1",stress_condition,H3K27ac-glucose-deprived-stress_condition-E30,None,False
+PRJNA783027,SRX13211260,"H3K27ac, Quiescent Replicate 2",stress_condition,H3K27ac-glucose-deprivation-stress_condition-Q,Input-glucose-deprivation-stress_condition-Q,False
+PRJNA783027,SRX13211259,"H3K23ac, Quiescent Replicate 1",stress_condition,H3K23ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211258,"H3K18ac, Log Growth Replicate 2",none,H3K18ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211257,"H3K18ac, Log Growth Replicate 1",none,H3K18ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211256,"H3K18ac, Exit 240 min Replicate 2",none,H3K18ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211255,"H3K18ac, Exit 240 min Replicate 1",none,H3K18ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211254,"H3K18ac, Exit 30 min Replicate 2",none,H3K18ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211253,"H3K18ac, Exit 30 min Replicate 1",none,H3K18ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211252,"H3K18ac, Quiescent Replicate 2",stress_condition,H3K18ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211235,"H3K27ac, Quiescent Replicate 1",stress_condition,H3K27ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211234,"H3K23ac, Log Growth Replicate 2",none,H3K23ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211233,"H3K23ac, Log Growth Replicate 1",none,H3K23ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211232,"H3K23ac, Exit 240 min Replicate 2",none,H3K23ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211231,"H3K23ac, Exit 240 min Replicate 1",none,H3K23ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211230,"H3K23ac, Exit 30 min Replicate 2",none,H3K23ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211229,"H3K23ac, Exit 30 min Replicate 1",none,H3K23ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211228,"H3K23ac, Quiescent Replicate 2",stress_condition,H3K23ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211227,"H3K18ac, Quiescent Replicate 1",stress_condition,H3K18ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211226,"H3K9ac, Log Growth Replicate 2",none,H3K9ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211225,"H3K9ac, Log Growth Replicate 1",none,H3K9ac-WT-LOG,Input-WT-LOG,False
+PRJNA783027,SRX13211224,"H3K9ac, Exit 240 min Replicate 2",none,H3K9ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211223,"H3K9ac, Exit 240 min Replicate 1",none,H3K9ac-WT-E240,Input-WT-E240,False
+PRJNA783027,SRX13211222,"H3K9ac, Exit 30 min Replicate 2",stress_condition,H3K9ac-glucose-deprived-stress_condition-E30,None,False
+PRJNA783027,SRX13211221,"H3K9ac, Exit 30 min Replicate 1",none,H3K9ac-WT-E30,Input-WT-E30,False
+PRJNA783027,SRX13211220,"H3K9ac, Quiescent Replicate 2",stress_condition,H3K9ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211219,"H3K9ac, Quiescent Replicate 1",stress_condition,H3K9ac-glucose-deprived-stress_condition-Q,Input-glucose-deprived-stress_condition-Q,False
+PRJNA783027,SRX13211275,"TAP-Tagged Input, Quiescent Replicate 1",stress_condition,Input-glucose-deprivation-stress_condition-Q,,False
+PRJNA783027,SRX13211267,"Input, Quiescent Replicate 1",stress_condition,Input-glucose-deprivation-stress_condition-Q,,False
+PRJNA783027,SRX13211248,"TAP-Tagged Input, Log Growth Replicate 1",none,Input-WT-LOG,,False
+PRJNA783027,SRX13211247,"TAP-Tagged Input, Exit 240 min Replicate 1",none,Input-WT-E240,,False
+PRJNA783027,SRX13211246,"TAP-Tagged Input, Exit 30 min Replicate 2",none,Input-WT-E30,,False
+PRJNA783027,SRX13211245,"TAP-Tagged Input, Exit 30 min Replicate 1",none,Input-WT-E30,,False
+PRJNA783027,SRX13211244,"TAP-Tagged Input, Quiescent Replicate 2",stress_condition,Input-glucose-deprived-stress_condition-Q,,False
+PRJNA783027,SRX13211242,"Input, Log Growth Replicate 2",none,Input-WT-LOG,,False
+PRJNA783027,SRX13211241,"Input, Log Growth Replicate 1",none,Input-WT-LOG,,False
+PRJNA783027,SRX13211240,"Input, Exit 240 min Replicate 2",none,Input-WT-E240,,False
+PRJNA783027,SRX13211239,"Input, Exit 240 min Replicate 1",none,Input-WT-E240,,False
+PRJNA783027,SRX13211238,"Input, Exit 30 min Replicate 2",none,Input-WT-E30,,False
+PRJNA783027,SRX13211237,"Input, Exit 30 min Replicate 1",none,Input-WT-E30,,False
+PRJNA783027,SRX13211236,"Input, Quiescent Replicate 2",stress_condition,Input-glucose-deprived-stress_condition-Q,,False
+PRJNA831793,SRX19038060,IAA_H3_IP_Rep2,protein_depletion,H3-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038059,IAA_H3_IP_Rep1,protein_depletion,H3-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038058,IAA_H3K4me3_IP_Rep2,protein_depletion,H3K4me3-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038057,IAA_H3K4me3_IP_Rep1,protein_depletion,H3K4me3-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038056,IAA_H3K4me2_IP_Rep2,protein_depletion,H3K4me2-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038055,IAA_H3K4me2_IP_Rep1,protein_depletion,H3K4me2-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038054,IAA_H2Bub_IP_Rep2,protein_depletion,H2BK123ub-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038046,DMSO_H3_IP_Rep2,none,H3-WT,Input-WT,False
+PRJNA831793,SRX19038037,IAA_H2Bub_IP_Rep1,protein_depletion,H2BK123ub-Spt6-protein_depletion,Input-Spt6-protein_depletion,False
+PRJNA831793,SRX19038029,DMSO_H3_IP_Rep1,none,H3-WT,Input-WT,False
+PRJNA831793,SRX19038028,DMSO_H3K4me3_IP_Rep2,none,H3K4me3-WT,Input-WT,False
+PRJNA831793,SRX19038027,DMSO_H3K4me3_IP_Rep1,none,H3K4me3-WT,Input-WT,False
+PRJNA831793,SRX19038026,DMSO_H3K4me2_IP_Rep2,none,H3K4me2-WT,Input-WT,False
+PRJNA831793,SRX19038025,DMSO_H3K4me2_IP_Rep1,none,H3K4me2-WT,Input-WT,False
+PRJNA831793,SRX19038024,DMSO_H2Bub_IP_Rep2,none,H2BK123ub-WT,Input-WT,False
+PRJNA831793,SRX19038023,DMSO_H2Bub_IP_Rep1,none,H2BK123ub-WT,Input-WT,False
+PRJNA831793,SRX19038080,IAA_Input_1_Rep1,protein_depletion,Input-Spt6-protein_depletion,,False
+PRJNA831793,SRX19038072,DMSO_Input_4_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038071,DMSO_Input_3_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038070,DMSO_Input_3_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038069,DMSO_Input_2_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038068,DMSO_Input_2_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038067,DMSO_Input_1_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038066,DMSO_Input_1_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038064,IAA_Input_6_Rep2,stress_condition,Input-IAA-stress_condition,,False
+PRJNA831793,SRX19038063,IAA_Input_6_Rep1,stress_condition,Input--stress_condition,,True
+PRJNA831793,SRX19038062,IAA_Input_5_Rep2,stress_condition,Input--stress_condition,,True
+PRJNA831793,SRX19038045,IAA_Input_5_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038044,IAA_Input_4_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038043,IAA_Input_4_Rep1,stress_condition,Input--stress_condition,,True
+PRJNA831793,SRX19038042,IAA_Input_3_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038041,IAA_Input_3_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038040,IAA_Input_2_Rep2,protein_depletion,Input-Spt6-protein_depletion,,False
+PRJNA831793,SRX19038039,IAA_Input_2_Rep1,stress_condition,Input-IAA-stress_condition,,False
+PRJNA831793,SRX19038038,IAA_Input_1_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038034,DMSO_Input_6_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038033,DMSO_Input_6_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038032,DMSO_Input_5_Rep2,none,Input-WT,,False
+PRJNA831793,SRX19038031,DMSO_Input_5_Rep1,none,Input-WT,,False
+PRJNA831793,SRX19038030,DMSO_Input_4_Rep2,none,Input-WT,,False
+PRJNA954824,SRX19945096,S288E_H3K4me3,gene_mutation,H3K4me3-Set1-S228E-gene_mutation,None,False
+PRJNA954824,SRX19945095,S288E_H3,gene_mutation,H3-Set1-S228E-gene_mutation,None,False
+PRJNA954824,SRX19945094,S288A_H3K4me3,gene_mutation,H3K4me3-Set1-S228A-gene_mutation,None,False
+PRJNA954824,SRX19945093,S288A_H3,gene_mutation,H3-Set1-S228A-gene_mutation,None,False
+PRJNA954824,SRX19945092,WT_H3K4me3,none,H3K4me3-WT,Input-WT,False
+PRJNA954824,SRX19945091,WT_H3 (Set1 control),none,H3-WT,Input-WT,False
+PRJNA954824,SRX19945089,Cla4_input,none,Input-WT,,False
+PRJNA989169,SRX20828404,H3K9me2; TetR-SET; Sir2Sp-HP1; Sir3-SET; hfl1D; ChIP-seq (B),gene_mutation,H3K9me2-hflD-URA3Kl-tetO10X-ADE2-gene_mutation,Input-hflD-URA3Kl-tetO10X-ADE2-gene_mutation,True
+PRJNA989169,SRX20828403,H3K9me2; TetR-SET; Sir2Sp-HP1; Sir3-SET; hfl1D; ChIP-seq (A),gene_mutation,H3K9me2-hflD-URA3Kl-tetO10X-ADE2-gene_mutation,Input-hflD-URA3Kl-tetO10X-ADE2-gene_mutation,True
+PRJNA989169,SRX20828402,"H3K9me2; TetR-SET; Sir2Sp-HP1; Sir3-SET; sir-; ChIP-seq (A, B, C)",gene_mutation,H3K9me2-TetR-SET-gene_mutation,None,True
+PRJNA989169,SRX20828401,H3K9me2; TetR-SET; Sir2Sp-HP1; Sir3-SET; ChIP-seq (B),gene_deletion,H3K9me2-ΔhmrD-gene_deletion,Input-ΔhmrD-gene_deletion,False
+PRJNA989169,SRX20828400,H3K9me2; TetR-SET; Sir2Sp-HP1; Sir3-SET; ChIP-seq (A),gene_mutation,H3K9me2-TetR-SET-gene_mutation,None,True
+PRJNA989169,SRX20828399,H3K9me2; TetR-SET; Sir2Sp-HP1; Suv39x; ChIP-seq (B),gene_mutation,H3K9me2-TetR-SET-gene_mutation,None,True
+PRJNA989169,SRX20828398,H3K9me2; TetR-SET; Sir2Sp-HP1; Suv39x; ChIP-seq (A),gene_mutation,H3K9me2-TetR-SET-gene_mutation,None,True
+PRJNA989169,SRX20828397,H3K9me2; TetR-SET; Suv39x; ChIP-seq (B),gene_mutation,H3K9me2-TetR-SET-gene_mutation,None,True
+PRJNA989169,SRX20828396,H3K9me2; TetR-SET; Suv39x; ChIP-seq (A),gene_deletion,H3K9me2-ΔhmrD-gene_deletion,Input-ΔhmrD-gene_deletion,False
+PRJNA989169,SRX20828395,"H3K9me2; TetR-SET; ChIP-seq (A, B, C)",gene_deletion,H3K9me2-ΔhmrD-gene_deletion,Input-ΔhmrD-gene_deletion,False
+PRJNA989169,SRX20828410,input DNA; AY4345 (B),gene_mutation,Input-hflD::URA3Kl-tetO10X-ADE2-gene_mutation,,True
+PRJNA989169,SRX20828409,input DNA; AY4345 (A),gene_mutation,Input-hflD-URA3Kl-tetO10X-ADE2-gene_mutation,,True
+PRJNA989169,SRX20828408,input DNA; AY4307 (B),gene_deletion,Input-ΔhmrD-gene_deletion,,False
+PRJNA989169,SRX20828407,input DNA; AY4307 (A),gene_deletion,Input-ΔhmrD-gene_deletion,,False
+PRJNA989169,SRX20828406,input DNA; AY2896 (B),gene_mutation,Input-hmrD-tetO10X-ADE2-gene_mutation,,True
+PRJNA989169,SRX20828405,input DNA; AY2896 (A),gene_mutation,Input-hmrD-tetO10X-ADE2-gene_mutation,,True

@@ -1,0 +1,92 @@
+experiment_id,exp_title,gene_mutation,gene_deletion,protein_depletion,stress_condition,time_series,chip_input,antibody_control,chip_target,mutation,deletion,depletion,stress,time_point,project_id,model_summary,model_annotation,warning,sample,perturbation,control
+SRX390624,H3K4ME3_WT_FM392_Rep_2,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA231240,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX390623,H3K4ME3_WT_FM392_Rep_1,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA231240,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX390620,H3K4ME3_Full_length_Set1_Rep_2,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA231240,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX390618,H3K4ME3_Full_length_Set1_Rep_1,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA231240,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX390619,Input_for_Full_length_Set1_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA231240,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX1143276,"H3 chIP-seq in WT yeast, rep #2",False,False,False,False,False,False,False,H3,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX1143275,"H3 chIP-seq in WT yeast, rep #1",False,False,False,False,False,False,False,H3,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX1143272,"H3K56ac chIP-seq in WT yeast, rep #2",False,False,False,False,False,False,False,H3K56ac,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K56ac-WT,none,Input-WT
+SRX1143271,"H3K56ac chIP-seq in WT yeast, rep #1",False,False,False,False,False,False,False,H3K56ac,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K56ac-WT,none,Input-WT
+SRX1143268,"H3K4me3 chIP-seq in WT yeast, rep #2",False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX1143267,"H3K4me3 chIP-seq in WT yeast, rep #1",False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX1143283,"Input in WT yeast, rep #1",False,False,False,False,False,True,False,,,,,,,PRJNA254082,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869418,"WT Old (S3O, Exp 2) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869417,"WT Old (S2O, Exp 2) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869416,"WT Young (S2Y, Exp 2) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869415,"WT Old (S3O, Exp 2) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869414,"WT Old (S2O, Exp 2) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869413,"WT Young (S2Y, Exp 2) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869400,"WT Old (S3O, Exp 1) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869399,"WT Old (S2O, Exp 1) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869398,"WT Young (S2Y, Exp 1) H3",False,False,False,False,False,False,False,H3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX869397,"WT Old (S3O, Exp 1) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869396,"WT Old (S2O, Exp 1) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869395,"WT Young (S2Y, Exp 1) H3K36me3",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX869421,"WT Old (S3O, Exp 2) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869420,"WT Old (S2O, Exp 2) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869419,"WT Young (S2Y, Exp 2) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869403,"WT Old (S3O, Exp 1) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869402,"WT Old (S2O, Exp 1) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX869401,"WT Young (S2Y, Exp 1) Input",False,False,False,False,False,True,True,,,,,,,PRJNA274975,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX957133,H3K36me3,False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA278334,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX957132,H3K4me3,False,False,False,False,False,False,False,H3K4me3,,,,,stationary growth phase,PRJNA278334,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX957131,H3K4me1,False,False,False,False,False,False,False,H3K4me1,,,,,,PRJNA278334,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me1-WT,none,Input-WT
+SRX957135,INPUT_2,False,False,False,False,False,True,False,,,,,,,PRJNA278334,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX957134,INPUT_1,False,False,False,False,False,True,False,,,,,,,PRJNA278334,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX1738632,wild type H3K4me3 repeat2,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX1738629,wild type H3K4me2 repeat2,False,False,False,False,False,False,False,H3K4me2,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me2-WT,none,Input-WT
+SRX1738626,wild type H3K4me1 repeat2,False,False,False,False,False,False,False,H3K4me1,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me1-WT,none,Input-WT
+SRX1738620,wild type H3K4me3 repeat1,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX1738617,wild type H3K4me2 repeat1,False,False,False,False,False,False,False,H3K4me2,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me2-WT,none,Input-WT
+SRX1738614,wild type H3K4me1 repeat1,False,False,False,False,False,False,False,H3K4me1,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me1-WT,none,Input-WT
+SRX1738635,wild type input repeat2,False,False,False,False,False,True,False,,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX1738623,wild type input repeat1,False,False,False,False,False,True,False,,,,,,,PRJNA320298,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641858,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX8641857,"H3K36me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",False,False,False,False,False,False,False,H3K36me3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me3-WT,none,Input-WT
+SRX8641854,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",False,False,False,False,False,False,False,H3K36me2,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me2-WT,none,Input-WT
+SRX8641853,"H3K36me2 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",False,False,False,False,False,False,False,H3K36me2,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K36me2-WT,none,Input-WT
+SRX8641850,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX8641849,"H3K4me3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX8641844,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 4",False,False,False,False,False,False,False,H3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX8641843,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 3",False,False,False,False,False,False,False,H3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX8641842,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 2",False,False,False,False,False,False,False,H3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX8641841,"histone H3 ChIP-seq, ChIP DNA: Spn1-AID + DMSO 1",False,False,False,False,False,False,False,H3,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX8641911,"Set2 ChIP-seq, input DNA: Spn1-AID + DMSO 2",False,False,False,False,False,True,False,Set2,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641909,"Set2 ChIP-seq, input DNA: Spn1-AID + DMSO 1",False,False,False,False,False,True,False,Set2,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641903,"Spt6 ChIP-seq, input DNA: Spn1-AID + DMSO 2",False,False,False,False,False,True,False,Spt6,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641901,"Spt6 ChIP-seq, input DNA: Spn1-AID + DMSO 1",False,False,False,False,False,True,False,Spt6,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641887,ChIP-seq input DNA: Spn1-AID + DMSO 4,False,False,False,False,False,True,False,,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641886,ChIP-seq input DNA: Spn1-AID + DMSO 3,False,False,False,False,False,True,False,,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641885,ChIP-seq input DNA: Spn1-AID + DMSO 2,False,False,False,False,False,True,False,,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX8641884,ChIP-seq input DNA: Spn1-AID + DMSO 1,False,False,False,False,False,True,False,,,,,,,PRJNA643248,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX10574727,H2A.Z ChIP in WT-Swc2 yeast,False,False,False,False,False,False,False,H2A.Z,,,,,,PRJNA721183,gpt-4o-mini,gpt-4o-2024-08-06,True,H2A.Z-WT,none,Input-WT
+SRX10574728,input of WT-Swc2 yeast,False,False,False,False,False,True,True,,,,,,,PRJNA721183,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038046,DMSO_H3_IP_Rep2,False,False,False,False,False,False,False,H3,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX19038029,DMSO_H3_IP_Rep1,False,False,False,False,False,False,False,H3,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX19038028,DMSO_H3K4me3_IP_Rep2,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX19038027,DMSO_H3K4me3_IP_Rep1,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX19038026,DMSO_H3K4me2_IP_Rep2,False,False,False,False,False,False,False,H3K4me2,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me2-WT,none,Input-WT
+SRX19038025,DMSO_H3K4me2_IP_Rep1,False,False,False,False,False,False,False,H3K4me2,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me2-WT,none,Input-WT
+SRX19038024,DMSO_H2Bub_IP_Rep2,False,False,False,False,False,False,False,H2BK123ub,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H2BK123ub-WT,none,Input-WT
+SRX19038023,DMSO_H2Bub_IP_Rep1,False,False,False,False,False,False,False,H2BK123ub,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,H2BK123ub-WT,none,Input-WT
+SRX19038072,DMSO_Input_4_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038071,DMSO_Input_3_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038070,DMSO_Input_3_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038069,DMSO_Input_2_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038068,DMSO_Input_2_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038067,DMSO_Input_1_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038066,DMSO_Input_1_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038045,IAA_Input_5_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038044,IAA_Input_4_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038042,IAA_Input_3_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038041,IAA_Input_3_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038038,IAA_Input_1_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038034,DMSO_Input_6_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038033,DMSO_Input_6_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038032,DMSO_Input_5_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038031,DMSO_Input_5_Rep1,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19038030,DMSO_Input_4_Rep2,False,False,False,False,False,True,False,,,,,,,PRJNA831793,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,
+SRX19945092,WT_H3K4me3,False,False,False,False,False,False,False,H3K4me3,,,,,,PRJNA954824,gpt-4o-mini,gpt-4o-2024-08-06,True,H3K4me3-WT,none,Input-WT
+SRX19945091,WT_H3 (Set1 control),False,False,False,False,False,False,False,H3,,,,,,PRJNA954824,gpt-4o-mini,gpt-4o-2024-08-06,True,H3-WT,none,Input-WT
+SRX19945089,Cla4_input,False,False,False,False,False,True,False,,,,,,,PRJNA954824,gpt-4o-mini,gpt-4o-2024-08-06,True,Input-WT,none,

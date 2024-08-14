@@ -181,24 +181,27 @@ def bool_check(df):
                 'time_point':'time_series'}
 
     # loop through the rows and check for inconsistencies
-    check = []
+    checks = []
     # for each row in the df, check if any of the bool and char variables disagree
     for i in range(len(df)):
-        mismatch = True 
+        warn = False 
+        warnings = []
         for var in var_dict:
-
-            #if df.loc[i, var_dict[var]] == False and pd.isnull(df.loc[i, var]) == False:
+            test = True
             if df.loc[i, var_dict[var]] == False and df.loc[i, var] == '':
-                mismatch = False 
-            #elif df.loc[i, var_dict[var]] == True and pd.isnull(df.loc[i, var]) == True:
+                test = False 
             elif df.loc[i, var_dict[var]] == True and df.loc[i, var] != '':
-                mismatch = False
-
-        if mismatch:
-            check.append(True)
-        else:
-            check.append(False)
-    df['warning'] = check
+                test = False
+            warnings.append(test)
+            print(warnings) 
+        if any(warnings): # if any of the checks fail, set warn to True, all(warnings) is False if any of the checks fail
+            warn = True
+        if df.loc[i, 'gene_mutation'] and df.loc[i, 'gene_deletion']: # if both gene mutation and gene deletion are true, set warn to True
+            print(f'Warning: experiment {df.loc[i, "experiment_id"]} has both gene mutation and gene deletion set to True')
+            warn = True
+        print(warn)
+        checks.append(warn)
+    df['warning'] = checks
 
     return df
 
@@ -295,10 +298,11 @@ def gather(input,
          model_summary = None,
          model_annotation = None,
          annotate = False,
-         validate = False, 
-         tag = False,
+         validate = True, 
+         tag = True,
          sample = None,
          summary_reps = 1,
+         use_corrected = False,
          save_output = True):
 
     if save_output:
@@ -316,63 +320,80 @@ def gather(input,
     elif type(input) not in ['str','list','pd.DataFrame']:
         raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
 
+    if type(annotate) != bool:
+        raise ValueError("Annotate must be set to True or False")
+    elif not annotate:
+        outdf = meta
+    elif annotate:
+        if Path('sragent_output/annotation_FULL.csv').exists():
+            outdf = pd.read_csv('sragent_output/annotation_FULL.csv', keep_default_na=False)
+            print('Annotation exists, loading annotation...')
+        else:
+            if model_summary is None or model_annotation is None:
+                raise ValueError("Model names must be provided for annotation")
 
-#    if type(input) == pd.DataFrame:
-#        outdf = input
-    if annotate:
-    # parse meta table, isolate individual projects and their experiments
-        unique_projects = meta['project_id'].unique() 
+        # parse meta table, isolate individual projects and their experiments
+            unique_projects = meta['project_id'].unique() 
 
-        expdf_list = []
-        for project_id in unique_projects:
-            prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
-            expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
+            expdf_list = []
+            for project_id in unique_projects:
+                prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+                expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
 
-            project_title = prjMeta['project_title'].iloc[0]
-            #project_id = prjMeta['project_id'].iloc[0]
+                project_title = prjMeta['project_title'].iloc[0]
+                #project_id = prjMeta['project_id'].iloc[0]
 
-            if Path(f'sragent_output/{project_id}_summary.txt').exists():
-                with open(f'sragent_output/{project_id}_summary.txt', 'r') as f:
-                    project_summary = f.read()
-            else:
-                summary = summarize(model_summary,
-                                    prjMeta,
-                                    expMeta)
-                project_summary = summary.choices[0].message.content
-      #      summaries.append(project_summary)
-            print(project_summary)
+                if use_corrected:
+                    if Path(f'sragent_output/{project_id}_summary-corrected.txt').exists():
+                        with open(f'sragent_output/{project_id}_summary.txt', 'r') as f:
+                            print(f'Corrected summary exists, loading {project_id} summary...')
+                            project_summary = f.read()
+                    else:
+                        print(f'Corrected summary does not exist, summarizing {project_id}...')
+                else: 
+                    if Path(f'sragent_output/{project_id}_summary.txt').exists():
+                        with open(f'sragent_output/{project_id}_summary.txt', 'r') as f:
+                            print(f'Summary exists, loading {project_id} summary...')
+                            project_summary = f.read()
+                    else:
+                        print(f'Summary does not exist, summarizing {project_id}...')
+                        summary = summarize(model_summary,
+                                            prjMeta,
+                                            expMeta)
+                        project_summary = summary.choices[0].message.content
+          #      summaries.append(project_summary)
 
-            expMeta_list = sampleExps(model_annotation,
-                                      expMeta,
-                                      project_summary,
-                                      summary_reps,
-                                      sample)
+                expMeta_list = sampleExps(model_annotation,
+                                          expMeta,
+                                          project_summary,
+                                          summary_reps,
+                                          sample)
 
-     ### handling response output ### 
-     # use the project_model class to format the experiment jsons under the parent project
-            output = project_model(project_id = project_id, 
-                                   project_title = project_title, 
-                                   experimentMeta = expMeta_list)        
+         ### handling response output ### 
+         # use the project_model class to format the experiment jsons under the parent project
+                output = project_model(project_id = project_id, 
+                                       project_title = project_title, 
+                                       experimentMeta = expMeta_list)        
 
-            # validate and store the json output 
-            json_args = json.loads(output.model_dump_json())
+                # validate and store the json output 
+                json_args = json.loads(output.model_dump_json())
 
-            # convert json output to dataframe
-            expdf = pd.json_normalize(json_args['experimentMeta'])
-            expdf['project_id'] = project_id
-            expdf['model_summary'] = model_summary
-            expdf['model_annotation'] = model_annotation
-            #expdf['summary'] = '\n'.join(summaries)
-            expdf_list.append(expdf)
+                # convert json output to dataframe
+                expdf = pd.json_normalize(json_args['experimentMeta'])
+                expdf['project_id'] = project_id
+                expdf['model_summary'] = model_summary
+                expdf['model_annotation'] = model_annotation
+                #expdf['summary'] = '\n'.join(summaries)
+                expdf_list.append(expdf)
 
-            # save project summary for each project
-            if save_output:
-                with open(f'sragent_output/{project_id}_summary.txt', 'w') as f:
-                    f.write(project_summary)
+                # save project summary for each project
+                if save_output:
+                    with open(f'sragent_output/{project_id}_summary.txt', 'w') as f:
+                        f.write(project_summary)
 
-            print(f'project {project_id} done!')
+                print(f'project {project_id} done!')
 
-        outdf = pd.concat(expdf_list, ignore_index=True)
+            outdf = pd.concat(expdf_list, ignore_index=True)
 
         if validate:
             outdf = bool_check(outdf)
@@ -381,11 +402,6 @@ def gather(input,
            outdf = tagExps(outdf) 
            outdf = outdf.groupby('project_id').apply(setControl)
 
-    elif not annotate:
-        outdf = meta
-    else:
-        raise ValueError("Annotate must be set to True or False")
-
     ### outputs
     if save_output:
         meta.to_csv(f'sragent_output/metadata.csv', index = False, sep = ',') 
@@ -393,11 +409,6 @@ def gather(input,
             outdf.to_csv(f'sragent_output/annotation_FULL.csv', index = False, sep = ',')
             if tag:
                 outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
-            else:
-                outdf[['project_id','experiment_id','exp_title','perturbation','sample']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
-        
-        
-
 
     return outdf
 
