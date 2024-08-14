@@ -1,6 +1,7 @@
 import os
 import json
 import random
+from pathlib import Path
 import pandas as pd
 from openai import OpenAI
 from pydantic import BaseModel, Field
@@ -77,6 +78,8 @@ def summarize(model,
               prjMeta, 
               expMeta):
 
+    print(f'Summarizing project {prjMeta["project_id"].iloc[0]}...')
+
     system_prompt = "You are an assistant with domain expertise in yeast genetics and molecular biology, you are skilled in analyzing and summarizing metadata from high-throughput sequencing experiments."
     summary_prompt = """Analyze the metadata for this ChIP-seq project and the experiments in the project.
 Briefly summarize the main goal of the project. What is the project testing? What are the different experimental conditions?
@@ -151,13 +154,11 @@ def sampleExps(model,
         exp_list = random.sample(exp_list, sample)
     # get all of the unique experiments in the project
 
-    #project_summary = '\n'.join(project_summary)
-    print(project_summary)
     expMeta_list = []
     for exp in exp_list:
         # get the experiment metadata from the full dataframe of experiments 
         exp_details = expMeta[expMeta['experiment_id'] == exp][['experiment_id', 'title', 'attributes']]
-        print(f'annotating experiment {exp_details["experiment_id"]}')
+        print(f'annotating experiment {exp_details["experiment_id"]}...')
 
         json_response = jsonOut(model, 
                                 project_summary, 
@@ -183,13 +184,15 @@ def bool_check(df):
     check = []
     # for each row in the df, check if any of the bool and char variables disagree
     for i in range(len(df)):
-        mismatch = False 
+        mismatch = True 
         for var in var_dict:
 
-            if df.loc[i, var_dict[var]] == False and pd.isnull(df.loc[i, var]) == False:
-                mismatch = True 
-            elif df.loc[i, var_dict[var]] == True and pd.isnull(df.loc[i, var]) == True:
-                mismatch = True
+            #if df.loc[i, var_dict[var]] == False and pd.isnull(df.loc[i, var]) == False:
+            if df.loc[i, var_dict[var]] == False and df.loc[i, var] == '':
+                mismatch = False 
+            #elif df.loc[i, var_dict[var]] == True and pd.isnull(df.loc[i, var]) == True:
+            elif df.loc[i, var_dict[var]] == True and df.loc[i, var] != '':
+                mismatch = False
 
         if mismatch:
             check.append(True)
@@ -200,7 +203,8 @@ def bool_check(df):
     return df
 
 def tagExps(annotated_exps):
-    
+    print('tagging...')
+
     for row in range(len(annotated_exps)):
         timepoint = str(annotated_exps.loc[row,'time_point']).replace(' ','_')
 
@@ -244,6 +248,9 @@ def setControl(annotated_proj):
     # designed for grouped apply to projects within annotated table
     # first find out what the controls are in the project if any
     # then iterate the rows and match control to experiment
+
+    print('setting controls...')
+
     controls = pd.DataFrame()
     exps = pd.DataFrame()
     if not any(annotated_proj['chip_input']): # if there are no samples labelled as inputs
@@ -284,14 +291,19 @@ def setControl(annotated_proj):
     return annotated_proj
 
 # default settings to 1 rep 1 sample for testing
-def annotate(input,
-         model,
-         annotate = True,
-         validate = True, 
-         tag = True,
+def gather(input,
+         model_summary = None,
+         model_annotation = None,
+         annotate = False,
+         validate = False, 
+         tag = False,
          sample = None,
          summary_reps = 1,
          save_output = True):
+
+    if save_output:
+        if not os.path.exists('sragent_output'):
+            os.mkdir('sragent_output')
 
     check_env()
 
@@ -319,14 +331,18 @@ def annotate(input,
             project_title = prjMeta['project_title'].iloc[0]
             #project_id = prjMeta['project_id'].iloc[0]
 
-
-            summary = summarize(model,
-                                prjMeta,
-                                expMeta)
-            project_summary = summary.choices[0].message.content
+            if Path(f'sragent_output/{project_id}_summary.txt').exists():
+                with open(f'sragent_output/{project_id}_summary.txt', 'r') as f:
+                    project_summary = f.read()
+            else:
+                summary = summarize(model_summary,
+                                    prjMeta,
+                                    expMeta)
+                project_summary = summary.choices[0].message.content
       #      summaries.append(project_summary)
+            print(project_summary)
 
-            expMeta_list = sampleExps(model,
+            expMeta_list = sampleExps(model_annotation,
                                       expMeta,
                                       project_summary,
                                       summary_reps,
@@ -344,9 +360,17 @@ def annotate(input,
             # convert json output to dataframe
             expdf = pd.json_normalize(json_args['experimentMeta'])
             expdf['project_id'] = project_id
-            expdf['model'] = model
+            expdf['model_summary'] = model_summary
+            expdf['model_annotation'] = model_annotation
             #expdf['summary'] = '\n'.join(summaries)
             expdf_list.append(expdf)
+
+            # save project summary for each project
+            if save_output:
+                with open(f'sragent_output/{project_id}_summary.txt', 'w') as f:
+                    f.write(project_summary)
+
+            print(f'project {project_id} done!')
 
         outdf = pd.concat(expdf_list, ignore_index=True)
 
@@ -364,8 +388,6 @@ def annotate(input,
 
     ### outputs
     if save_output:
-        if not os.path.exists('sragent_output'):
-            os.mkdir('sragent_output')
         meta.to_csv(f'sragent_output/metadata.csv', index = False, sep = ',') 
         if annotate:    
             outdf.to_csv(f'sragent_output/annotation_FULL.csv', index = False, sep = ',')

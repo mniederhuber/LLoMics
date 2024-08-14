@@ -11,7 +11,7 @@ from .annotate import (
     bool_check,
     tagExps,
     setControl,
-    annotate
+    gather
 )
 
 from .fetch import fetch
