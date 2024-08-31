@@ -14,7 +14,8 @@ setup(
         'pandas',  
         'openai',
         'biopython',
-        'pydantic'
+        'pydantic',
+        'sqlite3',
         ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Change as appropriate for your project's maturity

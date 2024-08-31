@@ -1,12 +1,14 @@
 import os
 import json
 import random
+import sqlite3
 from pathlib import Path
 import pandas as pd
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
 import sragent.fetch as fetch
+import sragent.store as store
 
 class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
@@ -295,12 +297,20 @@ def gather(input,
          sample = None,
          save_output = True):
 
-    if save_output:
-        if not os.path.exists('sragent_output'):
-            os.mkdir('sragent_output')
-
     check_env()
 
+    if not os.path.exists('sragent_output'):
+        os.mkdir('sragent_output')
+
+    if Path('sragent_output/sragent.db').exists():
+        print('database exists, connecting...')
+        conn = sqlite3.connect('sragent_output/sragent.db')
+    else:
+        print('initializing database...')
+        store.initialize_database()
+        conn = sqlite3.connect('sragent_output/sragent.db')
+
+    ### input handling - to do make function
     if type(input) == list:
         meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
     elif type(input) == str:
@@ -315,12 +325,9 @@ def gather(input,
     elif not annotate:
         outdf = meta
     elif annotate:
-        if Path('sragent_output/annotation_FULL.csv').exists():
-            outdf = pd.read_csv('sragent_output/annotation_FULL.csv', keep_default_na=False)
-            print('Annotation exists, loading annotation...')
-        else:
-            if model_summary is None or model_annotation is None:
-                raise ValueError("Model names must be provided for annotation")
+### STOPPED HERE ADDING NEW SQL FUNCTIONALITY 24.08.31
+        if model_summary is None or model_annotation is None:
+            raise ValueError("Model names must be provided for annotation")
 
         # parse meta table, isolate individual projects and their experiments
             unique_projects = meta['project_id'].unique() 

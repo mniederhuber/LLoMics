@@ -15,5 +15,6 @@ from .gather import (
     reannotate
 )
 
+from .store import initialize_database
 from .fetch import fetch
 from .validate import bool_check
