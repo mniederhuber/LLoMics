@@ -26,14 +26,14 @@ def fetch(prjid):
     tree = ET.parse(sra_handle)
     root = tree.getroot()
 
+    header = ['project_id','project_title','abstract','protocol','run_id','experiment_id','title','organism','assay_id','attributes',]
     outRows = []
+
     for element in root.findall('.//EXPERIMENT_PACKAGE'):
 
         assay_id = element.find('.//LIBRARY_STRATEGY').text
         if assay_id.lower() != 'chip-seq':
             continue
-
-        header = ['project_id','project_title','abstract','protocol','run_id','experiment_id','title','organism','assay_id','attributes',]
 
         experiment_id = element.find('.//EXPERIMENT').attrib.get('accession', '')
 
