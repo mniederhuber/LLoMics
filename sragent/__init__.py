@@ -7,11 +7,12 @@ from .gather import (
     exp_text,
     summarize,
     jsonOut,
-    sampleExps,
+    annotate,
     bool_check,
     tagExps,
     setControl,
-    gather
+    gather,
+    reannotate
 )
 
 from .fetch import fetch
