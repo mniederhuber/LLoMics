@@ -294,10 +294,19 @@ def gather(input,
          model_summary = None,
          model_annotation = None,
          annotate = False,
-         sample = None,
-         save_output = True):
+         sample = None):
 
     check_env()
+
+    ### input handling - to do make function
+    if type(input) == list:
+        meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
+    elif type(input) == str:
+        meta = pd.DataFrame(fetch.fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
+#    elif type(input) == pd.DataFrame:
+#        meta = input
+    elif type(input) not in ['str','list','pd.DataFrame']:
+        raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
 
     if not os.path.exists('sragent_output'):
         os.mkdir('sragent_output')
@@ -305,20 +314,11 @@ def gather(input,
     if Path('sragent_output/sragent.db').exists():
         print('database exists, connecting...')
         conn = sqlite3.connect('sragent_output/sragent.db')
+
     else:
         print('initializing database...')
         store.initialize_database()
         conn = sqlite3.connect('sragent_output/sragent.db')
-
-    ### input handling - to do make function
-    if type(input) == list:
-        meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
-    elif type(input) == str:
-        meta = pd.DataFrame(fetch.fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
-    elif type(input) == pd.DataFrame:
-        meta = input
-    elif type(input) not in ['str','list','pd.DataFrame']:
-        raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
 
     if type(annotate) != bool:
         raise ValueError("Annotate must be set to True or False")
@@ -326,74 +326,64 @@ def gather(input,
         outdf = meta
     elif annotate:
 ### STOPPED HERE ADDING NEW SQL FUNCTIONALITY 24.08.31
-        if model_summary is None or model_annotation is None:
-            raise ValueError("Model names must be provided for annotation")
-
-        # parse meta table, isolate individual projects and their experiments
-            unique_projects = meta['project_id'].unique() 
-
-            expdf_list = []
-            for project_id in unique_projects:
-                prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
-                expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
-
-                project_title = prjMeta['project_title'].iloc[0]
-
-                if Path(f'sragent_output/{project_id}_summary.txt').exists():
-                    with open(f'sragent_output/{project_id}_summary.txt', 'r') as f:
-                        print(f'Summary exists, loading {project_id} summary...')
-                        project_summary = f.read()
-                else:
-                    print(f'Summary does not exist, summarizing {project_id}...')
-                    summary = summarize(model_summary,
-                                        prjMeta,
-                                        expMeta)
-                    project_summary = summary.choices[0].message.content
-
-                expMeta_list = annotate(model_annotation,
-                                          expMeta,
-                                          project_summary,
-                                          sample)
-
-         ### handling response output ### 
-         # use the project_model class to format the experiment jsons under the parent project
-                output = project_model(project_id = project_id, 
-#                                       project_title = project_title, 
-                                       experimentMeta = expMeta_list)        
-
-                # validate and store the json output 
-                json_args = json.loads(output.model_dump_json())
-
-                # convert json output to dataframe
-                expdf = pd.json_normalize(json_args['experimentMeta'])
-                expdf['project_id'] = project_id
-                expdf['model_summary'] = model_summary
-                expdf['model_annotation'] = model_annotation
-                #expdf['summary'] = '\n'.join(summaries)
-                expdf_list.append(expdf)
-
-                # save project summary for each project
-                if save_output:
-                    with open(f'sragent_output/{project_id}_summary.txt', 'w') as f:
-                        f.write(project_summary)
-
-                print(f'project {project_id} done!')
-
-            outdf = pd.concat(expdf_list, ignore_index=True)
-
-        outdf = bool_check(outdf)
-        outdf = tagExps(outdf) 
-        outdf = outdf.groupby('project_id').apply(setControl)
-
-    ### outputs
-    if save_output:
-        meta.to_csv(f'sragent_output/metadata.csv', index = False, sep = ',') 
-        if annotate:    
-            outdf.to_csv(f'sragent_output/annotation_FULL.csv', index = False, sep = ',')
-            outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
+        annotate(meta, model_summary, model_annotation, sample)
 
     return outdf
 
+def annotate(meta, model_summary, model_annotation, sample):
+
+    if model_summary is None or model_annotation is None:
+        raise ValueError("Model names must be provided for annotation")
+    else:
+    # parse meta table, isolate individual projects and their experiments
+        unique_projects = meta['project_id'].unique() 
+
+        expdf_list = []
+        for project_id in unique_projects:
+            prjMeta = meta[meta['project_id'] == project_id][['project_id','project_title','abstract','protocol']].drop_duplicates(subset='project_id', keep = 'first')
+            expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
+
+            project_title = prjMeta['project_title'].iloc[0]
+
+            summary = summarize(model_summary,
+                                prjMeta,
+                                expMeta)
+            project_summary = summary.choices[0].message.content
+
+            expMeta_list = annotate(model_annotation,
+                                    expMeta,
+                                    project_summary,
+                                    sample)
+
+     ### handling response output ### 
+     # use the project_model class to format the experiment jsons under the parent project
+            output = project_model(project_id = project_id, 
+                                    project_title = project_title, 
+                                   experimentMeta = expMeta_list)        
+
+            # validate and store the json output 
+            json_args = json.loads(output.model_dump_json())
+
+            # convert json output to dataframe
+            expdf = pd.json_normalize(json_args['experimentMeta'])
+            expdf['project_id'] = project_id
+            expdf['model_summary'] = model_summary
+            expdf['model_annotation'] = model_annotation
+            #expdf['summary'] = '\n'.join(summaries)
+            expdf_list.append(expdf)
+
+            # save project summary for each project
+            if save_output:
+                with open(f'sragent_output/{project_id}_summary.txt', 'w') as f:
+                    f.write(project_summary)
+
+            print(f'project {project_id} done!')
+
+        outdf = pd.concat(expdf_list, ignore_index=True)
+
+    outdf = bool_check(outdf)
+    outdf = tagExps(outdf) 
+    outdf = outdf.groupby('project_id').apply(setControl)
 
 def reannotate(project_id,
                model_annotation = None):
