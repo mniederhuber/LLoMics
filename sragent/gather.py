@@ -187,13 +187,13 @@ def bool_check(df):
             elif df.loc[i, var_dict[var]] == True and df.loc[i, var] != '':
                 test = False
             warnings.append(test)
-            print(warnings) 
+    #        print(warnings) 
         if any(warnings): # if any of the checks fail, set warn to True, all(warnings) is False if any of the checks fail
             warn = True
         if df.loc[i, 'gene_mutation'] and df.loc[i, 'gene_deletion']: # if both gene mutation and gene deletion are true, set warn to True
             print(f'Warning: experiment {df.loc[i, "experiment_id"]} has both gene mutation and gene deletion set to True')
             warn = True
-        print(warn)
+    #    print(warn)
         checks.append(warn)
     df['warning'] = checks
 
