@@ -14,7 +14,8 @@ setup(
         'pandas',  
         'openai',
         'biopython',
-        'pydantic'
+        'pydantic',
+        'nicegui',
         ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Change as appropriate for your project's maturity
