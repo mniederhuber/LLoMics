@@ -6,8 +6,8 @@ setup(
     author='m',  # Replace 'Your Name' with the package author's name
     author_email='your.email@example.com',  # Replace with the author's email
     description='place holder',  # Package description
-    long_description=open('README.md').read(),  # Long description from README.md
-    long_description_content_type='text/markdown',  # Content type of the long description
+#    long_description=open('README.md').read(),  # Long description from README.md
+#    long_description_content_type='text/markdown',  # Content type of the long description
     url='https://github.com/yourusername/sragent',  # Replace with your repository URL
     packages=find_packages(),  # Automatically find and include all packages
     install_requires=[
