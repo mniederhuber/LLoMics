@@ -14,14 +14,15 @@ metadata_df = pd.DataFrame()
 def fetch_metadata(project_id):
     global metadata_df
     # Use the gather function to fetch the metadata
-    metadata_df = fetch.fetch(project_id)
+    metadata_df = fetch(project_id)
+    print(metadata_df)
     if not metadata_df.empty:
         # Once metadata is fetched, display it in the GUI
         display_metadata()
 
 def display_metadata():
     # Clear previous output before displaying new results
-    ui.clear()
+   # ui.clear()
     
     # Display project summary
     ui.label("Project Summary").classes('text-xl')
