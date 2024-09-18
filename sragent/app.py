@@ -1,8 +1,12 @@
-import streamlit as st
+import dash
+from dash import dcc, html, Input, Output, State
+import pandas as pd
 import os
+from dash.dash_table import DataTable
 from gather import gather, summarize
-from fetch import fetch
-from validate import bool_check
+
+# Initialize the Dash app
+app = dash.Dash(__name__)
 
 # Directory where the app outputs files
 OUTPUT_DIR = "./sragent_output"
@@ -11,80 +15,128 @@ OUTPUT_DIR = "./sragent_output"
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
-# Set the page title
-st.set_page_config(page_title="Project Metadata Annotator")
+# Function to list files in the output directory
+def list_files():
+    return os.listdir(OUTPUT_DIR)
 
-# Title of the app
-st.title("Project Metadata Annotator")
+# Layout of the Dash app
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),  # Track URL changes
 
-# Sidebar for file listing
-st.sidebar.title("Available Output Files")
+    # Sidebar
+    html.Div([
+        html.H3("Output Files"),
+        html.Div(id='file-list'),  # This will display the list of files as links
+        html.Button("Reload File List", id='reload-button', style={'margin-top': '20px'}),
 
-# List available files in the output directory
-files = os.listdir(OUTPUT_DIR)
+        html.Hr(),
 
-# Display the list of files in the sidebar
-selected_file = st.sidebar.selectbox("Select a file to view", files)
+        # Form to select specific project or all projects for metadata gathering
+        html.H3("Fetch Metadata"),
+        dcc.Dropdown(
+            id='summary-type',
+            options=[
+                {'label': 'Summarize Specific Project', 'value': 'specific'},
+                {'label': 'Summarize All Projects', 'value': 'all'}
+            ],
+            value='specific',  # Default selection
+            style={'margin-bottom': '10px'}
+        ),
+        dcc.Input(id='project-id', type='text', placeholder="Enter Project ID (for specific project)", style={'margin-bottom': '10px'}),
+        html.Button("Fetch and Summarize Metadata", id='fetch-button'),
+        html.Div(id='metadata-output')
+    ], style={'width': '20%', 'float': 'left', 'padding': '20px', 'border-right': '1px solid lightgrey'}),
 
-# If a file is selected, display its contents
-if selected_file:
-    st.sidebar.subheader(f"Viewing File: {selected_file}")
-    
-    file_path = os.path.join(OUTPUT_DIR, selected_file)
-    
-    # Determine how to display the file based on its extension
-    if selected_file.endswith(".json"):
-        with open(file_path, "r") as f:
-            file_contents = f.read()
-            st.sidebar.json(file_contents)  # Display as JSON
-    elif selected_file.endswith(".txt"):
-        with open(file_path, "r") as f:
-            file_contents = f.read()
-            st.sidebar.text(file_contents)  # Display as plain text
-    else:
-        st.sidebar.warning(f"Unsupported file format: {selected_file}")
-else:
-    st.sidebar.write("No file selected.")
+    # Main content area for viewing and editing files
+    html.Div([
+        html.H3("File Content"),
+        html.Div(id='file-content', style={'whiteSpace': 'pre-wrap'}),
+        html.Div(id='file-editor')
+    ], style={'width': '75%', 'float': 'right', 'padding': '20px'})
+])
 
-# Input form for project ID
-project_id = st.text_input("Enter Project ID:")
+# Callback to reload the list of files and display them as clickable links
+@app.callback(
+    Output('file-list', 'children'),
+    [Input('reload-button', 'n_clicks')]
+)
+def reload_file_list(n_clicks):
+    files = list_files()
+    return [
+        html.A(file, href=f"/view/{file}", style={'display': 'block', 'margin-bottom': '10px'}) for file in files
+    ]
 
-if st.button("Fetch and Summarize Metadata"):
-    if project_id:
-        # Fetch metadata
-        with st.spinner('Fetching metadata...'):
+# Callback to display the selected file content and provide editing options
+@app.callback(
+    [Output('file-content', 'children'),
+     Output('file-editor', 'children')],
+    [Input('url', 'pathname')]
+)
+def display_file(pathname):
+    if not pathname or not pathname.startswith("/view/"):
+        return "Select a file to view its contents.", ""
+
+    # Extract the file name from the URL
+    file_name = pathname.split("/view/")[1]
+    file_path = os.path.join(OUTPUT_DIR, file_name)
+
+    # Handle CSV and Excel files by displaying them as interactive DataTables
+    if file_name.endswith('.csv'):
+        df = pd.read_csv(file_path)
+
+        # Create a DataTable for the CSV file with scrollable content
+        table = DataTable(
+            id='dataframe-table',
+            columns=[{"name": i, "id": i} for i in df.columns],
+            data=df.to_dict('records'),
+            editable=True,
+            style_table={'height': '300px', 'overflowY': 'auto'},  # Set table height with vertical scroll
+            style_cell={'textAlign': 'left', 'minWidth': '150px', 'width': '150px', 'maxWidth': '150px'},  # Adjust cell width
+        )
+        return f"### {file_name} - DataFrame", table
+
+    # Handle text files
+    elif file_name.endswith('.txt'):
+        with open(file_path, 'r') as file:
+            content = file.read()
+        editor = dcc.Textarea(
+            id='text-editor',
+            value=content,
+            style={'width': '100%', 'height': '400px'}
+        )
+        return f"### {file_name}\n\n{content}", editor
+
+    return "Unsupported file type.", ""
+
+# Callback to fetch metadata based on project ID or summarize all projects
+@app.callback(
+    Output('metadata-output', 'children'),
+    [Input('fetch-button', 'n_clicks')],
+    [State('summary-type', 'value'), State('project-id', 'value')]
+)
+def fetch_metadata(n_clicks, summary_type, project_id):
+    if summary_type == 'specific':
+        if not project_id:
+            return "Please enter a valid project ID."
+        # Gather metadata and summarize it for a specific project
+        try:
             metadata = gather(project_id)
-        
-        # Display raw metadata
-        st.subheader("Raw Metadata")
-        st.dataframe(metadata)
-        
-        # Gather and summarize metadata
-        #with st.spinner('Summarizing metadata...'):
-        #    exp_data = gather(project_id)
-        #    summary = summarize(exp_data)
+            summary = summarize(metadata)
+            return html.Pre(f"Summary of project {project_id}:\n{summary}")
+        except Exception as e:
+            return f"Error fetching metadata: {str(e)}"
+    elif summary_type == 'all':
+        # Logic to gather and summarize metadata for all projects
+        try:
+            all_summaries = ""
+            for project_id in list_files():  # Assuming list_files() returns project IDs or files related to projects
+                metadata = gather(project_id)
+                summary = summarize(metadata)
+                all_summaries += f"Summary of project {project_id}:\n{summary}\n\n"
+            return html.Pre(all_summaries)
+        except Exception as e:
+            return f"Error fetching metadata: {str(e)}"
 
-        ## Display summary for human-in-the-loop validation
-        #st.subheader("Generated Project Summary")
-        #edited_summary = st.text_area("Review and edit the project summary below:", value=summary, height=300)
-        
-        ## Validation button
-        #if st.button("Validate Summary"):
-        #    # Validate the edited summary
-        #    with st.spinner('Validating summary...'):
-        #        validation_report = bool_check(edited_summary)
-
-        #    st.subheader("Validation Report")
-        #    st.json(validation_report)
-
-        # Save summary to a new output file
-#        if st.button("Save Summary"):
-#            file_name = f"summary_{project_id}.txt"
-#            file_path = os.path.join(OUTPUT_DIR, file_name)
-#            
-#            with open(file_path, "w") as f:
-#                f.write(edited_summary)
-#            
-#            st.success(f"Summary saved to {file_name}")
-    else:
-        st.error("Please enter a valid Project ID.")
+# Run the Dash app
+if __name__ == '__main__':
+    app.run_server(debug=True)
