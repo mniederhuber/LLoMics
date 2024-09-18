@@ -15,7 +15,7 @@ setup(
         'openai',
         'biopython',
         'pydantic',
-        'nicegui',
+        'streamlit',
         ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Change as appropriate for your project's maturity

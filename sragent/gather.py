@@ -6,7 +6,7 @@ import pandas as pd
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
-import sragent.fetch as fetch
+from sragent import fetch
 
 class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
@@ -302,9 +302,9 @@ def gather(input,
     check_env()
 
     if type(input) == list:
-        meta = pd.concat([fetch.fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
+        meta = pd.concat([fetch(prj) for prj in input]).drop_duplicates(subset='experiment_id', keep = 'first')    
     elif type(input) == str:
-        meta = pd.DataFrame(fetch.fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
+        meta = pd.DataFrame(fetch(input).drop_duplicates(subset='experiment_id', keep = 'first'))
     elif type(input) == pd.DataFrame:
         meta = input
     elif type(input) not in ['str','list','pd.DataFrame']:
