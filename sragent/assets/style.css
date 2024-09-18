@@ -1,0 +1,162 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #1e415d;
+    font-weight: bold;
+}
+
+a {
+    color: #1e415d;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #148291;
+    text-decoration: underline;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #eaf2f8;
+    padding: 20px;
+    border-right: 2px solid #dfe6ed;
+}
+
+.sidebar h3 {
+    color: #148291;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.sidebar button, .sidebar input {
+    background-color: #f5f7fa;
+    border: 1px solid #dfe6ed;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sidebar button {
+    background-color: #148291;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar button:hover {
+    background-color: #106d77;
+}
+
+.sidebar input {
+    padding-left: 10px;
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 20px;
+    background-color: white;
+    margin-left: 20%;
+    min-height: 100vh;
+}
+
+.main-content h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #1e415d;
+}
+
+.main-content .data-table {
+    border: 1px solid #dfe6ed;
+    border-radius: 4px;
+    background-color: #f9fcff;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.data-table th {
+    background-color: #eaf2f8;
+    color: #148291;
+}
+
+.data-table td {
+    border-bottom: 1px solid #dfe6ed;
+}
+
+/* Buttons */
+button {
+    background-color: #148291;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #106d77;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Inputs */
+input, textarea {
+    background-color: white;
+    border: 1px solid #dfe6ed;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f5f7fa;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #148291;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #106d77;
+}
+
+/* Accent Colors */
+.accent {
+    color: #148291;
+}
+
+/* Divider */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #dfe6ed;
+    margin: 20px 0;
+}

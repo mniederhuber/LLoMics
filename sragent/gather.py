@@ -291,7 +291,7 @@ def setControl(annotated_proj):
 def gather(input,
          model_summary = None,
          model_annotation = None,
-         annotate = False,
+         annotate_meta = False,
          sample = None,
          save_output = True):
 
@@ -310,11 +310,11 @@ def gather(input,
     elif type(input) not in ['str','list','pd.DataFrame']:
         raise ValueError("Input must be a project_id, list of project_ids, or a pandas dataframe of processed metadata")
 
-    if type(annotate) != bool:
-        raise ValueError("Annotate must be set to True or False")
-    elif not annotate:
+    if type(annotate_meta) != bool:
+        raise ValueError("annotate_meta must be set to True or False")
+    elif not annotate_meta:
         outdf = meta
-    elif annotate:
+    elif annotate_meta:
         if Path('sragent_output/annotation_FULL.csv').exists():
             outdf = pd.read_csv('sragent_output/annotation_FULL.csv', keep_default_na=False)
             print('Annotation exists, loading annotation...')
@@ -381,7 +381,7 @@ def gather(input,
     ### outputs
     if save_output:
         meta.to_csv(f'sragent_output/metadata.csv', index = False, sep = ',') 
-        if annotate:    
+        if annotate_meta:    
             outdf.to_csv(f'sragent_output/annotation_FULL.csv', index = False, sep = ',')
             outdf[['project_id','experiment_id','exp_title','perturbation','sample','control','warning']].to_csv('sragent_output/annotation.csv', index = False, sep = ',')
 

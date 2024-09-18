@@ -38,23 +38,43 @@ app.layout = html.Div([
         #    },
         #    multiple=False
         #),
-        html.Button("gather()", id='gather-button', n_clicks = 0, style={'margin-bottom': '10px'}),
+        html.Button("gather()", id='gather-button', n_clicks = 0,),
         
 
         # Control for summarizing specific or all projects after gathering
         html.Hr(),
-        html.H3("Summarize"),
-        dcc.Dropdown(
-            id='summary-type',
-            options=[
-                {'label': 'Summarize Specific Project(s)', 'value': 'specific'},
-                {'label': 'Summarize All Projects', 'value': 'all'}
-            ],
-            value='specific',  # Default selection
-            style={'margin-bottom': '10px'}
-        ),
-        html.Button("Summarize Metadata", id='summarize-button'),
-        html.Div(id='summary-output'),
+        html.H3("annotate"),
+        
+        dcc.Input(id='prjID', type = 'text',
+                  placeholder='specific project (optional)',
+                  value='',
+                  style={'margin-bottom': '10px', 'width': '100%'}),
+        html.H5('model for summarization:'),
+        dcc.Dropdown(id='model_summary',
+                     options=[
+                         {'label':'4o','value':'gpt-4o'},
+                         {'label':'4o-mini','value':'gpt-4o-mini'},
+                         {'label':'o1-preview','value':'o1-preview'},
+                         {'label':'o1-mini', 'value':'o1'}
+                     ],
+                     value='gpt-4o-mini',
+                     style={'margin-bottom':'10px'}
+                  ),
+        html.H5('model for annotation:'),
+        dcc.Dropdown(id='model_annotation',
+                     options=[
+                         {'label':'4o','value':'gpt-4o'},
+                         {'label':'4o-mini','value':'gpt-4o-mini'},
+                         {'label':'o1-preview','value':'o1-preview'},
+                         {'label':'o1-mini', 'value':'o1'}
+                     ],
+                     value='gpt-4o-mini',
+                     style={'margin-bottom':'10px'}
+                  ),
+
+
+        html.Button("annotate()", id='annotate-button', style={'margin':'auto', 'padding':'2px'}),
+        html.Div(id='annotation-output'),
 
         html.Hr(),
 
@@ -66,15 +86,16 @@ app.layout = html.Div([
 
     # Main content area for viewing and editing files
     html.Div([
-        html.Div(id='file-content', style={'whiteSpace': 'pre-wrap'}),
+        html.Div(id='file-content', ),
         html.Div(id='file-editor'),
         
 #        html.Div(id = 'log-div', style=dict(height='300px',overlfow='auto')),
 
-    ], style={'width': '75%', 'float': 'right', 'padding': '20px'}),
+    ], style={'width': '75%', 'float': 'right', 'padding': '10px', 'height':'100%'}),
 
         # Store component to hold gathered data
-    dcc.Store(id='gather_output')  # Add this line to store data
+    dcc.Store(id='gather_output'),  # Add this line to store data
+    dcc.Store(id='annotation_output')  # Add this line to store data
 ])
 
 # Helper function to parse uploaded file
@@ -98,12 +119,26 @@ def reload_file_list(n_clicks):
 @app.callback(
     [Output('file-content', 'children'),
      Output('file-editor', 'children')],
-    [Input('url', 'pathname'), Input('gather_output','data')]
+    [Input('url', 'pathname'), Input('gather_output','data'), 
+     Input('annotation_output','data')]
 )
-def display_file(pathname, gather_data):
+def display_file(pathname, gather_data, annotation_output):
     if gather_data:
         # If there's gathered data (a DataFrame), display it as a table
         df = pd.DataFrame(gather_data)
+
+        table = DataTable(
+            id='dataframe-table',
+            columns=[{"name": i, "id": i} for i in df.columns],
+            data=df.to_dict('records'),
+            editable=False,
+            style_table={'height': '500px', 'width': '80%', 'margin': 'auto', 'overflowY': 'auto'},  # Set table height with vertical scroll
+            style_cell={'textAlign': 'left', 'minWidth': '150px', 'width': '150px', 'maxWidth': '150px'},  # Adjust cell width
+        )
+        return "metadata", table
+    elif annotation_output:
+        # If there's gathered data (a DataFrame), display it as a table
+        df = pd.DataFrame(annotation_output)
 
         table = DataTable(
             id='dataframe-table',
@@ -144,9 +179,9 @@ def display_file(pathname, gather_data):
         editor = dcc.Textarea(
             id='text-editor',
             value=content,
-            style={'width': '100%', 'height': '400px'}
+            style={'width': '80%', 'height': '800px','margin':'auto'}
         )
-        return f"### {file_name}\n\n{content}", editor
+        return f"{file_name}", editor
 
     return "Unsupported file type.", ""
 
@@ -181,40 +216,49 @@ def gather_metadata(n_clicks, project_id):
     except Exception as e:
         return f"Error gathering metadata: {str(e)}"
 
-## Callback to summarize the gathered metadata for specific or all projects
-#@app.callback(
-#    Output('summary-output', 'children'),
-#    [Input('summarize-button', 'n_clicks')],
-#    [State('summary-type', 'value'), State('project-id', 'value')]
-#)
-#$def summarize_metadata(n_clicks, summary_type, project_id):
-#$    if not n_clicks:
-#$        return ""
+# Callback to summarize the gathered metadata for specific or all projects
+@app.callback(
+    Output('annotation_output', 'data'),
+    [Input('annotate-button', 'n_clicks')],
+    [State('prjID', 'value'), State('gather_output','data'),
+     State('model_summary','value'), State('model_annotation','value')]
+)
+def annotate_metadata(n_clicks, prjID, gather_output,
+                       model_summary, model_annotation):
+    if not n_clicks:
+        return ""
 
-    #if summary_type == 'specific' and project_id:
-    #    project_ids = [p.strip() for p in project_id.split(',')]
-    #    all_summaries = ""
-    #    for pid in project_ids:
-    #        try:
-    #            #metadata = gather(pid)
-    #            summary = summarize(metadata)
-    #            all_summaries += f"Summary of project {pid}:\n{summary}\n\n"
-    #        except Exception as e:
-    #            all_summaries += f"Error summarizing project {pid}: {str(e)}\n"
-    #    return all_summaries
+    print(f'using {model_summary}')
 
-    #elif summary_type == 'all':
-    #    try:
-    #        all_summaries = ""
-    #        for project_id in list_files():  # Assuming list_files() returns project IDs or files related to projects
-    #            metadata = gather(project_id)
-    #            summary = summarize(metadata)
-    #            all_summaries += f"Summary of project {project_id}:\n{summary}\n\n"
-    #        return all_summaries
-    #    except Exception as e:
-    #        return f"Error fetching metadata: {str(e)}"
-    #else:
-    #    return "Please provide project ID(s) or select a valid option."
+    if gather_output:
+        print('using using input from gather()...')
+        df = pd.DataFrame(gather_output)
+
+    else:
+        return('run gather first')
+
+    if prjID != '':
+        print(f'running annotation for {prjID}...')
+        df_subset = df[df['project_id']==prjID]
+        annotation = gather(df_subset, model_summary = model_summary, model_annotation = model_annotation, annotate_meta = True)
+
+    else:
+        print(f'running annotation for all projects in metadata...')
+        annotation = gather(df, model_summary = model_summary, model_annotation = model_annotation, annotate_meta = True)
+
+    return annotation.to_dict('records')
+        #elif summary_type == 'all':
+            #try:
+            #    all_summaries = ""
+            #    for project_id in list_files():  # Assuming list_files() returns project IDs or files related to projects
+            #        metadata = gather(project_id)
+            #        summary = summarize(metadata)
+            #        all_summaries += f"Summary of project {project_id}:\n{summary}\n\n"
+            #    return all_summaries
+            #except Exception as e:
+            #    return f"Error fetching metadata: {str(e)}"
+        #else:
+            #return "Please provide project ID(s) or select a valid option."
 
 # Run the Dash app
 if __name__ == '__main__':
