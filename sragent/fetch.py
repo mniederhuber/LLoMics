@@ -3,7 +3,9 @@ import pandas as pd
 from Bio import Entrez
 import os
 import xml.etree.ElementTree as ET
+import logging
 ########
+logger = logging.getLogger(__name__)
 
 ########
     
@@ -17,6 +19,7 @@ def fetch(prjid):
         Entrez.email = os.environ.get('ENTREZ_EMAIL')
         api = os.environ.get('ENTREZ_API_KEY')
 
+    logger.info(f'Fetching {prjid}...')
     print(f'Fetching {prjid}...')
     # search by bioproject id and gather sra IDs
     search = Entrez.read(Entrez.esearch(db = 'sra', term = prjid, retmax = 5000, api_key = api))
@@ -111,5 +114,6 @@ def fetch(prjid):
                  
     outDF = pd.DataFrame(outRows, columns = header)
     
+    logger.info(f'{prjid} fetch complete...')
     print(f'{prjid} fetch complete...')
     return(outDF)
