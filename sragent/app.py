@@ -87,22 +87,12 @@ app.layout = html.Div([
     # Main content area for viewing and editing files
     html.Div([
         html.Div(id='file-content', ),
-        html.Div(id='file-editor'),
-        
-#        html.Div(id = 'log-div', style=dict(height='300px',overlfow='auto')),
 
     ], style={'width': '75%', 'float': 'right', 'padding': '10px', 'height':'100%'}),
 
         # Store component to hold gathered data
-    dcc.Store(id='gather_output'),  # Add this line to store data
-    dcc.Store(id='annotation_output')  # Add this line to store data
-])
+    ])
 
-# Helper function to parse uploaded file
-def parse_contents(contents, filename):
-    content_type, content_string = contents.split(',')
-    decoded = base64.b64decode(content_string)
-    return decoded.decode('utf-8').splitlines()
 
 # Callback to reload the list of files and display them as clickable links
 @app.callback(
@@ -114,76 +104,6 @@ def reload_file_list(n_clicks):
     return [
         html.A(file, href=f"/view/{file}", style={'display': 'block', 'margin-bottom': '10px'}) for file in files
     ]
-
-# Callback to display the selected file content and provide editing options
-@app.callback(
-    [Output('file-content', 'children'),
-     Output('file-editor', 'children')],
-    [Input('url', 'pathname'), Input('gather_output','data'), 
-     Input('annotation_output','data')]
-)
-def display_file(pathname, gather_data, annotation_output):
-    if gather_data:
-        # If there's gathered data (a DataFrame), display it as a table
-        df = pd.DataFrame(gather_data)
-
-        table = DataTable(
-            id='dataframe-table',
-            columns=[{"name": i, "id": i} for i in df.columns],
-            data=df.to_dict('records'),
-            editable=False,
-            style_table={'height': '500px', 'width': '80%', 'margin': 'auto', 'overflowY': 'auto'},  # Set table height with vertical scroll
-            style_cell={'textAlign': 'left', 'minWidth': '150px', 'width': '150px', 'maxWidth': '150px'},  # Adjust cell width
-        )
-        return "metadata", table
-    elif annotation_output:
-        # If there's gathered data (a DataFrame), display it as a table
-        df = pd.DataFrame(annotation_output)
-
-        table = DataTable(
-            id='dataframe-table',
-            columns=[{"name": i, "id": i} for i in df.columns],
-            data=df.to_dict('records'),
-            editable=False,
-            style_table={'height': '500px', 'width': '80%', 'margin': 'auto', 'overflowY': 'auto'},  # Set table height with vertical scroll
-            style_cell={'textAlign': 'left', 'minWidth': '150px', 'width': '150px', 'maxWidth': '150px'},  # Adjust cell width
-        )
-        return "metadata", table
-
-    if not pathname or not pathname.startswith("/view/"):
-        return "Select a file to view its contents.", ""
-
-    # Extract the file name from the URL
-    file_name = pathname.split("/view/")[1]
-    file_path = os.path.join(OUTPUT_DIR, file_name)
-
-    # Handle CSV and Excel files by displaying them as interactive DataTables
-    if file_name.endswith('.csv'):
-        df = pd.read_csv(file_path)
-
-        # Create a DataTable for the CSV file with scrollable content
-        table = DataTable(
-            id='dataframe-table',
-            columns=[{"name": i, "id": i} for i in df.columns],
-            data=df.to_dict('records'),
-            editable=False,
-            style_table={'height': '500px','width':'80%','margin':'auto', 'overflowY': 'auto'},  # Set table height with vertical scroll
-            style_cell={'textAlign': 'left', 'minWidth': '150px', 'width': '150px', 'maxWidth': '150px'},  # Adjust cell width
-        )
-        return f"{file_name}", table
-
-    # Handle text files
-    elif file_name.endswith('.txt'):
-        with open(file_path, 'r') as file:
-            content = file.read()
-        editor = dcc.Textarea(
-            id='text-editor',
-            value=content,
-            style={'width': '80%', 'height': '800px','margin':'auto'}
-        )
-        return f"{file_name}", editor
-
-    return "Unsupported file type.", ""
 
 # Callback to gather metadata based on project ID, list, or uploaded file
 @app.callback(
@@ -247,18 +167,7 @@ def annotate_metadata(n_clicks, prjID, gather_output,
         annotation = gather(df, model_summary = model_summary, model_annotation = model_annotation, annotate_meta = True)
 
     return annotation.to_dict('records')
-        #elif summary_type == 'all':
-            #try:
-            #    all_summaries = ""
-            #    for project_id in list_files():  # Assuming list_files() returns project IDs or files related to projects
-            #        metadata = gather(project_id)
-            #        summary = summarize(metadata)
-            #        all_summaries += f"Summary of project {project_id}:\n{summary}\n\n"
-            #    return all_summaries
-            #except Exception as e:
-            #    return f"Error fetching metadata: {str(e)}"
-        #else:
-            #return "Please provide project ID(s) or select a valid option."
+
 
 # Run the Dash app
 if __name__ == '__main__':

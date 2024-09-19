@@ -15,8 +15,7 @@ setup(
         'openai',
         'biopython',
         'pydantic',
-        'dash',
-        'dash-extensions'
+        'reflex',
         ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Change as appropriate for your project's maturity
