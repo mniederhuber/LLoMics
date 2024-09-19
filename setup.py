@@ -15,7 +15,7 @@ setup(
         'openai',
         'biopython',
         'pydantic',
-        'reflex',
+        'flask',
         ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Change as appropriate for your project's maturity

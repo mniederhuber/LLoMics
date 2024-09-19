@@ -1,8 +1,9 @@
+*.csv
+*.db
+*.py[cod]
+*.txt
 __pycache__
 scratch
-build
-sragent/sragent.egg-info
 sragent.egg-info
+sragent/sragent.egg-info
 vignette/sragent_output
-*.csv
-*.txt
