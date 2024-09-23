@@ -1,16 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Run Gather</title>
+    <meta charset="UTF-8">
+    <title>File Editor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Enter Project IDs</h1>
-    <form method="POST">
-        <label for="project_ids">Project IDs (comma-separated):</label><br>
-        <input type="text" id="project_ids" name="project_ids" required><br><br>
-        <input type="submit" value="Run Gather">
-    </form>
-    <br>
-    <a href="{{ url_for('view_files') }}">View Output Files</a>
+
+    <h1>File Editor</h1>
+
+    <div class="container">
+        <!-- Left Column -->
+        <div class="column-left">
+            <h2>Project Input</h2>
+            <input type="text" id="project-id" placeholder="Enter Project ID" />
+            <button id="gather-button">Run Gather</button>
+
+            <h2>Output Files</h2>
+            <ul id="file-list">
+                <!-- File list will be dynamically populated -->
+            </ul>
+        </div>
+
+      <!-- Right Column -->
+        <div class="column-right">
+            <h2>File Editor</h2>
+            <!-- Textarea for text file editing -->
+            <textarea id="file-content"></textarea>
+            <br>
+            <button id="save-button">Save</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        // Function to load the list of files
+        function loadFiles() {
+            $.getJSON('/files', function(files) {
+                let fileList = $('#file-list');
+                fileList.empty();  // Clear the list
+                files.forEach(function(file) {
+                    fileList.append(`<li><a href="#" onclick="loadFile('${file}')">${file}</a></li>`);
+                });
+            });
+        }
+    
+        // Function to load a file's content
+        function loadFile(filename) {
+            let fileExtension = filename.split('.').pop().toLowerCase();
+    
+            // Load file content and determine how to display it based on file type
+            $.get(`/file/${filename}`, function(data) {
+                if (fileExtension === 'txt') {
+                    // Show the text area for text files
+                    $('#file-content').show().val(data.content);
+                    $('#csv-table').hide();  // Hide the CSV table if it was displayed
+                    $('#save-button').show();  // Show save button for text files
+                    $('#save-button').data('filename', filename);  // Save the filename for saving
+                } else if (fileExtension === 'csv') {
+                    // Hide the text area and display a CSV table for CSV files
+                    $('#file-content').hide();
+                    $('#csv-table').show();
+                    $('#save-button').hide();  // Hide save button for CSV files (if you don’t need to edit them)
+    
+                    // Parse the CSV data and display it in the table
+                    Papa.parse(data.content, {
+                        header: true,
+                        complete: function(results) {
+                            displayCSV(results.data);
+                        }
+                    });
+                } else {
+                    alert('Unsupported file type');
+                }
+            });
+        }
+    
+        // Function to display CSV data in a table
+        function displayCSV(data) {
+            let table = $('#csv-table');
+            table.empty();  // Clear any existing table content
+    
+            if (data.length === 0) {
+                table.append('<p>No data found in CSV</p>');
+                return;
+            }
+    
+            // Create table headers from CSV keys
+            let headers = Object.keys(data[0]);
+            let thead = $('<thead>').appendTo(table);
+            let headerRow = $('<tr>');
+            headers.forEach(header => {
+                headerRow.append(`<th>${header}</th>`);
+            });
+            thead.append(headerRow);
+    
+            // Create table rows from CSV data
+            let tbody = $('<tbody>').appendTo(table);
+            data.forEach(row => {
+                let rowElement = $('<tr>');
+                headers.forEach(header => {
+                    rowElement.append(`<td>${row[header]}</td>`);
+                });
+                tbody.append(rowElement);
+            });
+        }
+    
+        // Function to save the file (only for text files)
+        $('#save-button').click(function() {
+            let filename = $(this).data('filename');
+            let content = $('#file-content').val();
+            $.ajax({
+                url: `/file/edit/${filename}`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ content: content }),
+                success: function(response) {
+                    alert('File saved successfully!');
+                }
+            });
+        });
+    
+        // Run gather function on button click
+        $('#gather-button').click(function() {
+            let projectId = $('#project-id').val();
+            if (projectId) {
+                $.ajax({
+                    url: '/gather',  // Make sure the /gather route exists in your Flask app
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ project_id: projectId }),
+                    success: function(response) {
+                        loadFiles();  // Reload the list of files after gather is run
+                        alert('Gather run successfully!');
+                    }
+                });
+            } else {
+                alert('Please enter a Project ID.');
+            }
+        });
+    
+        // Load files on page load
+        $(document).ready(function() {
+            loadFiles();
+        });
+    </script>
+     
+
 </body>
 </html>
