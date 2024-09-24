@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>File Editor</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
 </head>
 <body>
 
@@ -30,10 +32,11 @@
             <textarea id="file-content"></textarea>
             <br>
             <button id="save-button">Save</button>
+            <table id = "csv-table"> 
+            </table>    
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
         // Function to load the list of files
         function loadFiles() {
@@ -45,7 +48,7 @@
                 });
             });
         }
-    
+
         // Function to load a file's content
         function loadFile(filename) {
             let fileExtension = filename.split('.').pop().toLowerCase();
@@ -61,49 +64,16 @@
                 } else if (fileExtension === 'csv') {
                     // Hide the text area and display a CSV table for CSV files
                     $('#file-content').hide();
-                    $('#csv-table').show();
+                    $('#csv-table').show().dataTable({
+                        data: data.content,
+                        columns: data.columns,
+                        destroy: true
+                    });
                     $('#save-button').hide();  // Hide save button for CSV files (if you don’t need to edit them)
     
-                    // Parse the CSV data and display it in the table
-                    Papa.parse(data.content, {
-                        header: true,
-                        complete: function(results) {
-                            displayCSV(results.data);
-                        }
-                    });
                 } else {
                     alert('Unsupported file type');
                 }
-            });
-        }
-    
-        // Function to display CSV data in a table
-        function displayCSV(data) {
-            let table = $('#csv-table');
-            table.empty();  // Clear any existing table content
-    
-            if (data.length === 0) {
-                table.append('<p>No data found in CSV</p>');
-                return;
-            }
-    
-            // Create table headers from CSV keys
-            let headers = Object.keys(data[0]);
-            let thead = $('<thead>').appendTo(table);
-            let headerRow = $('<tr>');
-            headers.forEach(header => {
-                headerRow.append(`<th>${header}</th>`);
-            });
-            thead.append(headerRow);
-    
-            // Create table rows from CSV data
-            let tbody = $('<tbody>').appendTo(table);
-            data.forEach(row => {
-                let rowElement = $('<tr>');
-                headers.forEach(header => {
-                    rowElement.append(`<td>${row[header]}</td>`);
-                });
-                tbody.append(rowElement);
             });
         }
     
