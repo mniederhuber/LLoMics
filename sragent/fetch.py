@@ -19,10 +19,13 @@ def fetch(prjid):
         Entrez.email = os.environ.get('ENTREZ_EMAIL')
         api = os.environ.get('ENTREZ_API_KEY')
 
-    logger.info(f'Fetching {prjid}...')
+    # check that input is a valid bioproject id
+    if 'PRJ' not in prjid:
+        raise ValueError('Please enter a valid BioProject ID.')
+
     print(f'Fetching {prjid}...')
     # search by bioproject id and gather sra IDs
-    search = Entrez.read(Entrez.esearch(db = 'sra', term = prjid, retmax = 5000, api_key = api))
+    search = Entrez.read(Entrez.esearch(db = 'sra', term = prjid, retmax = 100, api_key = api))
     sra_handle = Entrez.efetch(db = 'sra', id = search['IdList'], rettype = 'full', retmode = 'xml', api_key = api) # changing retmode to xml because there is, it seems, more data in that file
     # fetch the runinfo for all the ids returned by the search
 

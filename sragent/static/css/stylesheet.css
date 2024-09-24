@@ -8,14 +8,19 @@ body {
 }
 
 .column-left {
-    width: 25%;  /* Adjust to 20-30% as needed */
+    width: 15%;  /* Adjust to 20-30% as needed */
     padding: 10px;
     border-right: 1px solid #ccc;
 }
 
 .column-right {
-    width: 75%;  /* Adjust to 70-80% as needed */
+    width: 85%;  /* Adjust to 70-80% as needed */
     padding: 10px;
+}
+
+#project-id {
+    display: inline-block;
+    width: 50%;
 }
 
 #file-list {
@@ -38,17 +43,31 @@ body {
 }
 
 #file-content {
-    width: 100%;
-    height: 300px;
+    width: 80%;
+    height: 60vh;
+    margin: auto;
 }
 
+#csv-table_wrapper {
+   width: 90%;
+   height: 80%;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 button {
     margin-top: 10px;
     padding: 5px 10px;
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 50%;
     padding: 5px;
     margin-bottom: 10px;
 }
