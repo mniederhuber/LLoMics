@@ -6,7 +6,12 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.top-row {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #42b096;
 
+}
 .column-left {
     width: 15%;  /* Adjust to 20-30% as needed */
     padding: 10px;

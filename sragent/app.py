@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
-from sragent import gather
+from sragent import gather 
 import pandas as pd
 import json
 
@@ -33,7 +33,6 @@ def get_file(filename):
             df = df[["project_id", "project_title", "run_id","experiment_id","title","organism","assay_id"]]
             content = jsonify(content=json.loads(df.to_json(orient='split'))['data'],
                               columns=[{"title": str(col)} for col in json.loads(df.to_json(orient="split"))["columns"]])
-            print(content)
             return content 
 
     elif '.txt' in filename:
@@ -60,6 +59,15 @@ def run_gather():
        return 'success!'
    else:
        return 'failed!'
+
+@app.route('/annotate', methods=['POST'])
+def run_annotate():
+    data = request.json['data']
+    columns = request.json['columns']
+    df = pd.DataFrame(data, columns = columns)
+    print(df)
+    return 'butt' 
+
 
 if __name__ == '__main__':
     app.run(debug=True)

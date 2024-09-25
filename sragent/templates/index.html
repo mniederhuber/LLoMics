@@ -10,15 +10,37 @@
     <script src="https://cdn.datatables.net/plug-ins/2.1.7/features/scrollResize/dataTables.scrollResize.min.js"></script>
 </head>
 <body>
-
+         <div class="top-row">  
+            <p>
+            The is a test of the top row div. <br>
+            This is where navigation and info will go. 
+            </p>
+         </div>
     <div class="container">
         <!-- Left Column -->
+
         <div class="column-left">
-                <label for="project_id">Project IDs (comma-separated):</label><br>
-                <input type="text" id="project_id" placeholder="Enter Project ID" />
+                <input type="text" id="project_id" placeholder="Enter Project ID"\>
                 <button id="gather-button">Run gather()</button>
             <br>
             <br>
+            <h4> Summary Model </h4>
+            <select name="Summary Model" id="summary_model">
+                <option value="gpt-4o">GPT-4o</option>
+                <option value="gpt-4o-mini">GPT-4o mini</option>
+                <option value="o1-preview">o1</option>
+                <option value="o1-mini">o1-mini</option>
+              </select>
+             <br>
+             <h4> Annotation Model </h4>
+            <select name="Summary Model" id="summary_model">
+                <option value="gpt-4o">GPT-4o</option>
+                <option value="gpt-4o-mini">GPT-4o mini</option>
+                <option value="o1-preview">o1</option>
+                <option value="o1-mini">o1-mini</option>
+              </select>
+            <br>
+            <button id="annotate-button">Run Annotation</button>
             <h2>Output Files</h2>
             <ul id="file-list"> </ul>
         </div>
@@ -122,7 +144,28 @@
                 alert('Please enter a Project ID.');
             }
         });
-    
+   
+        $('#annotate-button').click(function() {
+             // Get the filtered rows (visible rows after filtering)
+            table = $('#csv-table').DataTable();
+            let filtered_data = table.rows({ search: 'applied' }).data().toArray();
+            let col_names = table.columns().header().toArray().map(x => x.innerText);
+                        // Convert the filtered data to an array or JSON format (if needed)
+            $.ajax({
+                url: '/annotate',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ data: filtered_data, columns: col_names }),
+                success: function(response) {
+                    alert('Annotation successful!');
+                },
+                error: function() {
+                    alert('An error occurred while annotating.');
+                }
+            });
+        
+        })        
+
         // Load files on page load
         $(document).ready(function() {
             loadFiles();
