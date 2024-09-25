@@ -30,7 +30,7 @@ def get_file(filename):
         with open(os.path.join(OUTPUT_DIR, filename), 'r') as f:
             df = pd.read_csv(f)
 #            return df.to_html(header = 'true', index = False, table_id = 'csv-table')
-            df = df[["project_id", "project_title", "run_id","experiment_id","title","organism","assay_id"]]
+            #df = df[["project_id", "project_title", "run_id","experiment_id","title","organism","assay_id"]]
             content = jsonify(content=json.loads(df.to_json(orient='split'))['data'],
                               columns=[{"title": str(col)} for col in json.loads(df.to_json(orient="split"))["columns"]])
             return content 
@@ -64,8 +64,11 @@ def run_gather():
 def run_annotate():
     data = request.json['data']
     columns = request.json['columns']
+    summary_model = request.json['summary_model']
+    annotation_model = request.json['annotation_model']
     df = pd.DataFrame(data, columns = columns)
-    print(df)
+    annotation = gather(df, summary_model, annotation_model, annotate_meta=True)
+    print(annotation)
     return 'butt' 
 
 

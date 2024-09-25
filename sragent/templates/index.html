@@ -25,19 +25,19 @@
             <br>
             <br>
             <h4> Summary Model </h4>
-            <select name="Summary Model" id="summary_model">
-                <option value="gpt-4o">GPT-4o</option>
+            <select id="summary_model">
                 <option value="gpt-4o-mini">GPT-4o mini</option>
-                <option value="o1-preview">o1</option>
+                <option value="gpt-4o">GPT-4o</option>
                 <option value="o1-mini">o1-mini</option>
+                <option value="o1-preview">o1</option>
               </select>
              <br>
              <h4> Annotation Model </h4>
-            <select name="Summary Model" id="summary_model">
-                <option value="gpt-4o">GPT-4o</option>
+            <select id="annotation_model">
                 <option value="gpt-4o-mini">GPT-4o mini</option>
-                <option value="o1-preview">o1</option>
+                <option value="gpt-4o">GPT-4o</option>
                 <option value="o1-mini">o1-mini</option>
+                <option value="o1-preview">o1</option>
               </select>
             <br>
             <button id="annotate-button">Run Annotation</button>
@@ -151,11 +151,16 @@
             let filtered_data = table.rows({ search: 'applied' }).data().toArray();
             let col_names = table.columns().header().toArray().map(x => x.innerText);
                         // Convert the filtered data to an array or JSON format (if needed)
+            let summary_model = $('#summary_model').val();
+            let annotation_model = $('#annotation_model').val();
             $.ajax({
                 url: '/annotate',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ data: filtered_data, columns: col_names }),
+                data: JSON.stringify({ data: filtered_data, 
+                                       columns: col_names,
+                                       summary_model: summary_model,
+                                       annotation_model: annotation_model}),
                 success: function(response) {
                     alert('Annotation successful!');
                 },
