@@ -11,12 +11,10 @@
 </head>
 <body>
          <div class="top-row">  
-            <p>
-            The is a test of the top row div. <br>
-            This is where navigation and info will go. <br>
-            <br>
-            <a href="#" id="toggle-readme">README</a>  <!-- Toggle Link -->
-            </p>
+            <div class="nav-links">
+                <a href="#" id="toggle-readme">readme</a>  <!-- Toggle Link -->
+                <a href="#" >github</a>  <!-- Toggle Link -->
+            </div>
          </div>
     <div class="container">
         <!-- Left Column -->
@@ -47,6 +45,12 @@
             <button id="annotate-button">Run Annotation</button>
             <h2>Output Files</h2>
             <ul id="file-list"> </ul>
+            <br>
+            <br>
+            <br>
+            <div id="log-div">
+                <!-- Log messages will appear here -->
+            </div>
         </div>
 
       <!-- Right Column -->
@@ -70,6 +74,11 @@
     </div>
 
     <script>
+        function appendLogMessage(message) {
+            const logDiv = $('#log-div');
+            logDiv.append(`<p>${message}</p>`);
+            logDiv.scrollTop(logDiv[0].scrollHeight);  // Auto-scroll to bottom
+        }
         $('#toggle-readme').click(function(e) {
             e.preventDefault();  // Prevent default link behavior
             // Toggle visibility between README and file content
@@ -103,6 +112,9 @@
                     $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#save-button').show();  // Show save button for text files
                     $('#save-button').data('filename', filename);  // Save the filename for saving
+                    let log = `Loaded ${filename}`;
+                    appendLogMessage(log);
+
                 } else if (fileExtension === 'csv') {
                     // Hide the text area and display a CSV table for CSV files
                     $('#file-content').hide();
@@ -114,12 +126,17 @@
                         $('#csv-table').empty();  // Clear the table content
                     }
                     $('#csv-table').show().dataTable({
-                        data: data.content,
+                         data: data.content,
                         columns: data.columns,
-                        destroy: true,
+                        columnDefs: [
+                             { name: 'abstract', targets: data.columns.findIndex(col => col.title === 'abstract'), visible: false , searchable: false},  // Hide 'abstract'
+                             { name: 'protocol', targets: data.columns.findIndex(col => col.title === 'protocol'), visible: false , searchable: false},   // Hide 'protocol'
+                             { name: 'attributes', targets: data.columns.findIndex(col => col.title === 'attributes'), visible: false , searchable: false},   // Hide 'protocol',
+                        ],
+
+                      destroy: true,
                         lengthChange: true,
                         paging: false,
-                        scrollResize: false,
                         scrollX: true,
                         scrollY: '50vh',
                         scrollCollapse: true,
@@ -131,9 +148,10 @@
                         }
                     });
                     $('#save-button').hide();  // Hide save button for CSV files (if you don’t need to edit them)
-    
+                    let log = `Loaded ${filename}`;
+                    appendLogMessage(log);
                 } else {
-                    alert('Unsupported file type');
+                    appendLogMessage('Unsupported file type');
                 }
             });
         }
@@ -148,7 +166,8 @@
                 contentType: 'application/json',
                 data: JSON.stringify({ content: content }),
                 success: function(response) {
-                    alert('File saved successfully!');
+                    let log = `Loaded ${filename}`;
+                    appendLogMessage(log);
                 }
             });
         });
@@ -164,14 +183,16 @@
                     data: JSON.stringify({ project_id: projectId }),
                     success: function(response) {
                         loadFiles();  // Reload the list of files after gather is run
-                        alert('Gather run successfully!');
+                        appendLogMessage('gather completed');
+                        appendLogMessage(response.log);
                     },
                     error: function() {
-                        alert('An error occurred while running gather.');
+                        appendLogMessage('something went wrong');
+                        appendLogMessage(response.log);
                     }
                 });
             } else {
-                alert('Please enter a Project ID.');
+                appendLogMessage('enter a bio project id to start...');
             }
         });
    
@@ -192,10 +213,12 @@
                                        summary_model: summary_model,
                                        annotation_model: annotation_model}),
                 success: function(response) {
-                    alert('Annotation successful!');
+                    appendLogMessage('Annotation successful!');
+                    appendLogMessage(response.log);
                 },
                 error: function() {
-                    alert('An error occurred while annotating.');
+                    appendLogMessage('An error occurred while annotating.');
+                    appendLogMessage(response.log);
                 }
             });
         

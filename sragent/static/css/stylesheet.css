@@ -1,23 +1,53 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 2%;
 }
 
 .container {
     display: flex;
     justify-content: space-between;
+    height: 80vh;
 }
 .top-row {
-    height: 100px;
+    min-height: 100px;
+    height: 5vh;
     width: 100%;
     display: flex;
-    border-bottom: 1px solid #42b096;
+    border-bottom: 4px solid #008cff;
+
+}
+.nav-links {
+    display: block;
+    width: 60%;
+    margin: auto;
+    font-size: 25px;
+}
+
+.nav-links a {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    color: #101010;
+}
+.nav-links a:hover {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    color: #008cff;
+}
+.bottom-row {
+    width: 100%;
+    display: flex;
+    height: 10vh;
 
 }
 .column-left {
+    display: flex;;
+    flex-direction: column;
     min-width: 200px;
     width: 15%;  /* Adjust to 20-30% as needed */
     padding: 10px;
-    border-right: 1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
 
@@ -25,6 +55,14 @@ body {
     width: 85%;  /* Adjust to 70-80% as needed */
     padding: 10px;
     position: relative; /* Relative positioning for child elements */
+}
+
+#log-div {
+    width: 95%;
+    height: 200px;
+    overflow: scroll;
+    background-color: rgb(242, 240, 240);
+    padding: 10px;
 }
 
 #project-id {
@@ -62,12 +100,12 @@ body {
 
 #file-content {
     width: 80%;
-    height: 60vh;
+    height: 70vh;
 }
 
 #csv-table_wrapper {
-   width: 75%;
-   height: 80%;
+   width: 80%;
+   height: 70vh;
 }
 
 
@@ -78,7 +116,6 @@ table {
 td {
     height: 20px;
     overflow: scroll;
-    text-overflow: ellipsis;
     max-width: 80px;
     white-space: nowrap;
 }
