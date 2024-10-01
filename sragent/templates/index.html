@@ -13,13 +13,17 @@
          <div class="top-row">  
             <p>
             The is a test of the top row div. <br>
-            This is where navigation and info will go. 
+            This is where navigation and info will go. <br>
+            <br>
+            <a href="#" id="toggle-readme">README</a>  <!-- Toggle Link -->
             </p>
          </div>
     <div class="container">
         <!-- Left Column -->
 
         <div class="column-left">
+                <br>
+                <br>
                 <input type="text" id="project_id" placeholder="Enter Project ID"\>
                 <button id="gather-button">Run gather()</button>
             <br>
@@ -47,15 +51,33 @@
 
       <!-- Right Column -->
         <div class="column-right">
+            <div id="readme-content">
+                <h2>README</h2>
+                <p>
+                    Welcome to the file editor. Here you can gather and annotate project data. 
+                    Use the sidebar to run the gather and annotation functions, and view the output files.
+                </p>
+                <p>
+                    Click the toggle link above to start editing a file.
+                </p>
+            </div>
             <!-- Textarea for text file editing -->
-            <textarea id="file-content"></textarea>
-            <button id="save-button">Save</button>
-            <table id = "csv-table" class = "cell-border nowrap stripe hover" style="width:100%; height:80%"> 
+            <textarea id="file-content" style="display:none;"></textarea>
+            <button id="save-button" style="display:none;">Save</button>
+            <table id = "csv-table" class = "cell-border nowrap stripe hover" style="width:100%; height:80%; display:none"> 
             </table>    
         </div>
     </div>
 
     <script>
+        $('#toggle-readme').click(function(e) {
+            e.preventDefault();  // Prevent default link behavior
+            // Toggle visibility between README and file content
+            $('#readme-content').show();  
+            $('#file-content').hide();
+            $('#save-button').hide();
+            $('#csv-table_wrapper').hide();
+        });
         // Function to load the list of files
         function loadFiles() {
             $.getJSON('/files', function(files) {
@@ -78,12 +100,19 @@
                     $('#file-content').show().val(data.content);
                     $('#csv-table_wrapper').hide();
                     $('#csv-table').hide();  // Hide the CSV table if it was displayed
+                    $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#save-button').show();  // Show save button for text files
                     $('#save-button').data('filename', filename);  // Save the filename for saving
                 } else if (fileExtension === 'csv') {
                     // Hide the text area and display a CSV table for CSV files
                     $('#file-content').hide();
+                    $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#csv-table_wrapper').show();
+                                // Check if a DataTable is already initialized and destroy it before reinitializing
+                    if ($.fn.DataTable.isDataTable('#csv-table')) {
+                        $('#csv-table').DataTable().destroy();  // Destroy the old DataTable instance
+                        $('#csv-table').empty();  // Clear the table content
+                    }
                     $('#csv-table').show().dataTable({
                         data: data.content,
                         columns: data.columns,
@@ -91,6 +120,7 @@
                         lengthChange: true,
                         paging: false,
                         scrollResize: false,
+                        scrollX: true,
                         scrollY: '50vh',
                         scrollCollapse: true,
                         searching: true,

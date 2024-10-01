@@ -7,20 +7,24 @@ body {
     justify-content: space-between;
 }
 .top-row {
+    height: 100px;
     width: 100%;
     display: flex;
     border-bottom: 1px solid #42b096;
 
 }
 .column-left {
+    min-width: 200px;
     width: 15%;  /* Adjust to 20-30% as needed */
     padding: 10px;
     border-right: 1px solid #ccc;
 }
 
+
 .column-right {
     width: 85%;  /* Adjust to 70-80% as needed */
     padding: 10px;
+    position: relative; /* Relative positioning for child elements */
 }
 
 #project-id {
@@ -47,24 +51,36 @@ body {
     text-decoration: underline;
 }
 
+#readme-content {
+    margin-bottom: 20px;  /* Add some space below README content */
+}
+
+#file-content, #csv-table_wrapper {
+    display: block;
+    margin: auto;  /* This will center the content */
+}
+
 #file-content {
     width: 80%;
     height: 60vh;
-    margin: auto;
 }
 
 #csv-table_wrapper {
-   width: 90%;
+   width: 75%;
    height: 80%;
 }
+
 
 table {
     table-layout: fixed;
 }
 
 td {
-    overflow: hidden;
+    height: 20px;
+    overflow: scroll;
     text-overflow: ellipsis;
+    max-width: 80px;
+    white-space: nowrap;
 }
 button {
     margin-top: 10px;
