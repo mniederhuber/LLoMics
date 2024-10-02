@@ -3,18 +3,22 @@ body {
     margin: 2%;
 }
 
+h3 {
+    margin: 5px;
+}
 .container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    height: 600px;
+    height: 900px;
 }
 
 .top-row {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    max-height: 100px;
+    align-items: center;
+    min-height: 50px;
     width: 100%;
     font-size: 25px;
     border-bottom: 4px solid #008cff;
@@ -39,12 +43,12 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: left;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
     min-width: 250px;
     width: 15%;  /* Adjust to 20-30% as needed */
     padding: 10px;
-    height: 650px;
     border: 1px solid #ccc;
 }
 
@@ -52,12 +56,12 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: space-between;
+    align-content: space-between;
     align-items: center;
-    height: 650px;
     width: 85%;  /* Adjust to 70-80% as needed */
-    padding: 10px;
 }
+
 .output-files {
     min-height: 100px;
     margin: auto;
@@ -77,14 +81,42 @@ body {
     background-color: #f9f9f9;
 }
 
+#settings {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding:10px;
+}
+
+#selection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+
+#text-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+}
+
 
 #log-wrapper {
-    width: 100%;
+    width: 85%;
+    padding: 20px;
 }
 
 #log-div {
-    flex: none;
-    width: 70%;
+    margin: 20px;
+    width: 90%;
     height: 100px;
     overflow: auto;
     background-color: rgb(57, 57, 57);
@@ -117,28 +149,26 @@ body {
 }
 
 #readme-content {
-    height: 500px;
-    width: 90%;
+    width: 85%;
 }
 
 #file-content {
-    height: 500px;
-    width: 80%;
+    margin: 20px;
+    width: 85%;
+    min-width: 800px;
+    max-width: 1000px;
+    min-height: 500px;
+    max-height: 1000px;
 }
 
 #csv-table_wrapper {
     flex: none;
-    display: flex;
-    width: 80%;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    width: 85%
 }
 
 #csv-table {
-    width: 80%;
-    overflow-y: auto;
+    overflow: auto;
 }
-
 
 td {
     height: 20px;
@@ -146,9 +176,14 @@ td {
     max-width: 80px;
     white-space: nowrap;
 }
+
 button {
-    margin-top: 10px;
-    padding: 5px 10px;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #000000;
+    background-color: #c0f7df;
+    border-radius: 5px;
+    width: 50%;
 }
 
 input[type="text"] {

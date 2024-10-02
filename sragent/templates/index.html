@@ -27,27 +27,37 @@
                     <button id="gather-button">get metadata</button>
                 <br>
                 <br>
-                <h4> Summary Model </h4>
-                <select id="summary_model">
-                    <option value="gpt-4o-mini">GPT-4o mini</option>
-                    <option value="gpt-4o">GPT-4o</option>
-                    <option value="o1-mini">o1-mini</option>
-                    <option value="o1-preview">o1</option>
-                  </select>
-                 <br>
-                 <h4> Annotation Model </h4>
-                <select id="annotation_model">
-                    <option value="gpt-4o-mini">GPT-4o mini</option>
-                    <option value="gpt-4o">GPT-4o</option>
-                    <option value="o1-mini">o1-mini</option>
-                    <option value="o1-preview">o1</option>
-                  </select>
+                <div id="settings">
+                    <h3> define models</h3>
+                    <div id="selection">
+                        summarization:<br>
+                        <select id="summary_model">
+                            <option value="gpt-4o-mini">GPT-4o mini</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                            <option value="o1-mini">o1-mini</option>
+                            <option value="o1-preview">o1</option>
+                         </select>
+                    </div>
+                     <br>
+                    <div id="selection">
+                        annotation: <br>
+                        <select id="annotation_model">
+                            <option value="gpt-4o-mini">GPT-4o mini</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                            <option value="o1-mini">o1-mini</option>
+                            <option value="o1-preview">o1</option>
+                          </select>
+                    </div>
+                </div>
+                <button id="annotate-button">run all</button>
                 <br>
-                <button id="annotate-button">summarise and annotate</button>
+                <br>
+                <input type="text" id="project_id" placeholder="Enter Project ID"\>
+                <button id="gather-button">run project</button>
                 <br>
                 <hr>
                 <div class="output-files">
-                    <b style="padding:5px;"> output files</b>
+                    <h3>sragent_output/</h3>
                     <div class="output-file-list">
                         <ul id="file-list"> </ul>
                     </div>
@@ -66,10 +76,14 @@
                     </p>
                 </div>
                 <!-- Textarea for text file editing -->
-                <textarea id="file-content" style="display:none;"></textarea>
-                <button id="save-button" style="display:none;">Save</button>
-                <table id = "csv-table" class = "cell-border nowrap stripe hover" style="width:100%; height:80%; display:none"> </table>    
-                    <div id="log-div"></div>
+                <div id="text-wrapper" style="display:none">
+                    <textarea id="file-content" style="display:none;"></textarea>
+                    <button id="save-button" style="display:none;">Save</button>
+                </div>
+                <table id = "csv-table" class = "cell-border nowrap stripe hover" style="display:none"> 
+                </table>    
+                <div id="log-div" style="display:none">
+                </div>
             </div>
         </div>  
     </div>
@@ -108,6 +122,7 @@
             $.get(`/file/${filename}`, function(data) {
                 if (fileExtension === 'txt') {
                     // Show the text area for text files
+                    $('#text-wrapper').show();
                     $('#file-content').show().val(data.content);
                     $('#csv-table_wrapper').hide();
                     $('#csv-table').hide();  // Hide the CSV table if it was displayed
@@ -120,6 +135,7 @@
 
                 } else if (fileExtension === 'csv') {
                     // Hide the text area and display a CSV table for CSV files
+                    $('#text-wrapper').hide();
                     $('#file-content').hide();
                     $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#csv-table_wrapper').show();
@@ -139,9 +155,8 @@
                         ],
 
                       destroy: true,
-                        lengthChange: true,
                         paging: false,
-                        scrollX: true,
+                        scrollX: '950px',
                         scrollY: '400px',
                         scrollCollapse: true,
                         searching: true,
