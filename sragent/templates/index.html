@@ -10,67 +10,68 @@
     <script src="https://cdn.datatables.net/plug-ins/2.1.7/features/scrollResize/dataTables.scrollResize.min.js"></script>
 </head>
 <body>
+    <div class="container">
          <div class="top-row">  
             <div class="nav-links">
                 <a href="#" id="toggle-readme">readme</a>  <!-- Toggle Link -->
                 <a href="#" >github</a>  <!-- Toggle Link -->
             </div>
          </div>
-    <div class="container">
+
         <!-- Left Column -->
-
-        <div class="column-left">
+        <div class="main">
+            <div class="column-left">
+                    <br>
+                    <br>
+                    <input type="text" id="project_id" placeholder="Enter Project ID"\>
+                    <button id="gather-button">get metadata</button>
                 <br>
                 <br>
-                <input type="text" id="project_id" placeholder="Enter Project ID"\>
-                <button id="gather-button">Run gather()</button>
-            <br>
-            <br>
-            <h4> Summary Model </h4>
-            <select id="summary_model">
-                <option value="gpt-4o-mini">GPT-4o mini</option>
-                <option value="gpt-4o">GPT-4o</option>
-                <option value="o1-mini">o1-mini</option>
-                <option value="o1-preview">o1</option>
-              </select>
-             <br>
-             <h4> Annotation Model </h4>
-            <select id="annotation_model">
-                <option value="gpt-4o-mini">GPT-4o mini</option>
-                <option value="gpt-4o">GPT-4o</option>
-                <option value="o1-mini">o1-mini</option>
-                <option value="o1-preview">o1</option>
-              </select>
-            <br>
-            <button id="annotate-button">Run Annotation</button>
-            <h2>Output Files</h2>
-            <ul id="file-list"> </ul>
-            <br>
-            <br>
-            <br>
-            <div id="log-div">
-                <!-- Log messages will appear here -->
+                <h4> Summary Model </h4>
+                <select id="summary_model">
+                    <option value="gpt-4o-mini">GPT-4o mini</option>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="o1-mini">o1-mini</option>
+                    <option value="o1-preview">o1</option>
+                  </select>
+                 <br>
+                 <h4> Annotation Model </h4>
+                <select id="annotation_model">
+                    <option value="gpt-4o-mini">GPT-4o mini</option>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="o1-mini">o1-mini</option>
+                    <option value="o1-preview">o1</option>
+                  </select>
+                <br>
+                <button id="annotate-button">summarise and annotate</button>
+                <br>
+                <hr>
+                <div class="output-files">
+                    <b style="padding:5px;"> output files</b>
+                    <div class="output-file-list">
+                        <ul id="file-list"> </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-
       <!-- Right Column -->
-        <div class="column-right">
-            <div id="readme-content">
-                <h2>README</h2>
-                <p>
-                    Welcome to the file editor. Here you can gather and annotate project data. 
-                    Use the sidebar to run the gather and annotation functions, and view the output files.
-                </p>
-                <p>
-                    Click the toggle link above to start editing a file.
-                </p>
+            <div class="column-right">
+                <div id="readme-content">
+                    <h2>README</h2>
+                    <p>
+                        Welcome to the file editor. Here you can gather and annotate project data. 
+                        Use the sidebar to run the gather and annotation functions, and view the output files.
+                    </p>
+                    <p>
+                        Click the toggle link above to start editing a file.
+                    </p>
+                </div>
+                <!-- Textarea for text file editing -->
+                <textarea id="file-content" style="display:none;"></textarea>
+                <button id="save-button" style="display:none;">Save</button>
+                <table id = "csv-table" class = "cell-border nowrap stripe hover" style="width:100%; height:80%; display:none"> </table>    
+                    <div id="log-div"></div>
             </div>
-            <!-- Textarea for text file editing -->
-            <textarea id="file-content" style="display:none;"></textarea>
-            <button id="save-button" style="display:none;">Save</button>
-            <table id = "csv-table" class = "cell-border nowrap stripe hover" style="width:100%; height:80%; display:none"> 
-            </table>    
-        </div>
+        </div>  
     </div>
 
     <script>
@@ -85,6 +86,7 @@
             $('#readme-content').show();  
             $('#file-content').hide();
             $('#save-button').hide();
+            $('#log-div').hide();
             $('#csv-table_wrapper').hide();
         });
         // Function to load the list of files
@@ -112,7 +114,8 @@
                     $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#save-button').show();  // Show save button for text files
                     $('#save-button').data('filename', filename);  // Save the filename for saving
-                    let log = `Loaded ${filename}`;
+                    $('#log-div').show();
+                    let log = `> loaded ${filename}`;
                     appendLogMessage(log);
 
                 } else if (fileExtension === 'csv') {
@@ -120,6 +123,7 @@
                     $('#file-content').hide();
                     $('#readme-content').hide();  // Hide the README if it was displayed
                     $('#csv-table_wrapper').show();
+                    $('#log-div').show();
                                 // Check if a DataTable is already initialized and destroy it before reinitializing
                     if ($.fn.DataTable.isDataTable('#csv-table')) {
                         $('#csv-table').DataTable().destroy();  // Destroy the old DataTable instance
@@ -138,7 +142,7 @@
                         lengthChange: true,
                         paging: false,
                         scrollX: true,
-                        scrollY: '50vh',
+                        scrollY: '400px',
                         scrollCollapse: true,
                         searching: true,
                         search: {
@@ -148,10 +152,10 @@
                         }
                     });
                     $('#save-button').hide();  // Hide save button for CSV files (if you don’t need to edit them)
-                    let log = `Loaded ${filename}`;
+                    let log = `> loaded ${filename}`;
                     appendLogMessage(log);
                 } else {
-                    appendLogMessage('Unsupported file type');
+                    appendLogMessage('> unsupported file type');
                 }
             });
         }
@@ -166,7 +170,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({ content: content }),
                 success: function(response) {
-                    let log = `Loaded ${filename}`;
+                    let log = `> loaded ${filename}`;
                     appendLogMessage(log);
                 }
             });
@@ -183,16 +187,16 @@
                     data: JSON.stringify({ project_id: projectId }),
                     success: function(response) {
                         loadFiles();  // Reload the list of files after gather is run
-                        appendLogMessage('gather completed');
+                        appendLogMessage('> gather completed');
                         appendLogMessage(response.log);
                     },
                     error: function() {
-                        appendLogMessage('something went wrong');
+                        appendLogMessage('> something went wrong');
                         appendLogMessage(response.log);
                     }
                 });
             } else {
-                appendLogMessage('enter a bio project id to start...');
+                appendLogMessage('> enter a bio project id to start...');
             }
         });
    
@@ -217,7 +221,7 @@
                     appendLogMessage(response.log);
                 },
                 error: function() {
-                    appendLogMessage('An error occurred while annotating.');
+                    appendLogMessage('> an error occurred while annotating.');
                     appendLogMessage(response.log);
                 }
             });
