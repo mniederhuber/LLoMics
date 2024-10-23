@@ -21,14 +21,9 @@
         <!-- Left Column -->
         <div class="main">
             <div class="column-left">
-                    <br>
-                    <br>
-                    <input type="text" id="project_id" placeholder="Enter Project ID"\>
-                    <button id="gather-button">get metadata</button>
                 <br>
-                <br>
-                <div id="settings">
-                    <h3> define models</h3>
+                 <b>1. Set Models</b>
+                 <div class="control_box">
                     <div id="selection">
                         summarization:<br>
                         <select id="summary_model">
@@ -49,15 +44,26 @@
                           </select>
                     </div>
                 </div>
-                <button id="annotate-button">run all</button>
                 <br>
+                <b>2. Gather Metadata</b>
+                <div class = 'control_box'>
+                    <button id="gather-button">run:</button>
+                    <input type="text" id="project_id" placeholder="Enter Project ID"\>
+                </div>
                 <br>
-                <input type="text" id="project_id" placeholder="Enter Project ID"\>
-                <button id="gather-button">run project</button>
+                <b>3. Annotate Experiments</b>
+                <div class = 'control_box'>
+                    <button id="annotate-button">Run All</button>
+                </div>
                 <br>
-                <hr>
+                <b>4. Reannotate project (optional)</b>
+                <div class = 'control_box'>
+                    <button id="run-project">Run:</button>                
+                    <input type="text" id="test_project_id" placeholder="Enter Project ID"\>
+                </div>
+                <br>
                 <div class="output-files">
-                    <h3>sragent_output/</h3>
+                    <b>sragent_output</b>
                     <div class="output-file-list">
                         <ul id="file-list"> </ul>
                     </div>
@@ -68,11 +74,17 @@
                 <div id="readme-content">
                     <h2>README</h2>
                     <p>
-                        Welcome to the file editor. Here you can gather and annotate project data. 
-                        Use the sidebar to run the gather and annotation functions, and view the output files.
-                    </p>
-                    <p>
-                        Click the toggle link above to start editing a file.
+                       SRAgent is designed to assist with access and annotation of SRA metadata. <br>
+                       All outputs are saved in a local directory called 'sragent_output'. <br><br>
+                       1. Enter a valide BioProject ID and run 'get metadata' to download metadata files. <br> 
+                          This will save a metadata.csv file. <br><br>
+                       2. View the metadata.csv file by clicking on it in the file list. Metadata can then be filtered to specific rows. <br><br>
+                       3. When you are happy with the metadata selected, set models for summarization and annotation and click `run all` <br>
+                          This will save a summary.txt for each project and an annotation.csv file. <br> <br>
+                        4. Best results will require review of the annotation and possibly manual correction of the project summaries. <br>
+                          To make corrections to a project summary file click on the file link and make edits then save. <br><br>
+                        5. After correcting the summary a specific project can be rerun by entering the project ID and clicking `run project`. <br>
+                       
                     </p>
                 </div>
                 <!-- Textarea for text file editing -->
@@ -232,7 +244,8 @@
                                        summary_model: summary_model,
                                        annotation_model: annotation_model}),
                 success: function(response) {
-                    appendLogMessage('Annotation successful!');
+                    loadFiles();  // Reload the list of files after gather is run
+                    appendLogMessage('> Annotation successful!');
                     appendLogMessage(response.log);
                 },
                 error: function() {
@@ -240,9 +253,34 @@
                     appendLogMessage(response.log);
                 }
             });
-        
-        })        
+        }); 
 
+        $('#run-project').click(function() {
+            let projectId = $('#test_project_id').val();
+            let summary_model = $('#summary_model').val();
+            let annotation_model = $('#annotation_model').val();
+            if (projectId) {
+                $.ajax({
+                    url: '/run_project',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ project_id: projectId ,
+                                           summary_model: $('#summary_model').val(),
+                                           annotation_model: $('#annotation_model').val()}),
+                    success: function(response) {
+                        loadFiles();  // Reload the list of files after gather is run
+                        appendLogMessage('> project run completed');
+                        appendLogMessage(response.log);
+                    },
+                    error: function() {
+                        appendLogMessage('> something went wrong');
+                        appendLogMessage(response.log);
+                    }
+                });
+            } else {
+                appendLogMessage('> enter a bio project id to start...');
+            }
+        });
         // Load files on page load
         $(document).ready(function() {
             loadFiles();

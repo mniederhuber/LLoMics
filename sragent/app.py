@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
-from sragent import gather 
+from sragent import gather, reannotate
 import pandas as pd
 import json
 
@@ -62,15 +62,29 @@ def run_gather():
 
 @app.route('/annotate', methods=['POST'])
 def run_annotate():
+   
     data = request.json['data']
     columns = request.json['columns']
     summary_model = request.json['summary_model']
     annotation_model = request.json['annotation_model']
     df = pd.DataFrame(data, columns = columns)
-    annotation = gather(df, summary_model, annotation_model, annotate_meta=True)
-    print(annotation)
-    return 'butt' 
+    gather(df, summary_model, annotation_model, annotate_meta=True)
 
+@app.route('/run_project', methods=['POST'])
+def run_project():
+    project_id = request.json['project_id']
+    summary_model = request.json['summary_model']
+    annotation_model = request.json['annotation_model']
+
+    print(f'project_id: {project_id}')
+    print(f'summary_model: {summary_model}')
+    print(f'annotation_model: {annotation_model}')
+
+    reannotation = reannotate(project_id, summary_model, annotation_model)
+    if reannotation is not None:
+        return 'success!'
+    else:
+        return 'failed!'
 
 if __name__ == '__main__':
     app.run(debug=True, port = 6942)

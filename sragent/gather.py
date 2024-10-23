@@ -390,7 +390,10 @@ def gather(input,
 
 
 def reannotate(project_id,
-               model_annotation = None):
+               model_annotation = None,
+               model_summary = None):
+
+    check_env()
 
     if Path(f'sragent_output/annotation_FULL.csv').exists():
         print('Found annotation, loading...')
@@ -411,9 +414,17 @@ def reannotate(project_id,
         raise ValueError("No metadata file found, please run gather first")
 
     expMeta = meta[meta['project_id'] == project_id][['project_id','experiment_id', 'title', 'attributes']]
-    model_annotation = annotation['model_annotation'].iloc[0]
-    model_summary = annotation['model_summary'].iloc[0]
 
+    if model_annotation is None or model_summary is None:
+        model_annotation = annotation['model_annotation'].iloc[0]
+        model_summary = annotation['model_summary'].iloc[0]
+    else:
+        model_annotation = model_annotation
+        model_summary = model_summary
+    print(model_annotation)
+    print(model_summary)
+    print(expMeta)
+    print(project_summary)
     expMeta_list = annotate(model_annotation, 
                               expMeta, 
                               project_summary, 
