@@ -1,11 +1,14 @@
-# llomics 
+# LLoMics
 
-`llomics` is a set of python functions to access and process metadata from the Sequence Reads Archive (SRA) records.
+`llomics` is a simple prototype package built to access and process metadata from the Sequence Reads Archive (SRA) records.
 It was made in an attempt to help automate the handling of large numbers of records with frequently ambiguous metadata, and provide a structured output with standardized sample identification and classification.
 To do this, `llomics` relies on prompts to an LLM (currently any OpenAI model via their API) to interpret metadata and determine if/what perturbations (mutations, depletions, etc.) or controls are present in an experiment.
 
 The goal of `llomics` is to maximize accuracy while minimizing user effort without fine-tuning the LLM.
 Currently, all that is needed is an OpenAI API account, and an NCBI API key.
+
+>[!NOTE]
+> This projected was recently renamed from SRAgent to LLoMics to disambiguate from the recently published tool of the same name. This tool has not yet been tested after the rename.  
 
 ## Status 🚧
 
