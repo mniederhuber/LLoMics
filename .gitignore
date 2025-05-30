@@ -1,5 +1,6 @@
-__pycache__
-scratch
-build
-sragent/sragent.egg-info
-sragent.egg-info
+__pycache__/
+scratch/
+llomics/llomics.egg-info
+llomics.egg-info
+.DS_Store
+cache/

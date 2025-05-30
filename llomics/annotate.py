@@ -6,7 +6,7 @@ import tiktoken
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from typing import Literal, List, Optional
-import sragent.fetch as fetch
+import llomics.fetch as fetch
 
 class experiment_model(BaseModel):
     """Fill in the metatdata for a ChIP-seq experiment, let's think this through step by step."""
